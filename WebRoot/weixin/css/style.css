@@ -1,0 +1,43 @@
+* {
+	margin:0;
+	padding:0;
+	
+}
+
+body{ max-width:800px; margin:0 auto;
+	font-family: "Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+	font-size: 14px;
+	color: #333;
+	text-decoration: none;
+	text-align: center;
+	list-style-type: none;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;	/* Firefox */
+    -webkit-box-sizing:border-box;	/* Safari */
+	
+	-moz-tap-highlight-color:rgba(0,0,0,0);
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	appearance:none;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+}
+a{
+	color:#333; cursor: pointer;
+	text-decoration: none;  outline:none;
+}
+a img{border: none;}
+
+li{list-style-type: none;}
+
+input,textarea {-webkit-appearance: none; outline:none;}
+
+
+
+select{ outline:none;}
+
+strong{ font-weight:normal;}
+
+.all{ width:100%;}
+.All_C1{ width:96%; padding:0 2%;}
+.All_C2{ width:96%; margin:0 2%;}
+.clear{ clear:both;} 

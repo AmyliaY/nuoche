@@ -1,0 +1,173 @@
+.mui-bar {
+	padding-left: initial;
+	padding-right: initial;
+	background-color: #FFFFFF;
+}
+/*去掉header中的下边的框的虚影*/
+.mui-bar-nav{
+	color: #FF4683;
+}
+.mui-bar-nav {
+	box-shadow: none;
+}
+
+.image_back {
+	width: 28px;
+	height: 28;
+	margin-top: 8px;
+	margin-right: 15px;
+	margin-left: 5px;
+}
+
+html,
+body{
+	height: 100%;
+	overflow: hidden;
+}
+header {
+	border-bottom: 0.5px solid darkgray !important;
+}
+.mui-bar {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+#regist_phone{
+	padding: 0 !important;
+	height: 50px;
+	background-color: #FFF;
+	margin-top: 30px; 
+	border:0.5px solid gainsboro;
+	border-bottom: 1px solid #D7D7DC ;
+}
+label{
+	padding: auto !important;
+	margin: 0 !important;
+	height: 50px !important;
+	width: 50px !important;
+
+}
+#txt_phone{
+	height: 50px;
+	float: left;
+}
+#txt_yzm{
+	height: 50px;
+	float: left;
+	width: 250px;
+}
+#txt_pwd{
+	height: 50px;
+	float: left;
+	width: 250px;
+}
+#txt_zh{
+	height: 50px;
+	float: left;
+	width: 300px;
+}
+#txt_surepwd{
+	height: 50px;
+	float: left;
+	width: 250px;
+}
+#clear_phone {
+	font-size: 22px;
+	position: absolute;
+	z-index: 1;
+	top: 13px;
+	right: 115px;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	color: #999;
+	border-radius: 50px;
+}
+#clear_zh{
+	font-size: 22px;
+	position: absolute;
+	z-index: 1;
+	top: 13px;
+	right: 55px;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	color: #999;
+	border-radius: 50px;
+}
+#clear_yzm{
+	font-size: 22px;
+	position: absolute;
+	z-index: 1;
+	top: 13px;
+	right: 55px;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	color: #999;
+	border-radius: 50px;
+}
+#clear_pwd{
+	font-size: 22px;
+	position: absolute;
+	z-index: 1;
+	top: 13px;
+	right: 55px;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	color: #999;
+	border-radius: 50px;
+}
+#clear_surepwd{
+	font-size: 22px;
+	position: absolute;
+	z-index: 1;
+	top: 13px;
+	right: 55px;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	color: #999;
+	border-radius: 50px;
+}
+#yzm{
+	position: absolute;
+	z-index: 1;
+	top: 10px;
+	right: 10px;
+	height: 30px;
+	width: 100px;
+	text-align: center;
+	font-size: 14px;
+	padding-left:10px;
+	padding-top: 7px;
+	
+}
+#regist_yzm{
+	padding: 0 !important;
+	height: 50px;
+	background-color: #FFF;
+	border:0.5px solid gainsboro;
+	border-bottom: 1px solid #D7D7DC ;
+}
+#regist_pwd{
+	padding: 0 !important;
+	height: 50px;
+	background-color: #FFF;
+	border:0.5px solid gainsboro;
+	border-bottom: 1px solid #D7D7DC ;
+}
+#regist_zh{
+	padding: 0 !important;
+	height: 50px;
+	background-color: #FFF;
+	border:0.5px solid gainsboro;
+	border-bottom: 1px solid #D7D7DC ;
+}
+#regist_surepwd{
+	padding: 0 !important;
+	height: 50px;
+	background-color: #FFF;
+	border:0.5px solid gainsboro;
+	margin-bottom: 30px;
+}

@@ -1,0 +1,78 @@
+.mui-content{
+	
+	font-family: "arial, helvetica, sans-serif";
+}
+
+ .mui-icon-arrowright{
+	
+	float: right;
+	margin-right: 15px;
+	line-height: 40px;
+	color: #777777;
+}
+/*商品管理   置换管理*/
+.tel_div{
+	
+	width: 100%;
+	padding: 0;
+	background-color: white;
+	height: 120px;
+	margin-top: 15px;
+	  font-size: 16px;
+}
+
+.tel_div li{
+	list-style: none;
+	height: 40px;
+	border-bottom: 1px solid #DDDDDD;
+	 text-indent: 15px; 
+	 line-height: 40px;
+}
+/*推广链接   我的积分*/
+.tel_div2{
+	
+	width: 100%;
+	padding: 0;
+	background-color: white;
+	height: 80px;
+	margin-top: 15px;
+	  font-size: 16px;
+}
+
+.tel_div2 li{
+	list-style: none;
+	height: 40px;
+	border-bottom: 1px solid #DDDDDD;
+	 text-indent: 15px; 
+	 line-height: 40px;
+}
+/*会员续费   会员申请*/
+.tel_div3{
+	
+	width: 100%;
+	padding: 0;
+	background-color: white;
+	height: 80px;
+	margin-top: 15px;
+	  font-size: 16px;
+}
+
+.tel_div3 li{
+	list-style: none;
+	height: 40px;
+	border-bottom: 1px solid #DDDDDD;
+	 text-indent: 15px; 
+	 line-height: 40px;
+}
+/*钱包*/
+.dindan{
+	width: 100%;
+	height: 40px;
+	background-color: white;
+    line-height: 40px;
+    text-indent: 15px; 
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+

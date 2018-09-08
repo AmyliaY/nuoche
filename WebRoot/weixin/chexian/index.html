@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>卡卡车险</title> 
+	    
+	    <meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">    
+		 
+		<script src="../js/jquery-1.9.0.min.js"></script>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="css/mui.picker.min.css" />
+		<script src="js/mui.dtpicker.js"></script>-->
+        <script src="js/mui.picker.min.js"></script>
+        
+		<script type="text/javascript" charset="utf-8">
+        	mui.init();
+        </script>
+
+		<style>
+#picktime {
+	width: 35%;
+	height: 30px;
+	border: 0px solid white;
+	margin-top: 6px;
+}
+
+.mui-input-row .text {
+	width: 55%;
+	height: 30px;
+}
+
+.mui-content button {
+	margin-top: 20px;
+}
+
+#trigger5 {
+	margin-left: 40%;
+	margin-top: -20px;
+}
+</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color: #ff7900;">
+		<h1 class="mui-title" style="color: white;">
+			登记车辆信息
+		</h1>
+		</header>
+        
+        
+		<div class="mui-content">
+		    <form id="f" name="f">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="" style="height: 55px;">
+						<div class="mui-input-row">
+							<label class="label" style="color:#444;width:150px;">车辆初登日:</label>
+						    <a id='demo1' name="shi" data-options='{"type":"date"}' class="btn"  style="width: 65%;height: 54px;line-height:40px ;font-size: 100%;border: 0px solid;color:#444;text-align:right;">
+								点击选择时间
+							</a>
+							<input type=hidden name="cdr" id="cdr"/>
+							<p id="shijian1" style="display: none;"></p>
+						</div> </a>
+				</li>
+
+				<li class="mui-table-view-cell">
+					<a class="" style="height: 55px;">
+						<div class="mui-input-row">
+							<label class="label">
+								发动机号码:
+							</label>
+							<input type="text" name="fdj" class="text" id="fdj" placeholder="发动机号码">
+						</div> </a>
+				</li>
+
+				<li class="mui-table-view-cell">
+					<a class="" style="height: 55px;">
+						<div class="mui-input-row">
+							<label class="label">
+								身份证号码:
+							</label>
+							<input type="text" name="sfz" class="text" id="sfz" placeholder="身份证号">
+						</div> </a>
+				</li>
+
+				<li class="mui-table-view-cell">
+					<a class="" style="height: 55px;">
+						<div class="mui-input-row">
+							<label class="label">
+								车&nbsp;&nbsp;&nbsp;&nbsp;架&nbsp;&nbsp;&nbsp;&nbsp;号:
+							</label>
+							<input type="text" name="cjh" class="text" id="cjh" placeholder="车架号">
+						</div> </a>
+				</li>
+
+
+				<li class="mui-table-view-cell">
+					<a class="" style="height: 55px;">
+						<div class="mui-input-row">
+							<label class="label">
+								车&nbsp;&nbsp;&nbsp;&nbsp;牌&nbsp;&nbsp;&nbsp;&nbsp;号:
+							</label>
+							<input type="text" class="text" name="cph" id="cph"
+								placeholder="车牌号码" maxlength="7" />
+
+						</div> </a>
+				</li>
+
+				<li class="mui-table-view-cell">
+					<a class="" style="height: 55px;">
+						<div class="mui-input-row">
+							<label class="label">
+								姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:
+							</label>
+							<input type="text" name="xm" class="text" id="xm" placeholder="姓名">
+						</div> </a>
+				</li>
+
+
+			</ul>
+            </form>
+
+			<a href="javascript:void(0)"><div class="mui-content-padded">
+					<button type="button" id="btnSave" class="mui-btn mui-btn-warning  mui-btn-block">
+						保存并下一步
+					</button>
+				</div> 
+			</a>
+		</div>
+
+
+
+
+		<script>
+		function getRootPath() {
+			//http://localhost:8083/uimcardprj/share/meun.jsp
+			var curWwwPath = window.document.location.href;
+			//uimcardprj/share/meun.jsp
+			var pathName = window.document.location.pathname;
+			var pos = curWwwPath.indexOf(pathName);
+			//http://localhost:8083
+			var localhostPaht = curWwwPath.substring(0, pos);
+			// uimcardprj
+			var projectName = pathName.substring(0, pathName.substr(1).indexOf(
+					'/') + 1);
+			if (projectName == "/admin" || projectName == "/daili"
+					|| projectName == "/weixin" || projectName == "/wap")
+				projectName = "";
+
+			return (localhostPaht + projectName);
+		}	
+			
+		var sj1 = mui('#shijian1')[0];
+		var result = mui('#demo1')[0];
+		var btns = mui('.btn');
+		var y = 0;
+		var m = 0;
+		var d = 0;
+		var h = 0;
+		var ii = 0;
+		var rs = 0;
+	
+		(function($) {
+			$.init();
+			btns.each(function(i, btn) {
+				btn.addEventListener('tap', function() {
+				    
+					var optionsJson = this.getAttribute('data-options') || '{}';
+					var options = JSON.parse(optionsJson);
+					var id = this.getAttribute('id');
+					var picker = new $.DtPicker(options);
+					picker.show(function(rs) {
+						if(btn.name == 'shi') {
+							y = rs.y.text;
+							m = rs.m.text;
+							d = rs.d.text;
+							h = rs.h.text;
+							ii = rs.i.text;
+							sj1.innerText = rs.text;
+							result.innerText = rs.text;
+							jQuery("#cdr").val(rs.text);
+							
+						}
+						picker.dispose();
+					});
+				}, false);
+			});
+		})(mui);
+		
+		  document.getElementById("btnSave").addEventListener("click",function(){
+		        
+		        if ($("#cdr").val()=='')
+		        {
+		          mui.toast('初登日期不能为空');
+		          return false;
+		        }
+		        
+		        if ($("#fdj").val()=='')
+		        {
+		           mui.toast('发动机号不能为空');
+		           return false;
+		        }
+		        
+		        if ($("#sfz").val()=='')
+		        {
+		           mui.toast('身份证号不能为空');
+		           return false;
+		        }
+		        
+		        if ($("#cjh").val()=='')
+		        {
+		           mui.toast('车架号不能为空');
+		           return false;
+		        }
+		        
+		        if ($("#cph").val()=='')
+		        {
+		           mui.toast('车牌号不能为空');
+		           return false;
+		        }
+		        
+		        
+		        if ($("#xm").val()=='')
+		        {
+		           mui.toast('姓名不能为空');
+		           return false;
+		        }
+		        var formData = $("#f").serialize();
+		        
+		        var url = getRootPath()+'/weixinChexian.do?p=addBaoxianInfo';
+		        var data = formData;
+		        var callback = function(data){
+		            if (data=="请登录")
+		            {
+		               mui.toast("请登录先");
+		               return false;
+		            }
+		            mui.toast('保存成功');
+		            location = getRootPath()+'/weixin/chexian/main.html';
+		            
+		        };
+		        mui.post(url,data,callback);
+		        
+		      
+		  });
+		  
+		  $(function(){
+		     var url = getRootPath()+"/weixinChexian.do?p=getCheInfo";
+		     var data={};
+		     var callback = function(data)
+		     {
+		         if (data=="请登录")
+		         {
+		            mui.toast("请登录先");
+		         }
+		         else
+		         {
+		            var json = eval(data);
+		            if (json.length>0)
+		            {
+		              var o = json[0];
+		              $("#xm").val(o.name);
+		              $("#cph").val(o.cepai);
+		              $("#cjh").val(o.cejiahao);
+		              $("#fdj").val(o.fadonjihao);
+		              $("#sfz").val(o.sfz);
+		              $("#cdr").val(o.time);
+		              sj1.innerText = o.time;
+					  result.innerText = o.time;
+		              
+		            }
+		         }
+		     };
+		     
+		     $.post(url,data,callback);
+		  
+		  });
+			
+			
+
+		</script>
+
+
+	</body>
+</html>

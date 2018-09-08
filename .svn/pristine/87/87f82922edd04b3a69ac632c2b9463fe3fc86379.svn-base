@@ -1,0 +1,160 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>通知</title> 
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/css/mui.min.css">
+		<!--App自定义的css-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/app.css"/>-->
+	</head>
+
+	<body>
+		<header id="head" class="mui-bar mui-bar-nav" style="background: #ff7900;height: 44px;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+			<h1 class="mui-title" style="color: white;">通知</h1>
+		</header>
+		<style>
+			.time{
+				font-size: 10px;
+				float: right;
+			}
+			
+		</style>
+		
+		
+		<div id="content" class="mui-content" >
+			<div id="slider" class="mui-slider" >
+				<div id="lunboImg" class="mui-slider-group mui-slider-loop" style="height:181px ;"></div>
+				<div id="dian" class="mui-slider-indicator">
+				</div>
+			</div>
+			<!--<ul class="mui-table-view" id="tongzhi" style="margin-top: -44px;">
+			</ul>-->
+		</div>
+		
+		<script src="${pageContext.request.contextPath}/weixin/js/jquery-1.9.0.min.js"></script>
+		<script type="text/javascript">
+			//初始化预加载详情页面(异步！可能取不到id)
+			
+			//onload从服务器获取列表数据；
+			window.onload = function(){
+			    //从服务器获取数据
+			    var fragment1=document.createDocumentFragment();
+			    //获取轮播图片
+			     mui.get("${pageContext.request.contextPath}/" + "appTongzhi.do?p=getAllTongzhiImges",function(data){
+					var js = eval("( " + data + ")");
+					 if(js.length==0){
+					 	mui.init({
+						  subpages:[{
+							url:'tongzhi-sub.jsp',
+							id:'tongzhi-sub.html',
+							styles:{
+								top:'44px',
+								bottom: '0px'
+							},extras:{
+								lunbo:'0'
+							}
+						}]
+						});
+					 }else{
+					var div_last=document.createElement("div");
+					div_last.className="mui-slider-item";
+					var a_last=document.createElement("a");
+					var img_last=document.createElement("img");
+					img_last.src="${pageContext.request.contextPath}/"+js[js.length-1].tzimages;
+					div_last.appendChild(a_last);
+					a_last.appendChild(img_last);
+					fragment1.appendChild(div_last);
+					
+					for(var i = 0; i < js.length; i++){
+						var div=document.createElement("div");
+						div.className="mui-slider-item";
+						var a=document.createElement("a");
+						var img=document.createElement("img");
+						img.src="${pageContext.request.contextPath}/"+js[i].tzimages;
+						
+						div.appendChild(a);
+						a.appendChild(img);
+						
+						fragment1.appendChild(div);
+						
+						var div2=document.createElement("div");
+						if(js.length>=2){
+							if(i==0){
+							div2.className="mui-indicator mui-active";
+							}else{
+								div2.className="mui-indicator";
+							}
+						}
+						document.getElementById("dian").appendChild(div2);
+						
+					}
+					
+					var div_first=document.createElement("div");
+					div_first.className="mui-slider-item mui-slider-item-duplicate";
+					var a_first=document.createElement("a");
+					var img_first=document.createElement("img");
+					img_first.src="${pageContext.request.contextPath}/"+js[0].tzimages;
+					div_first.appendChild(a_first);
+					a_first.appendChild(img_first);
+					fragment1.appendChild(div_first);
+					
+					$("#lunboImg").append(fragment1);
+					
+					
+					//图片轮播
+					var slider = mui("#slider");
+					
+					if(js.length==1){
+					 	slider.slider({
+						interval: 0
+					});
+					}else{
+						slider.slider({
+						interval: 3000
+					});
+					}
+					
+					
+					mui.init({
+					  subpages:[{
+						url:'tongzhi-sub.jsp',
+						id:'tongzhi-sub.html',
+						styles:{
+		//					top: mainHeight,
+							top:'225px',
+							bottom: '0px'
+						},extras:{
+								lunbo:'1'
+						}
+					}]
+					});
+					}
+					
+					/* mui.plusReady(function(){
+					    //关闭等待框
+					    plus.nativeUI.closeWaiting();
+					    //显示当前页面
+					    mui.currentWebview.show();
+			  		});*/
+					
+				}); 
+				
+			}; 
+			
+		</script>
+	</body>
+
+</html>

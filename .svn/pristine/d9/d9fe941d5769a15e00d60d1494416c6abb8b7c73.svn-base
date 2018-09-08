@@ -1,0 +1,7 @@
+.fenxiao{
+	padding-top: 17px; 
+	color: #4CD964;
+	font-size: 19px;
+	font-stretch: wider;
+	text-align: center;
+}

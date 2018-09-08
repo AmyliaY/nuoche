@@ -1,0 +1,93 @@
+html {
+	background: white!important;
+}
+
+.mui-table-view .shangpinimg {
+	line-height: 90px;
+	max-width: 90px;
+	height: 90px;
+	margin-right: 10px;
+	float: left;
+		
+}
+.shangpin-ellipsis{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space:nowrap;
+	color: #333333;
+}
+.shangpin-price{
+	line-height: 60px;
+	color: #c76831;
+	font-size: 16px;
+}
+.shangpin-num{
+	line-height: 60px;
+	color: #a6a6a6s;
+	float: right;
+	font-size: 16px;
+}
+.mui-table-view .xuan{
+	line-height: 85px;
+	max-width: 20px;
+	height: 20px;
+	float: left;
+	margin-right: 20px;
+}
+.mui-table-view .xuan img{
+	height: 100%;
+	width: 100%;
+}
+.mui-table-view.a2{
+	float: left;
+}
+.mui-table-view .a1{
+	width: 100%;
+	height: 20px;
+	font-size: 14px;
+	line-height: 20px;
+	margin-bottom: 10px;
+}
+.jieshu{
+	color: crimson;
+}
+.kaishi{
+	color: #8F8F94;
+}
+.buybutton{
+	float: right;
+	margin-top: -35px;
+	border: #FF7900;
+	color: white; 
+	background-color: #FF7900;
+
+}
+.shangpin-message{
+	margin-top: 24px;
+	width: 80%;
+	height: 40px;
+}
+.shangpin-message p{
+	padding-left: 0px;
+	padding-top:3px ;
+	font-size: 13px;
+	line-height: 17px;
+}
+.nowprice{
+	color: crimson;
+}
+
+.include{
+	width: 100%;
+	height: 120px;
+	border-bottom: 1px solid whitesmoke;
+}
+
+#pullrefresh{
+	background: white;
+	
+}
+
+.mui-table-view-cell:after {
+	background: white!important;
+}

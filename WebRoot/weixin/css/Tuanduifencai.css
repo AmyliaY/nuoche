@@ -1,0 +1,68 @@
+.tuanduijianjie{
+    	width: auto;
+    	height: auto;
+    	margin-top: 60px;
+    	background-color: white;
+    }
+        .mingpian{
+    	width: 335px;
+    	height: 120px;
+    	margin-top: 15px;
+    	margin-left: 12px;
+    	box-shadow:0px 3px 2px #7C7B77;
+    }
+      .tuoxiangs{
+    	float: left;
+    	width:150px;
+    	height:100px;
+    }
+        .xingname{
+    	color: black;
+    	font-family: "微软雅黑";
+    	font-size: 15px;
+    }
+       .renname{
+        color: black;
+    	font-family: "微软雅黑";
+    	font-size: 15px;
+    }
+     .zhuangtai{
+    	color: black;
+    	font-family: "微软雅黑";
+    	font-size: 15px;
+    	
+    }
+    .dengdai{
+    	color: black;
+    	font-family: "微软雅黑";
+    	font-size: 15px;
+    }
+    .leibie{
+    	 color: black;
+    	font-family: "微软雅黑";
+    	font-size: 14px;
+    }
+        .jishudianhua{
+    	color: black;
+    	font-family: "微软雅黑";
+    	font-size: 14px;
+    }
+        .dianhua_span{
+    	color: black;
+    	font-family: "微软雅黑";
+    	font-size: 14px;
+    }
+    .ulyangshi li{
+    	float: left;
+    	margin-top: 10px;
+    }
+    .uly2{
+    	float: left;
+    }
+    .uly2 li{
+    	float: left;
+    	margin-top: 20px;
+    }
+    .body{
+    	background-color: white;
+    }

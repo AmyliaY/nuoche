@@ -1,0 +1,63 @@
+/*
+添加人：王影
+时间：2016-04-21
+版本：1.0
+版权：量硕宏程投资管理（北京）有限公司
+*/
+
+@import 'base.css';
+
+/* 头部样式 */
+.head{ background:#424242; padding: 0.1rem 0;}
+.head .iconfont{ padding: 0 0.2rem; border-right: 1px solid #323232; margin-right: 0.2rem;}
+.head .more{ display: block; width: 0.08rem; top:50%; margin: -0.15rem 0.28rem 0 0; right: 0px;}
+.head .nav_cir{ width: 0.05rem; height: 0.05rem; border:1px solid #fff; border-radius: 50%; display: block; line-height: 0.05rem; margin-bottom: 0.05rem;}
+
+.head_cen{ padding-left: 0.2rem; padding-right: 0.2rem; }
+.head_cen i, .head_cen a ,.head_cen span{ display: inline-block; }
+.head_cen i, .head_cen a { width: 15%; }
+.head_cen span{ width: 70%; }
+.head_cen .back{ margin: 0; padding: 0; border:none; }
+
+
+
+/* 搜索 */
+.search{ border:1px solid #d5d7dc; border-radius: 0.1rem; padding:0.1rem 0.6rem 0.1rem 0.1rem;}
+.search .keywords ,.search_1 .keywords{ color: #b4b4b4; border:none; width: 100%; height: 0.4rem; line-height: 0.4rem; background: transparent; outline: none;}
+.search .btn_search{ background:none; border:none; color: #373737; top: 50%; right: 0; margin-top: -0.2rem; cursor: pointer;}
+.search_1{ border:1px solid #d5d7dc; border-radius: 0.1rem; padding:0.1rem 0.1rem 0.1rem 0.6rem;}
+.search_1 .btn_search{ background:none; border:none; color: #373737; top: 50%; left: 0; margin-top: -0.2rem; cursor: pointer;}
+
+/* 底部样式 */
+.foot{ border-top: 1px solid #d7d7da; padding: 0.1rem 0; position: fixed; bottom: 0px; left: 0px; width: 100%; z-index: 10;}
+.foot_nav li{ float: left; width: 25%; line-height: 1.2;}
+.foot_nav li a ,.foot_nav li i, .foot_nav li span{ display: block; }
+.foot_nav li a:hover i ,.foot_nav li.cur i{ color: #fd0000; }
+
+
+.bot_shop_btn li{ width: 33%; float: left; height: 0.98rem; line-height: 0.98rem;}
+.bot_shop_btn li:first-child{ width: 34%; }
+.bot_shop_btn li .btn{ display: inline-block; width: 100%; /* border:1px solid #fe0100; border-radius: 0.3rem; */  }
+.bot_shop_btn li .buy{ background-color: #fe0100;}
+.bot_shop_btn li .join{ background-color: #ff0; color: #323232;}
+
+.icon_korea{ background-image: url(../images/country/icon_korea.png); }
+.icon_england{ background-image: url(../images/country/icon_england.png); }
+.icon_france{ background-image: url(../images/country/icon_france.png);  }
+.icon_germany{ background-image: url(../images/country/icon_germany.png);  }
+.icon_italy{ background-image: url(../images/country/icon_italy.png);  }
+.icon_japan{ background-image: url(../images/country/icon_japan.png);  }
+.icon_usa{ background-image: url(../images/country/icon_usa.png);  }
+.icon_newZealand{ background-image: url(../images/country/icon_newZealand.png);  }
+
+.btn_ope{ border:1px solid #929292; border-radius: 5px; display: inline-block; padding: 0 0.1rem; }
+.btn_red{ background-color: #fe0100; color: #fff; border: 1px solid #fe0100; }
+.btn_pay{ background: #01bf49; border-radius: 5px; }
+.btn_pay_input{ background: #01bf49; border-radius: 5px; border:none; display: inline-block; width: 100%; padding: 0.1rem 0; }
+.radio{  display: inline-block; width: 0.2rem; height: 0.2rem; line-height: 0.18rem; overflow: hidden; text-align: center; border:1px solid #939393; border-radius: 50%;}
+.btn_disable{ background-color: #c0c0c0 !important;}
+
+
+
+
+

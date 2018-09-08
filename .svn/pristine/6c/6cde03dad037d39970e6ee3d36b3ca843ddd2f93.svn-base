@@ -1,0 +1,186 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String con = request.getParameter("con");
+if("0".equals(con)){
+	session.setAttribute("page", 0);
+}
+
+if(session.getAttribute("page") == null)
+	session.setAttribute("page", 0);	
+
+%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--标准mui.css-->
+		<title>米禾商城</title>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/css/mui.min.css">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/css/mui.min.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/weixin/	css/icons-extra.css" />
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="${pageContext.request.contextPath}/weixin/js/mui.min.js"></script>
+		<script src="${pageContext.request.contextPath}/weixin/layer/layer.js"></script>
+		<script src="${pageContext.request.contextPath}/weixin/url.js"></script>
+		<script src="${pageContext.request.contextPath}/weixin/layer/layer.js"></script>
+		<script src="${pageContext.request.contextPath}/weixin/shuaxin.js"></script>
+		<script src="${pageContext.request.contextPath}/weixin/layer/layer.js"></script>
+		<style>
+		html,body{
+			height: 100%;
+		}
+		iframe{
+			width: 100%;
+			height: 90%;
+			overflow: hidden;
+			
+		}
+		
+	
+		.mui-active {
+		color: #FF7900 !important;
+		}
+		
+		</style>
+	</head>
+	<script type="text/javascript">
+	
+	</script>
+	<body >
+		
+		<nav class="mui-bar mui-bar-tab" style="height: 10%;">
+			<a id="frame_one" class="mui-tab-item mui-active" href="#tabbar">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a id="frame_two" class="mui-tab-item" href="#tabbar-with-chat">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-gold"></span>
+				<span class="mui-tab-label">众筹</span>
+			</a> 
+			
+			<a id="frame_three" class="mui-tab-item" href="#tabbar-with-school">
+				<span class="mui-icon  mui-icon-star"></span>
+				<span class="mui-tab-label">收藏</span>
+			</a>
+			<a id="frame_four" class="mui-tab-item" href="#tabbar-with-contact">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"></span>
+				<span class="mui-tab-label">购物车</span>
+			</a>
+			<a id="frame_five" class="mui-tab-item" href="#tabbar-with-center">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">个人中心</span>
+			</a>
+		</nav>
+		<div class="mui-content" style="height: 90%;">
+			<iframe id="tabbar" class="mui-control-content   mui-iframe-wrapper mui-active"  src="${pageContext.request.contextPath}/weixin/home/home.jsp"     frameborder="no" >
+				
+			</iframe>
+			
+			<iframe id="tabbar-with-chat" class="mui-control-content mui-iframe-wrapper"    src="${pageContext.request.contextPath}/weixin/crowdfunding/crowdfunding.jsp"      frameborder="no"  >
+				
+				
+		
+			</iframe>
+			
+			<iframe id="tabbar-with-school" class="mui-control-content mui-iframe-wrapper"     src="${pageContext.request.contextPath}/weixin/collection/collection.jsp"          frameborder="no">
+				
+			</iframe>
+			
+			
+			<iframe id="tabbar-with-contact" class="mui-control-content mui-iframe-wrapper"     src="${pageContext.request.contextPath}/weixin/shopingcart/cart.jsp"      frameborder="no">
+			
+			</iframe>
+			
+			
+			<iframe id="tabbar-with-center" class="mui-control-content mui-iframe-wrapper" src="${pageContext.request.contextPath}/weixin/center2.jsp"    frameborder="no">
+			
+			</iframe>
+			
+		</div>
+	</body>
+	<script>
+	//判断用户是否登陆
+	var user  = '${userinfo}';
+	if(user.trim().length == 0){
+		//提示用户注册
+		var btnArray = ['注册', '登陆'];
+	    mui.confirm('', '请，请登陆先', btnArray, function(e) 
+	    {
+	        if (e.index == 1) 
+	        {
+	        	window.top.location = "${pageContext.request.contextPath}/weixin/home/login.jsp";
+	        } 
+	        else 
+	        {
+	        	//alert('注册');
+	        	window.top.location = "${pageContext.request.contextPath}/weixin/home/zhuce.jsp";
+	        }
+	    })
+		
+	}else{
+		//alert('已登陆');
+	}
+	
+	
+	
+	
+	
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		
+		function test(){
+			//document.getElementById('frame_four').src='http://www.baidu.com';;
+		}
+		window.onload = function (){
+			
+		document.getElementById("frame_one").addEventListener("tap", function(){
+			var twc = document.getElementById("tabbar");
+			if(twc.getAttribute("src")==null)
+				twc.setAttribute("src","${pageContext.request.contextPath}/weixin/home/home.jsp");
+		});	
+			
+			
+			
+		document.getElementById("frame_two").addEventListener("tap", function(){
+			var twc = document.getElementById("tabbar-with-chat");
+			if(twc.getAttribute("src")==null)
+				twc.setAttribute("src","${pageContext.request.contextPath}/weixin/crowdfunding/crowdfunding.jsp");
+		});
+		
+		document.getElementById("frame_three").addEventListener("tap", function(){
+			var twm = document.getElementById("tabbar-with-school");
+			if(twm.getAttribute("src")==null)
+				twm.setAttribute("src","${pageContext.request.contextPath}/weixin/collection/collection.jsp");
+		});
+		
+        document.getElementById("frame_four").addEventListener("tap", function(){
+			
+			var twc = document.getElementById("tabbar-with-contact");
+			if(twc.getAttribute("src")==null){
+				twc.setAttribute("src","${pageContext.request.contextPath}/weixin/shopingcart/cart.jsp");
+			}
+				
+		});        
+		document.getElementById("frame_five").addEventListener("tap", function(){
+			var twc = document.getElementById("tabbar-with-center");
+			if(twc.getAttribute("src")==null){
+				twc.setAttribute("src","${pageContext.request.contextPath}/weixin/center2.jsp");
+			}
+				
+		});
+		
+		
+		}
+		
+		
+		
+	</script>
+</html>

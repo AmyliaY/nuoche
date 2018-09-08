@@ -1,0 +1,68 @@
+body{
+	background-color: white;
+}
+.top-search{
+	background-color: #FF7900;
+	height: 45px;
+}
+.top-search p{
+	padding: 5px 15px 0px;
+	color: white;
+}
+#search{
+	text-align: left;
+	padding-right: 30px; 
+	background-color: #FF7900;
+	border-radius: 0;
+}
+li{
+	list-style: none;
+	float: left;
+}
+ul{
+	padding: 0px;
+	height: auto;
+}
+.fenlei{
+	width: 100%;
+	height: auto;
+	margin-top: -10px;
+}
+.yijidetail{
+	width: 100%;
+	clear: both;
+}
+.yiji{
+	height: 38px;
+	width: 100%;
+	color: #000;
+	margin-top: 5px;
+	border-bottom: 1px solid #CCCCCC;
+	line-height: 38px;
+	font-size: 0.8em;
+	font-family: "微软雅黑";
+}
+
+.yiji img{
+	width:20px;
+	border-radius:20px;
+	height: 20px;
+	margin: 8px;
+	float: left;
+}
+.erjidetail{
+	width: 33.3%;
+}
+.erjidetail img{
+	width: 100%; /*图片宽度*/
+	height: 120px;
+}
+.erjidetail p{
+	color: #000;
+	font-size: 0.8em;
+	font-family: "微软雅黑";
+	height: 25px;
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+}

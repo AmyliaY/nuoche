@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0"> 
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/mui.min.js"></script>
+		<script src="../js/jquery-1.9.0.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</head>
+	<style>
+		.mui-table-view{
+			margin-top: 10px;
+		}
+		
+		.mui-table-view{
+			height: 50px;
+		}
+		.mui-input-row span{
+			padding-top: 20px;
+		}
+		#shang{
+			width: 40%;
+			margin-left: 5%;
+			margin-top: 20px;
+		}
+		#xia{
+			width: 40%;
+			margin-left: 55%;
+			margin-top: -67.5px
+		}
+		
+	</style>
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color: #ff7900;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+			<h1 class="mui-title" style="color: white;">卡卡车险</h1>
+		</header>
+		
+		<div class="mui-content">
+		    <form id="f">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="mui-input-row mui-checkbox">
+						<span>请选择保险公司:</span>
+						<input name="checkbox2" value="Item 1" type="checkbox" id="quan" onclick='quanxuan()' >
+					</a>
+				</li>
+			</ul>
+			
+			
+			
+			<button type="button" id="shang" class="mui-btn  mui-btn-warning mui-btn-block" onclick="last()">上一步</button>
+			<button type="button" id="xia" class="mui-btn  mui-btn-warning mui-btn-block" onclick="next()">下一步</button>
+			</form>
+		</div>
+		
+		
+		<script>
+			function quanxuan()
+			{
+				var x=document.getElementsByName('checkbox')
+				var y=document.getElementById('quan')
+				for(var i = 0; i < x.length; i++){
+					x[i].checked=y.checked;
+				}
+				var fan=document.getElementById('fan');
+				fan.checked=false;
+			}
+			
+			function last(){
+				top.location.href="index.html?"+Math.random();
+			}
+			function next(){
+			    var x= $("input[name=checkbox]:checked");
+			    if (x.length<1)
+			    {
+			      mui.toast('至少选择一个保险公司');
+			      return false;
+			    }
+			    
+			    
+			     var url = getRootPath()+"/weixinChexian.do?p=saveBaoxianBaodanGonshi";
+		         var data=$("#f").serialize();
+			     var callback = function(data)
+			     {
+			         if (data=="请登录")
+			         {
+			            mui.toast("请登录先");
+			         }
+			         else
+			         {
+			            top.location.href="main.html?order=1&"+Math.random();
+			         }
+			    }
+			    $.post(url,data,callback);
+				
+			}
+			
+			
+			$(function(){
+		     var url = getRootPath()+"/weixinChexian.do?p=getBaoxianGonshi";
+		     var data={x:Math.random()};
+		     var callback = function(data)
+		     {
+		         if (data=="请登录")
+		         {
+		            mui.toast("请登录先");
+		         }
+		         else
+		         {
+		            
+		            var json = eval(data);
+		            if (json.length>0)
+		            {
+		                 for (var i=0;i<json.length;i++)
+		                 {
+		                    var name = json[i].name;
+		                    var logo = json[i].logo;
+		                    var chk  = json[i].check;
+		                    var chkStr = (chk==1 ? 'checked' : '');
+		                    
+		                    var ul = '<ul class="mui-table-view">'+
+							   '<li class="mui-table-view-cell">'+
+								   '<a class="mui-input-row mui-checkbox">'+
+										'<img style="width: 50px;height: 20px;" src="'+(getRootPath()+'/'+logo)+'" />'+
+										'<span style="position: absolute;top: -5px;left: 30%;">'+name+'</span>'+
+										'<input '+chkStr+' name="checkbox" value="'+name+'" type="checkbox" >'+
+								    '</a>'+
+							   '</li>'+
+						    '</ul>';
+			
+		                    $(ul).insertAfter($("#f>ul:first"));
+		                 }
+		            }
+		         }
+		     };
+		     
+		     $.post(url,data,callback);
+		  
+		  });
+			
+			
+			
+			
+			
+			function getRootPath() {
+			//http://localhost:8083/uimcardprj/share/meun.jsp
+			var curWwwPath = window.document.location.href;
+			//uimcardprj/share/meun.jsp
+			var pathName = window.document.location.pathname;
+			var pos = curWwwPath.indexOf(pathName);
+			//http://localhost:8083
+			var localhostPaht = curWwwPath.substring(0, pos);
+			// uimcardprj
+			var projectName = pathName.substring(0, pathName.substr(1).indexOf(
+					'/') + 1);
+			if (projectName == "/admin" || projectName == "/daili"
+					|| projectName == "/weixin" || projectName == "/wap")
+				projectName = "";
+
+			return (localhostPaht + projectName);
+		}	
+			
+		</script>
+	</body>
+
+</html>

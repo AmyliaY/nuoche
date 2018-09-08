@@ -1,0 +1,245 @@
+body {
+	background: #EFEFF4
+}
+
+.lf {
+	float: left
+}
+
+.rf {
+	float: right
+}
+
+.data {
+	padding: 0 10px;
+	background: #fff;
+}
+
+.pinpai{
+	color: #333333;
+	padding-top: 10px;
+}
+
+.shopName{
+	color: #333333;
+	padding-top: 10px;
+}
+
+.shopPrice{
+	color: #333333;
+	padding-top: 10px;
+}
+.shopPrice span{
+	color: #DE0707;
+}
+
+.people{
+	color: #333333;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+.warm_prompt {
+	margin: 10px 0;
+	padding: 10px;
+	background: #fff;
+	color: #6D6D72;
+	text-align: justify;
+}
+
+.img_word {
+	background: #fff;
+	padding: 0 10px;
+	margin-bottom: 60px;
+}
+
+.img_word p {
+	padding: 10px 0 10px 25px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #E1E1E1;
+	background: url("../images/img_word.png") no-repeat 0 center;
+	background-size: 17px 16px;
+}
+
+.img_word img {
+	display: block;
+	width: 100%;
+}
+
+.tool_bar {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	overflow: hidden;
+	position: fixed;
+	bottom: 0;
+}
+
+.tool_bar a {
+	display: block;
+	float: left;
+	height: 100%;
+	color: #fff;
+	text-align: center;
+}
+.buy{
+	width: 100%;
+	font-size: 21px;
+	background: #6cccca
+}
+
+.total {
+	font-family: "Microsoft yahei", Arial;
+	color: #DF1717;
+}
+
+/*自定义样式*/
+
+.layui-layer-setwin .layui-layer-close2 {
+	position: absolute;
+	right: -11px;
+	top: -11px;
+	width: 31px;
+	height: 31px;
+	margin-left: 0;
+	background-position: -60px 0;
+}
+.mui-control-item{
+	background: #ffffff;
+}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+    color: #007aff;
+    border-bottom: 2px solid #007aff;
+    background: #FFFFFF;
+
+}
+.mui-control-content {
+	background-color: #F2F2F2;
+}
+
+.mui-control-content .mui-loading {
+	margin-top: 50px;
+}
+
+
+/*评论下面的所有样式*/
+
+.goods_comments {
+	background: #FFFFFF;
+}
+
+.user_img {
+	width: 40px;
+	margin-left: 5px;
+	margin-right: 10px;
+	float: left;
+}
+
+#score img {
+	width: 10px;
+	height: 10px;
+}
+
+.user_img img {
+	clear: both;
+	margin: 0px auto;
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+}
+
+.comment_item {
+	padding-top: 10px;
+}
+
+.comment_middle {
+	float: left;
+}
+
+.comment_rigth {
+	float: right;
+	padding-bottom: 5px;
+	margin-right: 5px;
+	color: #AEAEAE;
+}
+
+.cm-description {
+	margin-bottom: 5px;
+	font-size: 14px;
+	color: #666666;
+	font-family: "bodoni mt black";
+}
+
+.comment_top {
+	margin-top: 8px;
+}
+
+.nicheng {
+	color: #555555;
+}
+
+.time {
+	color: #999999;
+	font-size: 11px;
+}
+
+.favor {
+	float: right;
+	margin-right: 10px;
+	color: #707070;
+	font-size: 13px;
+}
+
+.deliever_time {
+	padding: 3px;
+	font-size: 13px;
+}
+
+.action {
+	margin-left: 10px;
+	background: #222222;
+	color: white;
+	padding: 3px 0px;
+	visibility: hidden;
+}
+
+.xiangqing {
+	width: 85%;
+	text-align: left;
+	border-bottom: 1px solid #E4E4E4;
+	float: right;
+	margin-top: -5px;
+}
+
+.comment_title {
+	clear: both;
+	background: #FFFFFF;
+	margin-left: 10px;
+	color: #666666;
+	padding-top: 5px;
+}
+/*popover*/
+.mui-popover{
+	bottom: 50px;
+	width: 100%;
+	border-radius: 0px;
+	padding: 10px 15px 20px 15px;
+}
+
+.total_price span:first-child{
+	font-size: 16px;
+	color: #323232;
+}
+.total_price span:last-child{
+	font-size: 16px;
+	color: #f60;
+}
+.mui-backdrop {
+    position: fixed;
+    z-index: 998;
+    top: 0;
+    right: 0;
+    bottom: 50px;
+    left: 0;
+    background-color: rgba(0, 0, 0, .3);
+}

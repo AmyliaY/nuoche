@@ -1,0 +1,107 @@
+/*
+添加人：王影
+时间：2016-04-21
+版本：1.0
+版权：量硕宏程投资管理（北京）有限公司
+*/
+
+body {
+	background: #EEEFF3;
+}
+
+.clearfix {
+	background: white;
+}
+
+.ui-form-color-nav {
+	background-color: rgba(108, 204, 202, 0.9);
+	transition: all 0.5s ease 0s;
+}
+
+.clearPadding {
+	padding: 0;
+}
+
+.col-xs-12 {
+	width: 100%;
+}
+.col-title {
+	padding-top: 10px;
+    background: #FFFFFF;
+    padding-left: 10px;
+    padding-right: 15px;
+    color: #2b577a;
+    font-weight: 400;
+    font-family: "arial narrow";
+    font-size: 15px;
+}
+.font16 {
+    font-size: 16px;
+}
+.font12 {
+    font-size: 14px;
+    color: #888;
+}
+.pull-right {
+    float: right!important;
+}
+.clearPadding {
+    padding: 0;
+}
+.col-xs-3 {
+    width: 25%;
+    float: left;
+}
+.text-center {
+    text-align: center;
+}
+.sort-content img {
+    width: 40px;
+    height: 40px;
+}
+
+img {
+    vertical-align: middle;
+}
+img {
+    border: 0;
+}
+.sort-content img+div {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: rgba(32, 35, 37, 0.6);
+    font-size: 13px;
+}
+.mt10 {
+    padding-top: 10px;
+}
+.around-other-info .xl{
+	margin-top: 5px;
+	color: rgba(32, 35, 37, 0.6);
+    display: block;
+    font-size: 0.75rem;
+}
+.shop{
+	margin-top: 18px;
+}
+.shop img{
+	height: 1.5em;height: 1.5em;
+}
+.price{
+	margin-top: 12px;
+}
+.mui-slider-item img{
+	height: 200px;
+}
+#type{
+	height: 156px;
+}
+#lun{
+	height: 200px;
+}
+#destination{
+	height: 220px;
+}
+.price strong{
+	margin-left: 5px;
+}

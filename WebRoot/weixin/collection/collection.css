@@ -1,0 +1,131 @@
+html {
+	background: white!important;
+}
+
+
+.collection_product_a {
+	white-space: initial!important;
+	margin: 0px!important;
+}
+
+.mui-active{
+	background: #fff!important;
+}
+
+body {
+	background: white!important;
+}
+.mui-content {
+	background: white!important;
+	padding-top: 30px!important;
+}
+.collection_product {
+	/*border:1px solid firebrick;*/
+	width: 100%;
+	height: 100px;
+	font-family: sans-serif;
+	font-size: 14px;
+	/*border-top: 1px solid #C8C7CC;*/
+}
+.collection_img {
+	/*border:1px solid red;*/
+	width: 33%;
+	height: 100px;
+	padding: 8px;
+	cursor: pointer;
+}
+.collection_img img {
+	width: 110%;
+	height: 110%;
+}
+.collection_detail {
+	/*border:1px solid black;*/
+	width: 67%;
+	height: 100px;
+	float: right;
+	border-bottom: 1px solid whitesmoke;
+	
+}
+.collection_detail1 {
+	/*border:1px solid yellow;*/
+	padding: 10px;
+	margin-top: -5px;
+	color:#FF7900 ;
+	 width: 100%;
+	 height: 50px; 
+	 
+}
+.collection_detail2 {
+	/*border:1px solid green;*/
+	 margin: 5px 5px 10px 10px;
+	 width: 50px;
+	 height: 20px; 
+}
+.collection_detail3 {
+	/*border:1px solid blue;*/
+	 margin:-5px 5px 10px 8px;
+	 width: 100px;
+	 height: 25px; 
+}
+.buybutton{
+	border: #FF7900;
+	color: white; 
+	background-color: #FF7900;
+	height: 24px;
+	line-height: 12px;
+	text-align: center;
+	font-size: 11px;
+
+}
+.collection_name {
+	display: inline-block;
+	width: 100%;
+	height: 55px;
+	line-height: 22px;
+	padding: 10px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	cursor: pointer;
+	float: left;
+}
+.collection_price {
+	display: inline-block;
+	padding: 10px;
+	margin-top: -5px;
+	color:#FF7900 ;
+}
+/*别删了*/
+/*.collection_gname {
+	display: inline-block;
+	width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	cursor: pointer;
+	height: auto;
+	margin-left: 10px;
+}*/
+.collection_gprice {
+	display: inline-block;
+	margin-left: 10px;
+	height: auto;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-top: 20px;
+}
+.collection_buyCount {
+	display: inline-block;
+	margin-left: 15px;
+	height: auto;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-top: 20px;
+}
+.collection_youfei {
+	
+}
+.mui-btn-red {
+	background: #FF7900!important;
+}
+.mui-table-view-cell:after {
+	background: white!important;
+} 

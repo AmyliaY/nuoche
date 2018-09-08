@@ -1,0 +1,715 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+session.setAttribute("page", 3);
+%>
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>购物车</title>
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+		<link rel="stylesheet"
+			href="${pageContext.request.contextPath}/weixin/css/mui.min.css" />
+		<link rel="stylesheet"
+			href="${pageContext.request.contextPath}/weixin/shopingcart/css/cart.css" />
+		<link rel="stylesheet"
+			href="${pageContext.request.contextPath}/weixin/shopingcart/css/base.css" />
+		<link rel="stylesheet"
+			href="${pageContext.request.contextPath}/weixin/shopingcart/css/home.css" />
+		<link rel="stylesheet" type="text/css"
+			href="${pageContext.request.contextPath}/weixin/css/app.css" />
+		<script src="${pageContext.request.contextPath}/weixin/layer/layer.js"></script>
+	</head>
+	<style>
+.mui-table-view {
+	background: white;
+}
+
+.lili {
+	background: white;
+}
+
+.nb {
+	width: 200px;
+	margin-top: 20px;
+}
+
+#bianji {
+	width: 100%;
+	height: 40px;
+	background-color: white;
+	margin-top: -10px;
+	padding: 0;
+}
+
+#tongzhi {
+	height: 10px;
+	width: 10px;
+	background-color: red;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border: 1px solid white;
+	position: absolute;
+	top: 15%;
+	right: 1%;
+	z-index: 2;
+	display: none;
+}
+
+.tk {
+	height: 45px;
+	background: white;
+}
+
+.jianjieha {
+	color: #999999;
+	font-size: 11px;
+	margin-top: 5px;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	line-height: 15px;
+	overflow: hidden;
+}
+</style>
+	<body style="background-color: #F7F7F7;">
+		<header class="mui-bar mui-bar-nav" style="background: #FF7900;">
+		<span class="mui-title" id="cat_num" style="color: white;">购物车(0)</span>
+		<a href="#" id="cat-kefu"><span class="mui-icon mui-icon-chat"
+			style="color: white; float: right;"></span>
+		</a>
+		<a id="cat-bianji" class="mui-btn mui-btn-blue mui-btn-link "
+			style="color: white; float: right; margin-right: 35px;">编辑</a>
+		<a id="cat-over" class="mui-btn mui-btn-blue mui-btn-link "
+			style="color: white; float: right; margin-right: 35px; display: none;">完成</a>
+		<div id="tongzhi"></div>
+
+		</header>
+
+		<div style="margin-top: 44px;">
+			<form class="mui-input-group">
+				<ul class="mui-table-view" id="getallcat">
+					<!--
+                	<li class="mui-table-view-cell mui-media" style="background-color: gainsboro;">
+					<div >
+					<span class="mui-checkbox mui-left" ><input style="left:0px;margin-top: 20px;" name="checkbox" value="Item 1" type="checkbox"></span>
+					<div class="a2">
+						<a  href="#">
+							<img class="shangpinimg" src="${pageContext.request.contextPath}/weixin/images/1.jpg">
+							<div class="mui-media-body">
+								<p class='shangpin-ellipsis'>正宗仙居杨梅新鲜东魁荸荠鲜杨梅正宗仙居杨梅新鲜东魁荸荠鲜杨梅正宗仙居杨梅新鲜东魁荸荠鲜杨梅</p>
+								<p ><span class="shangpin-price" >￥19.9</span> <span class="shangpin-num" >x1</span></p>
+							</div>  
+						</a>
+					</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<span class="mui-checkbox mui-left" ><input style="left:0px;margin-top: 20px;" name="checkbox" value="Item 1" type="checkbox"></span>
+					<div class="a2">
+						<a href="#">
+							<img class="shangpinimg" src="${pageContext.request.contextPath}/weixin/images/1.jpg">
+							<div class="mui-media-body">
+								<p class='shangpin-ellipsis'>正宗仙居杨梅新鲜东魁荸荠鲜杨梅正宗仙居杨梅新鲜东魁荸荠鲜杨梅正宗仙居杨梅新鲜东魁荸荠鲜杨梅</p>
+								<p><span class="shangpin-price">￥<span id="sg_price">10</span></span> <span class="shangpin-num">x<span id="sg_num">1</span></span></p>
+							</div>
+						</a>
+					</div>
+				</li>
+				<div style="height: 10px;background: gray;"></div>
+				-->
+				</ul>
+			</form>
+		</div>
+
+		<div class="dibu" style="background: white;">
+			<div class="dibu-div1">
+				<a href="#">
+					<div class="mui-checkbox mui-left">
+						<input style="margin-left: -20px; margin-top: -10px;"
+							id="quanxuan" value="Item 1" type="checkbox">
+					</div> <span class="quanxuan" style="margin-left: 35px;">全选</span> <!--<span class="gongjijian">共<span id="gongjijian">0</span>件</span> -->
+				</a>
+			</div>
+			<div class="dibu-div2" id="cat-heji">
+				<p>
+					<span style="color: black;">合计:</span><span class="heji">￥<span
+						id="heji">0</span>
+					</span>
+					<br />
+					<span class="yunfei">不含运费</span>
+				</p>
+			</div>
+			<div class="dibu-div3" id="jiesuan">
+				结算(0)
+			</div>
+			<div class="dibu-div4" id="cat-delete" style="float: right;">
+				删除
+			</div>
+		</div>
+	</body>
+	<script src="${pageContext.request.contextPath}/weixin/js/mui.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/weixin/js/jquery-1.9.0.min.js"></script>
+	<script src="${pageContext.request.contextPath}/weixin/shuaxin.js"></script>
+	<script>
+		var index = 0;
+		var userid = '${userinfo.usersId}'; //会员ID
+		mui.init({
+				keyEventBind: {
+				backbutton: false
+			}
+			});
+			 window.addEventListener("showMsg",function(e){
+			
+			     layer.open({
+							content: '<div style="height:100%;width:100%"><div><img src="${pageContext.request.contextPath}/weixin/images/jnweb-kulian.png" width="30px" height="30px" style="margin-top:-10px"/></div>再按一次退出！</div>',
+							time: 1
+						});
+		  })
+		//商品单选
+		function danjia(chk,type,i)
+		{
+			
+			var boxnum=$("input[name=check]:checked").length;
+			$("#jiesuan").html('结算('+boxnum+')');
+			if(boxnum==0)
+			{
+				$("#quanxuan").attr('checked',false);
+			}
+			var price=$(chk).parent().parent().find("#sg_price").html();	//商品单价
+			var num=$(chk).parent().parent().find("#sg_num").html();		//商品数量
+			var sum=$("#heji").html();		//总计
+			var index=$("input[name=check]").attr('index');
+			if(index==1 || index==2){
+			//判断是否选中  选中 总计+商品单价*数量 
+			$(chk).each(function(){
+				if($(this).get(0).checked)
+				{
+					var money=(price*1*num)+(sum*1);	
+					$("#heji").html(money.toFixed(2));
+				}else{
+					var money=(sum*1)-(price*1*num);
+					$("#heji").html(money.toFixed(2));
+					$("#li"+i).children().find("#bianji").css('display','none');
+					$("#li"+i).children().find("#bianji").attr('index',1);
+				}
+			});
+			}
+		}
+		//全选
+		$("#quanxuan").click(function(){
+			var money=0;
+			var x=document.getElementsByName("check");
+			var y=document.getElementById("quanxuan");
+			for (var i=0;i<x.length;i++) {
+				x[i].checked=y.checked;
+			}
+			var boxlength=$("input[name=check]:checked").length;
+			$("#jiesuan").html('结算('+boxlength+')');
+			if(boxlength>0){
+			for (var j=0;j<boxlength;j++) {
+				var price=$("#li" +j).children().children().next().next().find("#sg_price").html();//商品价格
+				var num=$("#li" +j).children().children().next().next().find("#sg_num").html();//数量
+				money+=price*1*num;
+			}
+				$("#heji").html(money.toFixed(2));
+			}
+			else{
+				var chklength=$("input[name=check]").length;
+				for (var j=0;j<chklength;j++) {
+					$("#li"+j).children().find("#bianji").attr('index',1);
+					$("#li"+j).children().find("#bianji").css('display','none');
+				}
+				$("#heji").html(money.toFixed(2));
+			}
+		});
+		
+		//客服 消息
+		$("#cat-kefu").click(function(){
+			if(userid!=null){
+				window.top.location = "${pageContext.request.contextPath}/weixin/goodsdetail/kefu.jsp";
+			}else{
+				goLogin();
+			}
+		});
+		window.addEventListener('userinfo',function(e){
+			shuaxin();
+		});
+		//mui.plusReady(function() {
+			
+			window.onload = function (){
+			userid = '${userinfo.usersId}';
+			var catsum = null; //购物车数量
+			var catlist = null; //购物车list
+			
+			
+			
+			
+			//同步商家消息
+		setInterval(function() {
+			var list = null;
+			if(!userid){
+				return;
+			}
+			mui.ajax("${pageContext.request.contextPath}/" + 'uamessage.do?p=getadminmsg' + '&userid=' + userid + '&x=' + Math.random(), {
+				type: "post",
+				timeout: 30000,
+				success: function(data) {
+					var map = eval("(" + data + ")");
+					for(var key in map) {
+						if(key == "list") {
+							list = map[key];
+						}
+					}
+					if(list != null) {
+						if(list.length > 0) {
+							$("#tongzhi").show();
+
+							/*播放音频*/
+							//startPlay("${pageContext.request.contextPath}/weixin/music/3.wav");	
+							/*播放音频*/
+
+						} else {
+							$("#tongzhi").hide();
+						}
+					}
+				}
+			});
+		}, 3000);
+
+		/*得到商家消息*/
+		
+			
+			
+			
+			
+			
+			mui.ajax("${pageContext.request.contextPath}/" + "appcat.do?p=getAllCat&id=" + userid, {
+				type: 'post',
+				timeout: 30000,
+				success: function(data) {
+					if(data=="请先登录")
+					{
+						var li = '<div style="text-align: center; line-height: 200px; height: 120px; margin-top: 140px;">' +
+					'<span style="text-align: center; margin-top: 25px;color: darkslategrey;font-size:18px;">暂未登录</span>' +
+					'</div>' +
+					'<div class="mui-content" style="text-align:center;background-color: white;">' +
+					'<div class="mui-content-padded" >' +
+					'<a href="#">' +
+					'<input type="button" class="mui-btn mui-btn-primary mui-icon" style="width:160px;height:40px;margin-top:60px;background-color: #FF7900;color:white" value="请&nbsp;先&nbsp;登&nbsp;录" onclick="goLogin()"></input>' +
+					'</a>' +	
+					'</div>' + 
+					'</div>';
+					var ul=document.getElementById("getallcat");
+					ul.innerHTML=li;
+					return;
+					}
+					var map = eval("(" + data + ")");
+					for(var key in map) {
+						if(key == "sum") {
+							catsum = map[key];
+						}
+						if(key = "list") {
+							catlist = map[key];
+						}
+					}
+					$("#cat_num").html('购物车(' + catsum + ')'); //购物车数量
+					getAllCat(catlist);
+				}
+
+			});
+		//});
+		}
+			//显示购物车信息
+		function getAllCat(catlist)
+		{
+			if(catlist.length>0){
+			for (var i=0;i<catlist.length;i++) {
+				 var str='<li  class="mui-table-view-cell mui-media lili" style="margin-top: 0px;" id="li'+i+'">'+
+				 		 '<div  id="div' + catlist[i].scatId + '">'+
+				 		 '<div style="width:100%;height:40px;background-color: white; display:none;margin-top: -10px;" id="kong"></div>'+
+				 		 '<div index=1 id="bianji" style="display:none;"><span style="float:right;line-height: 40px;" onclick="bianji(' + catlist[i].scatId + ','+i+',2)" id="bj">编辑<span></div>'+
+				 		 '<div  id="over" style="display:none;width:100%;height:40px;background-color: white;margin-top: -10px;"><span style="float:right;line-height: 40px;" onclick="over(' + catlist[i].scatId + ','+i+',this)" id="ov">完成<span></div>'+
+				 		 '<div id="xuan" class="mui-checkbox mui-left">'+
+						'<input	index="1" name="check" gid="'+catlist[i].goods.gid+'" gnum="'+catlist[i].scatNum+'" value="' + catlist[i].scatId + '" style="margin-top: 20px;margin-left: -20px;" onclick="danjia(this,1,'+i+')" id="ckbox'+catlist[i].scatId+'" type="checkbox" ></div>'+
+						'<div class="a2"><img class="shangpinimg" src="'+"${pageContext.request.contextPath}"+catlist[i].goods.gimages+'">'+
+						'<div id="numbox" style="display:none;">'+
+						'<div class="mui-numbox" data-numbo2x-min="1" style="width: 146px;margin-top: 0px;">'+	//146
+						'<button id="catbtn-jian" class="mui-btn-numbox-minus" type="button">-</button>'+
+						'<input id="catnum" min="1" onclick="select()" onkeyup="setnum(' + catlist[i].scatId + ','+i+',this)"; class="mui-input-numbox" type="number" min="1" value="'+catlist[i].scatNum+'" />'+
+						'<button id="catbtn-jia" class="mui-btn-numbox-plus" type="button">+</button>'+
+						'</div>'+
+						'<button id="catbtn-del"  onclick="catbtndel(' + catlist[i].scatId + ','+i+')" style="float:right; height: 80px;background-color: red;" type="button" class="mui-btn"><span style="color:white">删除</span></button>'+
+						'</div>'+
+						'<a href="#" onclick="getGoodDetail(\''+catlist[i].goods.gid+'\',\''+catlist[i].goods.gname+'\',\''+catlist[i].goods.gprice+'\',\''+catlist[i].goods.gvipprice+'\',\''+catlist[i].goods.gdanwei+'\',\''+"${pageContext.request.contextPath}"+catlist[i].goods.gimages+'\')">'+
+						'<div class="mui-media-body" id="goodsxinxi">'+
+						'<p class="shangpin-ellipsis" style="color:#333333; font-size:14px">'+catlist[i].goods.gname+'</p>'+
+						'<div class="tk"><div class="jianjieha" id="jianjieah">'+catlist[i].goods.jianjie+'</div></div>'+ 
+						'<input  type="hidden" class="cartIdclass" id="cartId' + i + '" value="' + catlist[i].scatId + '" />';
+
+					
+					if(catlist[i].userinfo.usersType=='1')
+					{
+						str=str+'<div class="jiage"><p style="margin-top:-48px;"><span class="shangpin-price" style="color:#FF4500; font-size:18px;">￥<span id="sg_price" class="" >'+catlist[i].goods.gvipprice+' </span><span class=""  style="color:#999999; font-size:12px"> ' + catlist[i].goods.buyCount + '人付款</span></span>';
+					}else{
+						str=str+'<div class="jiage"><p style="margin-top:-48px;"><span class="shangpin-price" style="color:#FF4500; font-size:18px">￥<span id="sg_price" >'+catlist[i].goods.gprice+'</span><span class=""  style="color:#999999; font-size:12px"> ' + catlist[i].goods.buyCount + '人付款</span></span>';
+					}
+					str=str+'<span class="shangpin-num" style=" margin-top:4px;">x<span id="sg_num">'+catlist[i].scatNum+'</span></span></p></div></div></a></div></div></li>';
+					if(catlist.length>1){
+						str=str+'<div id="kongge' + catlist[i].scatId + '" style="height: 0px;background: gainsboro;"></div>';
+					}
+					if(catlist.length==i+1 && catlist.length>=5)
+					{
+						str=str+'<div id="lastdiv" style="height: 50px;background: gainsboro;"></div>';
+					}
+					var cathtml=document.getElementById("getallcat");
+					cathtml.innerHTML+=str;
+					var jianjieha = document.getElementById("jianjieah").innerHTML;
+                      if(jianjieha.length>30){
+                      	  
+                      }
+			}	
+			}
+			else{	
+				var li = '<div style="text-align: center; line-height: 200px; height: 120px; margin-top: 140px;">' +
+					'<span style="text-align: center; margin-top: 25px;color: darkslategrey;font-size:18px;">暂无商品</span>' +
+					'</div>' +
+					'<div class="mui-content" style="text-align:center;background-color: #F7F7F7;">' +
+					'<div class="mui-content-padded" >' +
+					'<a href="#">' +
+					'<input type="button" class="mui-btn mui-btn-primary mui-icon" style="width:160px;height:40px;margin-top:60px;background-color: #FF7900;color:white" value="去&nbsp;&nbsp;&nbsp;逛&nbsp;&nbsp;&nbsp;逛" onclick="goHome()"></input>' +
+					'</a>' +
+					'</div>' + 
+					'</div>';
+					var ul=document.getElementById("getallcat");
+					ul.innerHTML=li;
+					ul.style.backgroundColor="#F7F7F7";
+			}
+		}
+		//进入详情页面
+		function getGoodDetail(gid,gname,gprice,gvipprice,gkucun,gimages)
+		{
+			/*mui.openWindow({
+				url:'/goodsdetail/detail.html',
+				id:'detail',
+				extras:{
+					gid:gid,
+					gname:gname,
+					gprice:gprice,
+					gvipprice:gvipprice,
+					gkucun:gkucun,
+					gimages:gimages
+				}
+			});*/
+			window.top.location = "${pageContext.request.contextPath}/weixin/goodsdetail/detail.jsp?gid="+gid+"&gname="+gname+"&gprice="+gprice+"&gvipprice="+gvipprice+"&gkucun="+gkucun+"&gimages="+gimages+"&state=1";
+		}
+		//top  编辑
+		$("#cat-bianji").click(function(){
+			$("#cat-over").css('display','block');	//top  完成 显示
+			$("#cat-bianji").css('display','none');	//top  编辑 隐藏
+			$("#cat-delete").css('display','block');
+			$("#cat-heji").css('display','none');
+			$("#jiesuan").css('display','none');
+			$(".mui-numbox").css('width','180px');
+			var index=$("input[name=check]").attr('index',2);
+			var lileng=$("#getallcat").find("li").length;
+			for (var i=0;i<lileng;i++) {
+				$("#li"+i).children().children().next().next().find("#numbox").css('display','block');
+				$("#li"+i).children().children().next().next().find("#goodsxinxi").css('display','none');	//商品信息 隐藏
+				$("#li"+i).children().children().next().next().find("#catbtn-del").css('display','none');	//商品删除 隐藏
+				//$("#li"+i).children().find("#kong").css('display','block');
+				var catid=$("#li"+i).children().children().next().next().find("#cartId"+i).val();
+				var type=1;
+				bianji(catid,i,type);
+				setnum(catid);
+			}
+		});
+		//top 完成
+		$("#cat-over").click(function(){
+			$("#cat-over").css('display','none');	//top  完成 显示
+			$("#cat-bianji").css('display','block');	//top  编辑 隐藏
+			$("#cat-delete").css('display','none');
+			$("#cat-heji").css('display','block');
+			$("#jiesuan").css('display','block');
+			$("input[name=check]").attr('index',1);	
+			$(".mui-numbox").css('width','146px');
+			var lileng=$("#getallcat").find("li").length;
+			for (var i=0;i<lileng;i++) {
+				$("#li"+i).children().find("#kong").css('display','none');
+				$("#li"+i).children().children().next().next().find("#catbtn-del").css('display','block');	//商品删除 显示
+				var catid=$("#li"+i).children().children().next().next().find("#cartId"+i).val();	
+				over(catid,i);
+			}
+			$("input[name=check]:checked").each(function(){
+				if($(this).get(0).checked)
+				{
+					$("#li"+i).children().find("#bianji").css('display','block');
+				}else{
+					$("#li"+i).children().find("#bianji").css('display','none');
+				}
+			});
+		});
+		//编辑
+		function bianji(catid,i,type)
+		{	
+				/*var index=$("#li"+i).children().find("#bianji").attr('index');
+				if(index==1)	
+				{
+					//var x=$("#ckbox"+catid).attr('checked',true);
+					var x=$("#li"+i).children().find("input[name=check]").attr('checked',true);
+					danjia(x,type);
+					$("#li"+i).children().find("#bianji").attr('index',2);
+				}*/
+			$("#li"+i).children().find("#bianji").css('display','none');
+			if(type==1){
+				$("#li"+i).children().find("#over").css('display','none');
+			}else{
+				$("#li"+i).children().find("#over").css('display','block');	
+			}
+			$("#div"+catid).children().find("#goodsxinxi").css('display','none');
+			$("#div"+catid).children().find("#numbox").css('display','block');
+			//减
+			$("#div"+catid).children().find("#catbtn-jian").click(function(){
+				 var catnum=$("#div"+catid).children().find("#catnum").val();
+				 if(catnum>1){
+				 mui.post("${pageContext.request.contextPath}/"+"appcat.do?p=editCatNum&type=1",{catid:catid},function(data){
+				 	 var catnum=$("#div"+catid).children().find("#catnum").val(data);	
+				 	 var sgnum=$("#div"+catid).children().find("#sg_num").html(data);
+				 	 var sgprice=$("#div"+catid).children().find("#sg_price").html();	//金额
+				 	 var sum=$("#heji").html();	//总金额
+				 	 var leng=$("#li"+i).children().find("input[name=check]");
+				 	 $(leng).each(function(){
+				 	 	if($(this).get(0).checked)
+				 	 	{
+				 	 		$("#heji").html(((sum*1)-(sgprice*1)).toFixed(2));	
+				 	 	}
+				 	 });
+				 });
+				 }else{
+				 	mui.toast("受不了了，在减就没有了哦!");	
+				 	return false;
+				 }
+			});	
+			//加
+			$("#div"+catid).children().find("#catbtn-jia").click(function(){
+				mui.post("${pageContext.request.contextPath}/"+"appcat.do?p=editCatNum&type=2",{catid:catid},function(data){
+				 	 var catnum=$("#div"+catid).children().find("#catnum").val(data);	
+				 	 var sgnum=$("#div"+catid).children().find("#sg_num").html(data);
+				 	 var sgprice=$("#div"+catid).children().find("#sg_price").html();
+				 	 var sum=$("#heji").html();	//总金额
+				 	 var leng=$("#li"+i).children().find("input[name=check]");
+				 	 $(leng).each(function(){
+				 	 	if($(this).get(0).checked)
+				 	 	{
+				 	 		$("#heji").html(((sum*1)+(sgprice*1)).toFixed(2));	
+				 	 	}
+				 	 });
+				 	 
+				 });
+			});
+		}
+		//删除
+		function catbtndel(catid,i)	
+		{
+			mui.confirm("确定要删除该商品吗？",function(e){
+					var sum=$("#heji").html();
+					var sgnum=$("#div"+catid).children().find("#sg_num").html();	//商品数量
+					var sgprice=$("#div"+catid).children().find("#sg_price").html();	//商品价格
+					
+					if(e.index==1)
+					{
+						var boxleng=$("input[name=check]:checked").length;
+						if(boxleng>0){
+							$("#heji").html(((sum*1)-(sgnum*1)*(sgprice*1)).toFixed(2));
+						}
+						mui.post("${pageContext.request.contextPath}/"+"appcat.do?p=deleteCat",{catid:catid},function(data){
+							$("#getallcat").find("#li"+i).hide();
+							var x=$("#ckbox"+catid).attr('checked',true);
+							var boxleng=0;
+							if(x.get(0).checked)
+							{
+								boxleng=$("input[name=check]:checked").length-1;
+							}else{
+								boxleng=$("input[name=check]:checked").length;
+							}
+							$("#ckbox"+catid).attr('checked',false);
+							$("#jiesuan").html('结算('+boxleng+')');
+							$("#getallcat").find("#kongge"+catid).remove();	
+							//购物车为0的时候就刷新一下页面
+							var lileng=$("#getallcat").find('li').length-1;
+							if(lileng==0)
+							{
+								location.reload();
+							}
+							if(lileng<4)
+							{
+								$("#lastdiv").remove();
+							}
+							$("#cat_num").html('购物车(' + lileng + ')'); //购物车数量
+						});
+					}
+				});
+		}
+		//输入
+		function setnum(catid,i,ts)
+		{	
+			var sgnumm=$("#div"+catid).children().find("#sg_num").html();	//原先购买数量
+			var catnum=$("#div"+catid).children().find("#catnum").val();
+			var sgprice=$("#div"+catid).children().find("#sg_price").html();	//总金额
+			if(catnum>=1){
+			mui.post("${pageContext.request.contextPath}/"+"appcat.do?p=editCatSetNum",{catid:catid,catnum:catnum},function(data){
+				//$("#div"+catid).children().find("#catnum").val(data);
+				var sgnum=$("#div"+catid).children().find("#sg_num").html(data);
+				var leng=$("#li"+i).children().find("input[name=check]");
+				var chklenght=$("input[name]:checked").length;
+				var sum=$("#heji").html();	//总金额
+				var index=$("input[name=check]").attr('index');
+				$(leng).each(function(){
+					if($(this).get(0).checked)
+					{		
+						if(chklenght==1){
+							$("#heji").html(((data*sgprice*1)).toFixed(2));
+						}else{
+							$("#heji").html(((sum*1)+(data*sgprice*1)-(sgnumm*1*sgprice)).toFixed(2));
+						}
+					}
+				});
+			});
+			}
+			else{
+				catnum=$("#div"+catid).children().find("#catnum").val(1);
+				mui.toast("不能少于一件");
+			}
+		}
+		//完成
+		function over(catid,i)
+		{
+			var index=$("#li"+i).children().find("#bianji").attr('index');
+			if(index==2)
+			{
+				$("#li"+i).children().find("#bianji").css('display','block');
+			}	
+			$("#li"+i).children().find("#over").css('display','none');
+			$("#div"+catid).children().find("#goodsxinxi").css('display','block');
+			$("#div"+catid).children().find("#numbox").css('display','none');
+			$("#div"+catid).children().find("#catbtn-jian").attr('id','');
+			$("#div"+catid).children().find("#catbtn-jia").attr('id','');
+		}
+		
+		//去逛逛
+			function goHome()
+			{
+				
+				window.top.location = "${pageContext.request.contextPath}/weixin/index-main.jsp?con=0";
+				/*mui.plusReady(function(){
+					 var win = plus.webview.getLaunchWebview();
+					 mui.fire(win,"home",{});
+				});*/
+				
+			}
+			//去登录
+			function goLogin()
+			{
+				/*mui.openWindow({
+					url:'/home/login.html',
+					id:'login'
+				});*/
+				
+				window.top.location = "${pageContext.request.contextPath}/weixin/home/login.jsp";
+			}
+		//批量删除
+		$("#cat-delete").click(function(){
+			var length=$("input[name=check]:checked").length;
+			var catid=[];
+			
+			if(length==0)
+			{
+				mui.toast("请选择商品");
+				return;
+			}
+			$("input[name=check]:checked").each(function(){
+				catid.push($(this).val());
+			});
+				
+			mui.confirm('确认要删除这'+length+'件商品吗？',function(e){
+				if(e.index==1)
+				{
+					mui.post("${pageContext.request.contextPath}/"+"appcat.do?p=plcatdelete",{catid:catid},function(){
+						$("input[name=check]:checked").parent().parent().parent().hide();
+						$("#getallcat").find("#kongge"+catid).remove();
+						var boxleng=$("input[name=check]:checked").length;	
+						$("input[name=check]:checked").each(function(){
+							$(this).attr('checked',false);
+						});
+						$("#jiesuan").html('结算('+0+')');	
+						$("#heji").html(''+0);
+						var lileng=$("#getallcat").find('li').length-boxleng;
+						if(lileng==0)
+						{
+							location.reload();
+						}
+						if(lileng<4)
+						{
+							$("#lastdiv").remove();
+						}
+						$("#cat_num").html('购物车(' + lileng + ')'); //购物车数量
+						mui.toast("删除成功");
+					});	
+				}
+			});
+		});
+
+		//结算
+		$("#jiesuan").click(function(){
+			var boxlength=$("input[name=check]:checked").length;
+			var catid=[];
+			var gnum=[];
+			var goodid=[];
+			var a=[];
+			if(boxlength>0)
+			{
+				$("input[name=check]:checked").each(function(){
+					catid.push($(this).val());
+					goodid.push($(this).attr("gid"));
+					gnum.push($(this).parent().parent().find("#sg_num").html());
+				});
+				//去订单页面
+				/*mui.openWindow({
+					url:'/goodsdetail/confirm_order.html',
+					id:'confirm_order.html',
+					extras:{
+						catid:catid,
+						gnum:gnum,
+						goodid:goodid
+					}
+				});*/
+				window.top.location = "${pageContext.request.contextPath}/weixin/goodsdetail/confirm_order.jsp?catid="+catid+"&gnum="+gnum+"&goodid="+goodid;
+			}else{
+				mui.toast("请选择商品");
+			}
+		});
+		
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</script>
+
+</html>

@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd  http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-3.0.xsd  http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/task  http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+	
+	<context:component-scan base-package="com.service.admin"></context:component-scan>
+	<context:component-scan base-package="com.service.wap"></context:component-scan>
+	<context:component-scan base-package="com.service.business"></context:component-scan>
+	<context:component-scan base-package="com.service.daili"></context:component-scan>
+	<context:component-scan base-package="com.service.weixin"></context:component-scan>
+	<context:component-scan base-package="com.service.back"></context:component-scan>
+	<context:component-scan base-package="com.service.back"></context:component-scan>
+	<context:component-scan base-package="com.shop.service.app"></context:component-scan>
+	<context:component-scan base-package="com.shop.service.back"></context:component-scan>
+	<context:component-scan base-package="com.shop.service.weixin"></context:component-scan>
+	<context:component-scan base-package="com.shop.service.wap"></context:component-scan>
+	
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="maxIdleTime" value="1800"></property>
+		<property name="user" value="root"></property>
+		<property name="password" value="root"></property>
+		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/nuoche"></property>
+		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:hibernate.cfg.xml">
+		</property>
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	
+	<!-- 事物管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 事物属性 -->
+	<tx:advice id="mytx" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 织入 -->
+	<aop:config>
+		<aop:advisor advice-ref="mytx" pointcut="execution(* com.service.*.*(..))" />
+		<aop:advisor advice-ref="mytx"
+			pointcut="execution(* com.service.*.*.*(..))" />
+			
+			<aop:advisor advice-ref="mytx"
+			pointcut="execution(* com.shop.service.*.*.*(..))" />
+	</aop:config>
+	
+	<bean id="HqlDAO" class="com.dao.HqlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	<!-- 保险 -->
+	<bean id="BaoxianBaodanDAO" class="com.dao.BaoxianBaodanDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BaoxianGonshiDAO" class="com.dao.BaoxianGonshiDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BaoxianBaodanGonshiDAO"
+		class="com.dao.BaoxianBaodanGonshiDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+	
+	<!--                商城加入                             -->
+	
+	<bean id="MLevelDAO" class="com.dao.MLevelDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+ 
+	<bean id="LunboMusicDAO" class="com.dao.LunboMusicDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+    
+
+	<bean id="MSongsDAO" class="com.dao.MSongsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="MGuessDAO" class="com.dao.MGuessDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="PayrecordsDAO" class="com.dao.PayrecordsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GoodsimagesDAO" class="com.dao.GoodsimagesDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GoodsordersDAO" class="com.dao.GoodsordersDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="AddressDAO" class="com.dao.AddressDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="CollectionsDAO" class="com.dao.CollectionsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="GoodsorderdetailDAO"
+		class="com.dao.GoodsorderdetailDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UserinfoDAO" class="com.dao.UserinfoDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="ShoppingcatDAO" class="com.dao.ShoppingcatDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ZitiaddressDAO" class="com.dao.ZitiaddressDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="CarouselimagesDAO" class="com.dao.CarouselimagesDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="GoodsDAO" class="com.dao.GoodsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="UamessagesDAO" class="com.dao.UamessagesDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="PaypresentDAO" class="com.dao.PaypresentDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="JihuomaDAO" class="com.dao.JihuomaDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!--    商城结束      -->
+	
+	
+	
+	<bean id="TemplatemessageDAO" class="com.dao.TemplatemessageDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdminDAO" class="com.dao.AdminDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ProxyCashDAO" class="com.dao.ProxyCashDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SmsDAO" class="com.dao.SmsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ServiceTypeDAO" class="com.dao.ServiceTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ProvinceDAO" class="com.dao.ProvinceDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PeisongCorpDAO" class="com.dao.PeisongCorpDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MovecarDAO" class="com.dao.MovecarDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SylbImagesDAO" class="com.dao.SylbImagesDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TelParamDAO" class="com.dao.TelParamDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VipCashDAO" class="com.dao.VipCashDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CommentDAO" class="com.dao.CommentDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CityDAO" class="com.dao.CityDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AreaDAO" class="com.dao.AreaDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="YuyueDAO" class="com.dao.YuyueDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ApplydetailDAO" class="com.dao.ApplydetailDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ServiceCommentDAO" class="com.dao.ServiceCommentDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UserxufeiDAO" class="com.dao.UserxufeiDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ProxychongzhiDAO" class="com.dao.ProxychongzhiDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TopDAO" class="com.dao.TopDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SylbRecordDAO" class="com.dao.SylbRecordDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ServiceDAO" class="com.dao.ServiceDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UserDAO" class="com.dao.UserDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BusinessDAO" class="com.dao.BusinessDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ProxyDAO" class="com.dao.ProxyDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WeixinUserDAO" class="com.dao.WeixinUserDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ProxyCardDAO" class="com.dao.ProxyCardDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AboutweDAO" class="com.dao.AboutweDAO">
+    	<property name="sessionFactory">
+    		<ref bean="sessionFactory" />
+    	</property>
+    </bean>
+    <bean id="ChongzhiHuafeiDAO" class="com.dao.ChongzhiHuafeiDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<!-- *****唐仁鑫  注入   定时生成二维码参数 *********************************************************** -->
+	<bean id="qrService" class="com.service.admin.QRCodeService">
+	   <property name="hqlDAO" ref="HqlDAO"></property>
+	   <property name="qrCodePath" value="E:\WorkSpace2016\.metadata\.me_tcat7\webapps\nuoche\qrcodeimage"></property>
+	   <property name="qrCodeUrlServer" value="http://127.0.0.1"></property>
+	</bean>
+	<!--  **************************************************************************** -->
+
+    
+   <!--   定时生成二维码 -->
+    <task:scheduled-tasks>
+        <!-- 定时 产生二维码  -->
+        <task:scheduled ref="qrService" method="createQrCode"  cron="0 0 3 * * ?"/>
+    </task:scheduled-tasks>
+    
+
+
+
+	<bean id="uService" class="com.service.daili.UserService">
+	</bean>
+	<task:scheduled-tasks>
+        <!-- 定时 判断会员是否过期 -->
+        <task:scheduled ref ="uService" method="dingqixiugaizhuangtai"  cron="0 30 3 * * ?"/>
+    </task:scheduled-tasks>
+
+    <!-- 定时判断置顶服务是否过期  -->
+    <bean id="TopService" class="com.service.daili.DailiTopService"></bean>
+    <task:scheduled-tasks>
+        <task:scheduled  ref="TopService" method="guoqiZhiding"  cron="0 20 3 * * ?"/>
+    </task:scheduled-tasks>
+
+    <!-- S 文件上传配置 -->
+	<bean id="multipartResolver" class="com.util.MyCommonsMultipartResolver">
+		<property name="maxUploadSize" value="209715200" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="resolveLazily" value="true" />
+		<property name="includeUrls">
+			<list>
+				<value>/upload.do</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ApplybusinessDAO" class="com.dao.ApplybusinessDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean></beans>

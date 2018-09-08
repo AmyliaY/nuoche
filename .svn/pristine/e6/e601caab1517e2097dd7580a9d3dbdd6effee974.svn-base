@@ -1,0 +1,458 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
+		<script src="js/jquery-1.9.0.min.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="shuaxin.js"></script>
+		<script src="layer/layer.js"></script>
+	</head>
+	<style type="text/css">
+			.mui-active {
+			color: #FF7900 !important;
+			}
+			
+	</style>
+	<body>
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-active" href="home/home.html" index="0">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" href="crowdfunding/crowdfunding.html" index="1">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-gold"></span>
+				<span class="mui-tab-label">众筹</span>
+			</a>
+			<a id="sc" class="mui-tab-item" href="collection/collection.html" index="2">
+				<span class="mui-icon mui-icon-star"></span>
+				<span class="mui-tab-label">收藏</span>
+			</a>
+			<a class="mui-tab-item" href="shopingcart/cart.html" index="3">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"></span>
+				<span class="mui-tab-label" onclick="show()">购物车</span>
+			</a>
+			<a class="mui-tab-item" href="center.html" index="4">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">个人中心</span>
+			</a>
+		</nav>
+	</body>
+	<script type="text/javascript" charset="utf-8">
+	  
+	 
+	   
+	    
+		//图片轮播
+		var slider = mui("#slider");
+		slider.slider({
+			interval: 5000
+		});
+
+		mui.init();
+
+		var subpages = ['home/home.html', 'crowdfunding/crowdfunding.html', 'collection/collection.html', 'shopingcart/cart.html', 'center.html'];
+		var subpage_style = {
+			top: '0px',
+			bottom: '51px'
+		};
+		var aniShow = {};
+		var showMenu = false;
+		menu = null;
+		self = null;
+		isInTransition = false;
+		var memId = null;
+		//创建子页面，首个选项卡页面显示，其它均隐藏；
+		mui.plusReady(function() {
+			self = plus.webview.currentWebview();
+
+			//仅支持竖屏显示  
+			plus.screen.lockOrientation("portrait-primary");
+			// 设置系统状态栏样背景颜色  
+			plus.navigator.setStatusBarBackground('#f6f6f6');
+			// 设置系统状态栏样式为浅色文字    
+			//UIStatusBarStyleBlackOpaque      
+			plus.navigator.setStatusBarStyle("UIStatusBarStyleDefault");
+			self = plus.webview.currentWebview();
+			plus.screen.lockOrientation("portrait-primary");
+			//延迟缓存事件   
+			setTimeout(function() {
+				localStorage.setItem("height", $(window).height() - 95);
+			}, 100);
+
+			for(var i = 0; i < 5; i++) {
+				var temp = {};
+				var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
+				if(i > 0) {
+					sub.hide();
+				} else {
+					temp[subpages[i]] = "true";
+					mui.extend(aniShow, temp);
+				}
+				self.append(sub);
+			}
+			//检查更新
+			updataApp();
+
+		});
+		//当前激活选项
+		var activeTab = subpages[0];
+		var targetIndex = 0;
+		//选项卡点击事件
+		mui('.mui-bar-tab').on('tap', 'a', function(e) {
+
+			var targetTab = this.getAttribute('href');
+
+			//			alert("activeTab："+activeTab);
+			//			alert("targetTab："+targetTab);
+
+			//判断在购物车界面显示编辑
+			if(targetTab == activeTab) {
+				return;
+			}
+			/*if(targetTab== "cart.html"){
+				memId = plus.storage.getItem('uid');
+				mui.fire(plus.webview.getWebviewById("cart.html"),"shuaxingwc",{memId:memId});
+			}*/
+			//显示目标选项卡
+			//若为iOS平台或非首次显示，则直接显示
+			if(mui.os.ios || aniShow[targetTab]) {
+				plus.webview.show(targetTab);
+			} else {
+				//否则，使用fade-in动画，且保存变量
+				var temp = {};
+				temp[targetTab] = "true";
+				mui.extend(aniShow, temp);
+				plus.webview.show(targetTab, "pop-in", 300);
+			}
+			//隐藏当前;
+			plus.webview.hide(activeTab);
+			//更改当前活跃的选项卡
+			activeTab = targetTab;
+
+		});
+
+		window.addEventListener("home", function(e) {
+			//若为iOS平台或非   	b首次显示，则直接显示
+			//alert("index");
+			
+
+				targetTab = "home/home.html";
+				if(mui.os.ios || aniShow[targetTab]) {
+					plus.webview.show(targetTab);
+				} else {
+					//否则，使用fade-in动画，且保存变量
+					var temp = {};
+					temp[targetTab] = "true";
+					mui.extend(aniShow, temp);
+					plus.webview.show(targetTab, "pop-in", 300);
+				}
+				//隐藏当前;
+				plus.webview.hide(activeTab);
+				//更改当前活跃的选项卡
+				activeTab = targetTab;
+				$(".mui-tab-item").removeClass("mui-active");
+				$(".mui-tab-item:first").addClass("mui-active");
+                plus.webview.getLaunchWebview().show();
+			
+		});
+
+		window.addEventListener("five", function(e) {
+			//若为iOS平台或非首次显示，则直接显示
+			//alert("index");
+			targetTab = "center.html";
+
+			if(mui.os.ios || aniShow[targetTab]) {
+				plus.webview.show(targetTab);
+			} else {
+				//否则，使用fade-in动画，且保存变量
+				var temp = {};
+				temp[targetTab] = "true";
+				mui.extend(aniShow, temp);
+				plus.webview.show(targetTab, "pop-in", 300);
+			}
+			//隐藏当前;
+			//plus.webview.hide(activeTab);
+			//更改当前活跃的选项卡
+			activeTab = targetTab;
+			$(".mui-tab-item").removeClass("mui-active");
+			$(".mui-tab-item:last-child").addClass("mui-active");
+		});
+
+		window.addEventListener("index", function(e) {
+			//若为iOS平台或非   	b首次显示，则直接显示
+			//alert("index");
+			targetTab = "app-index.html";
+			if(mui.os.ios || aniShow[targetTab]) {
+				plus.webview.show(targetTab);
+			} else {
+				//否则，使用fade-in动画，且保存变量
+				var temp = {};
+				temp[targetTab] = "true";
+				mui.extend(aniShow, temp);
+				plus.webview.show(targetTab, "pop-in", 300);
+			}
+			//隐藏当前;
+			plus.webview.hide(activeTab);
+			//更改当前活跃的选项卡
+			activeTab = targetTab;
+			$(".mui-tab-item").removeClass("mui-active");
+			$(".mui-tab-item:first").addClass("mui-active");
+		});
+
+		//判断是安卓还是ios  安卓为0  ios为1
+		function isAndroid_ios() {
+			var u = navigator.userAgent,
+				app = navigator.appVersion;
+			var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器  
+			var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端  
+			return isAndroid == true ? 0 : 1;
+		}
+		var version = null;
+
+		function updataApp() {
+			plus.runtime.getProperty(plus.runtime.appid, function(info) {
+				version = info.version;
+				var type = isAndroid_ios();
+				mui.ajax(SERVER_URL + 'appversion.do?p=getAppVersion', {
+					data: {
+						'version': version,
+						'type': type,
+					},
+					type: "post",
+					async: true,
+					timeout: 3000,
+					success: function(data) {
+						if(data == "false") {
+							return;
+						}
+						var res = eval("(" + data + ")");
+						plus.nativeUI.confirm('发现新版本，是否更新？', function(e) {
+							if(e.index == 0) {
+								plus.nativeUI.showWaiting("下载升级文件...");
+								plus.downloader.createDownload(data, {}, function(d, status) {
+									console.log("下载状态：" + status);
+									if(status == 200) {
+										console.log(d.filename)
+										console.log("下载成功：" + d.filename);
+										installWgt(d.filename); // 安装wgt包  
+									} else {
+										console.log("下载失败！");
+										plus.nativeUI.alert("下载wgt失败！");
+									}
+									plus.nativeUI.closeWaiting();
+								}).start();
+							} else {}
+						}, '归真太极养生', ['确认', '取消']);
+					}
+				})
+			})
+		}
+
+		function installWgt(path) {
+			plus.nativeUI.showWaiting("安装wgt文件中。。。");
+			plus.runtime.install(path, {}, function() {
+				plus.nativeUI.closeWaiting();
+				plus.nativeUI.alert("应用升级完成", function() {
+						plus.runtime.restart();
+					}),
+					function(e) {
+						plus.nativeUI.closeWaiting();
+						console.log("安装wgt文件失败[" + e.code + "]：" + e.message);
+						plus.nativeUI.alert("安装wgt文件失败[" + e.code + "]：" + e.message);
+					}
+			});
+		}
+
+		//		function svn(t) {
+		//			//判断ios还是android
+		//			var type = isAndroid_ios();
+		//
+		//			var xhr = new plus.net.XMLHttpRequest();
+		//			xhr.onreadystatechange = function() {
+		//				if(xhr.readyState == 4) {
+		//					if(xhr.status == 200) {
+		//						var res = eval(xhr.responseText)[0];
+		//						//如果最新版本和当前版本不符   更新 
+		//						if(res.avversion != t) {
+		//							var upr;
+		//							plus.nativeUI.confirm('有新版本发布了， 是否更新？', function(e) {
+		//								upr = (e.index == 0) ? 'Y' : 'N';
+		//								if(upr == 'Y') {
+		//									var wt = plus.nativeUI.showWaiting('下载更新中， 请勿关闭');
+		//									var url = res.avurl; //得到下载地址
+		//									var down = plus.downloader.createDownload(url, {}, function(d, status) {
+		//										if(status == 200) {
+		//											var path = d.filename;
+		//											plus.runtime.install(path);
+		//										} else { //下载失败
+		//											alert('Download failed: ' + status);
+		//										}
+		//									});
+		//									down.start();
+		//								} else {}
+		//							}, '归真太极养生', ['确认', '取消']);
+		//						} else {
+		//							console.log('最新');
+		//
+		//			})
+		//					} else {
+		//						plus.nativeUI.toast('网络连接错误!');
+		//					}
+		//				}
+		//			}
+		//			xhr.open('GET', SERVER_URL + 'appversion.do?p=getAppVersion&type=' + type);
+		//			xhr.send();
+		//		}
+
+		//自动登录 
+		mui.plusReady(function() {
+
+			var username = plus.storage.getItem("username"); //会员账号
+			var password = plus.storage.getItem("userpwd"); //会员密码  
+
+			mui.ajax(SERVER_URL + "applogin.do?p=applogin", {
+				async: true,
+				type: 'post', //HTTP请求类型
+				timeout: 3000, //超时时间设置为10秒；
+				data: {
+					username: username,
+					userpwd: password
+				},
+				success: function(data) {
+					if(data == "请先登录") {
+						//mui.toast("用户名或密码错误");
+					} else {
+						var user = eval("(" + data + ")");
+						if(user.usersId != null && user.usersId != "") {
+							plus.storage.setItem("username", username); //会员账号
+							plus.storage.setItem("userpwd", password); //会员密码
+							var uid = plus.storage.setItem("uid", '' + user.usersId + ''); //会员ID
+							plus.storage.setItem("userstype", '' + user.usersType + ''); //会员类型 普通 or VIP
+							shuaxin();
+						}
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					if(type == 'timeout') {
+						layer.open({
+							content: '<div style="height:100%;width:100%"><div><img src="../images/jnweb-kulian.png" width="30px" height="30px" style="margin-top:-10px"/></div>服务器开了小差，请求超时了</div>',
+							time: 2
+						});
+						//$(".hidden_div2").show();
+						//mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+						return;
+					}
+					if(type == 'abort') {
+						layer.open({
+							content: '<div style="height:100%;width:100%"><div><img src="../images/jnweb-kulian.png" width="30px" height="30px" style="margin-top:-10px"/></div>亲，您的网络有点问题哦！</div>',
+							time: 2
+						});
+						//$(".hidden_div2").show();
+						//mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+						return;
+					} else {
+						layer.open({
+							content: '<div style="height:100%;width:100%"><div><img src="../images/jnweb-kulian.png" width="30px" height="30px" style="margin-top:-10px"/></div>服务器拒绝了连接，稍后再试吧！</div>',
+							time: 2
+						});
+						//$(".hidden_div2").show();
+						//mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+						return;
+					}
+				}
+
+			});
+
+		});
+
+		var firsts = null;
+
+		mui.plusReady(function() {
+
+			//首页返回键处理
+
+			//处理逻辑：1秒内，连续两次按返回键，则退出应用；
+
+			var first = null;
+
+			mui.back = function() {
+
+				//首次按键，提示‘再按一次退出应用’
+
+				if(!first) {
+
+					first = new Date().getTime();
+					targetTab = "home/home.html";
+
+					if(targetTab == activeTab) {
+						mui.fire(plus.webview.getWebviewById(activeTab), "showMsg", {});
+						setTimeout(function() {
+
+							first = null;
+
+						}, 1000);
+						return false;
+					}
+
+					/*if(targetTab== "cart.html"){
+				memId = plus.storage.getItem('uid');
+				mui.fire(plus.webview.getWebviewById("cart.html"),"shuaxingwc",{memId:memId});
+			}*/
+					//显示目标选项卡
+					//若为iOS平台或非首次显示，则直接显示
+
+					if(mui.os.ios || aniShow[targetTab]) {
+						plus.webview.show(targetTab);
+					} else {
+						//否则，使用fade-in动画，且保存变量
+						var temp = {};
+						temp[targetTab] = "true";
+						mui.extend(aniShow, temp);
+						plus.webview.show(targetTab, "pop-in", 300);
+					}
+					//隐藏当前;
+					plus.webview.hide(activeTab);
+					//更改当前活跃的选项卡
+					activeTab = targetTab;
+
+					$(".mui-tab-item").removeClass("mui-active");
+					$(".mui-tab-item:first").addClass("mui-active");
+					setTimeout(function() {
+
+						first = null;
+
+					}, 1000);
+
+				} else {
+
+					if(new Date().getTime() - first < 1000) {
+
+						plus.runtime.quit();
+
+					}
+
+				}
+
+			};
+
+		});
+		
+		function show(){}
+	</script>
+
+</html>

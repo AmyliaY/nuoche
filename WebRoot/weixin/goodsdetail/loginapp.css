@@ -1,0 +1,144 @@
+.jiantou {
+	color: #10A0EA;
+}
+
+
+.tou {
+	padding-top: 5px;
+	font-size: 20px;
+	background-color: #FOFOFO;
+	text-align: center;
+}
+
+.mui-input-row{
+	 height: 50px;
+}
+
+
+input.ren{
+	background-image: url(../images/login_name.png);
+	background-size: 20px;
+	background-repeat: no-repeat;
+	background-position-x: 10px;
+	background-position-y: 15px;
+}
+
+.mui-input-row input.ren{
+	height: 50px;
+	padding-left: 40px;
+	border-bottom: none;
+}
+input.ren1{
+	background-image: url(../images/login_password.png);
+	background-size: 20px;
+	background-repeat: no-repeat;
+	background-position-x: 10px;
+	background-position-y: 12px;
+}
+.mui-input-row input.ren1{
+	height: 50px;
+	padding-left: 40px;
+}
+
+.tu2 {
+	height: 100%;
+	float: left;
+	width:20%;
+	background-color: white;
+	border: 1px solid gainsboro;
+	border-right: 0;
+	border-bottom: 0;
+}
+
+.mui-input-clear{
+	
+	font-size:15px ;
+	width: 80%;
+	height: 40%;
+	
+	
+}
+
+.top {
+	background: #EF6700;
+	width: 90%;
+	height: 45px;
+	color: lightgray;
+	text-align: center !important;
+	margin-top: 8%;
+	margin-left: 5%;
+	font-size: 120%;
+	font-weight: bold;
+}
+.top2 {
+	margin-top: 20%;
+}
+.top3 {
+	margin-top: 8%;
+	width: 90%;
+	text-align: center;
+	margin-left: 5%;
+}
+.top456 {
+	margin-top: 12%;
+	margin-left: 16%;
+	float: left;
+	width: 80%;
+	font-size: 120%;
+}
+.wangjimima {
+	margin-left: 2%;
+	color: lightgray;
+	float: left;
+}
+.top5 {
+	color: lightgray;
+	margin-left: 8%;
+	float: left;
+}
+.top6 {
+	color: lightgray;
+	margin-left: 8%;
+	float: left;
+}
+
+.top789{
+	width: 100%;
+	height: 30px;
+	float: left;
+	margin-top:25%;
+	
+	
+	
+}
+.top7{
+	color: lightgray;
+	float: left;
+	height: 30px;
+	margin-left: 5%;
+	
+}
+.top8{
+	color: lightgray;
+	float: left;
+	line-height: 30px;
+	height: 30px;
+	margin-left: 6%;
+}
+.top9{
+	color: lightgray;
+	float: left;
+	height: 30px;
+	margin-left: 8%;
+}
+.top10{
+	width: 15%;
+	border-radius: 100%;
+	margin-left: 25%;
+	margin-top: 15%;
+}
+.top11{
+	width: 14%;
+	border-radius: 100%;
+	margin-left: 20%;
+}

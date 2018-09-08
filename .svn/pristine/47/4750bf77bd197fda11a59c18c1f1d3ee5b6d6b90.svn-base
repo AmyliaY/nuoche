@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>拨号盘</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/weixin/layui/css/layui.css">
+</head>
+<style>
+.keyboard{
+	line-height:50px;
+	margin:0 auto;
+	background-color:#83E5DC;
+}
+span{
+	font-size:24px;
+	margin-left:50px;
+}
+.number-area{
+	height:100px;
+	line-height:80px;
+}
+</style>
+<script type="text/javascript">
+function show(){
+	var str=$(".numbers").html();
+	alert(str);
+}
+</script>
+<body class="body">
+<div class="layui-container">  
+	  <div class="number-area " style="background-color:#83E5DC;">
+			<span class="numbers" ></span>
+	  </div>
+	  <div class="numbers-container">
+		  <div class="layui-row layui-col-space1" >
+			<div class="layui-col-xs4 keyboard" >
+			  <span class="pushed1">1</span>
+			</div>
+			<div class="layui-col-xs4 keyboard" >
+			  <span class="pushed2">2</span>
+			</div>
+			<div class="layui-col-xs4 keyboard" >
+			  <span class="pushed3">3</span>
+			</div>
+		  </div>
+		  <div class="layui-row layui-col-space1">
+			<div class="layui-col-xs4 keyboard" >
+			  <span class="pushed4">4</span>
+			</div>
+			<div class="layui-col-xs4 keyboard" >
+			  <span class="pushed5">5</span>
+			</div>
+			<div class="layui-col-xs4 keyboard" >
+			  <span class="pushed6">6</span>
+			</div>
+		  </div>
+		  <div class="layui-row layui-col-space1">
+			<div class="layui-col-xs4 keyboard" >
+			  <span class="pushed7">7</span>
+			</div>
+			<div class="layui-col-xs4 keyboard" >
+			  <span class="pushed8">8</span>
+			</div>
+			<div class="layui-col-xs4 keyboard" >
+			  <span class="pushed9">9</span>
+			</div>
+		  </div>
+		  <div class="layui-row layui-col-space1">
+			<div class="layui-col-xs4 keyboard" >
+			  <span class="pushed0">0</span>
+			</div>
+			<div class="layui-col-xs4 keyboard">
+			  <span><a class="delete-btn"><i class="layui-icon">&#xe65c;</i></a></span>
+			</div>
+			<div class="layui-col-xs4 keyboard">
+			  <span ><a onclick="show()"><i class="layui-icon">&#xe605;</i></a></span>
+			</div>
+		  </div>
+	  </div>
+</div>
+
+
+<script type="text/javascript" src="${pageContext.request.contextPath }/weixin/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/weixin/js/script.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/weixin/layui/layui.js"></script>
+
+</body>
+</html>

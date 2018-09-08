@@ -1,0 +1,14 @@
+#myteam{
+	margin-top: 45px;
+}
+#picture{
+	margin-top: 9px;
+	margin-left: -25px;
+}
+#teamname{
+	margin-top: 7px;
+	margin-left: -20px;
+}
+#people{
+	margin-top: 7px;;
+}

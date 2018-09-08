@@ -1,0 +1,284 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-1.9.0.min.js"></script>
+		<script src="../url.js"></script>
+	</head>
+	<style>
+		p {
+			margin: 0;
+		}
+		
+		.nav-header {
+			background-color: #000000;
+			color: white;
+		}
+		
+		.nav-header h1 {
+			text-align: left;
+		}
+		
+		.nav-header a {
+			color: white;
+		}
+		
+		.info {
+			text-align: center;
+			line-height: 60px;
+		}
+		
+		.way p {
+			background: #FFFFFF;
+			height: 50px;
+			line-height: 50px;
+			border-bottom: 1px solid #E6E6E6;
+		}
+		
+		.icon-a {
+			display: inline-block;
+			height: 26px;
+			width: 26px;
+			position: relative;
+			top: 8px;
+			margin: auto 8px;
+		}
+		
+		.pay {
+			height: 40px;
+			background: #FF6700;
+			border-radius: 6px;
+			text-align: center;
+			line-height: 40px;
+			color: #FFFFFF;
+			margin: 20px 10px 0px 10px;
+		}
+		
+		.ckbox {
+			height: 22px;
+			width: 22px;
+			display: inline-block;
+			float: right;
+			margin: 15px 15px 0 0;
+			background: url(../img/center/radio-1.png);
+			background-size: contain;
+		}
+	</style>
+
+	<body>
+		<header class="mui-bar mui-bar-nav nav-header"style="background-color:#FF7900;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" style="color: white;">立即支付</h1>
+
+		</header>
+		<div class="mui-content">
+			<p class="info">应付金额：<span id="price">1000.0</span>元（<span id="number">10000</span>积分）</p>
+			<div class="way">
+				<p class="choose"><span class="icon-a" style="background: url(../img/center/Weixin.png);background-size: contain;"></span><span>现场充值</span><span id="xcpay" class="ckbox"></span></p>
+				<p class="choose" id="p-weixin" style="display: none;"><span class="icon-a" style="background: url(../img/center/Weixin.png);background-size: contain;"></span><span>微信支付</span><span id="wxpay" class="ckbox"></span></p>
+				<p class="choose" id="p-alipay" style="display: none;"><span class="icon-a" style="background: url(../img/center/Alipay.png);background-size: contain;"></span><span>支付宝支付</span><span id="alipay" class="ckbox"></span></p>
+			</div>
+			<div class="pay" id="btnPay">立即支付<span id="pay">0</span>元</div>
+		</div>
+
+		<script type="text/javascript">
+			mui.init();
+			va${userinfo.usersId}rice = null; // 价格
+			var present = null; // 赠送积分
+			var userid = '${userinfo.usersId}';
+			var orderid = null;
+			var wxstatus = null;
+			var alpaystatus = null;
+			var payid = "alipay";
+
+			//选择支付方式  默认支付宝
+			$("#alipay").css("background-image", "url(../img/center/radio.png)");
+			$(".choose").bind("tap", function() {
+				$(".ckbox").css("background-image", "url(../img/center/radio-1.png)")
+				$(this).find(".ckbox").css("background-image", "url(../img/center/radio.png)")
+				payid = $(this).find(".ckbox").attr("id");
+				if(payid == "xcpay") {
+					mui.toast('请到株洲市芦淞区三角岔73号');
+				}
+			})
+
+			document.getElementById("btnPay").addEventListener("tap", function() {
+				if(payid == "wxpay") {
+					pay("wxpay"); //微信支付
+				} else if(payid == "alipay") {
+
+					pay("alipay"); //支付宝支付
+				}
+
+			});
+			mui.plusReady(function() {
+				self = plus.webview.currentWebview();
+				num = self.number; //充值积分
+				price = self.price; // 价格
+				present = self.present; // 赠送积分
+				$("#number").html(num * 1 + present * 1); //总获得积分
+				$("#price").html(price);
+				$("#pay").html(price);
+				mui.post(SERVER_URL + "rechargepay.do?p=chongzhiStatus", {}, function(data) {
+					var map = eval("(" + data + ")");
+					for(var key in map) {
+						if(key == "wxstatus") {
+							wxstatus = map[key];
+							if(wxstatus == '1') {
+								$("#p-weixin").css("display", 'block');
+							} else {
+								$("#p-alipay").css("display", 'none');
+							}
+						}
+						if(key == "alipayStatus") {
+							alipaystatus = map[key];
+							if(alipaystatus == '1') {
+								$("#p-alipay").css("display", 'block');
+							} else {
+								$("#p-alipay").css('display', 'none');
+							}
+						}
+					}
+				});
+			})
+
+			var pays = [];
+			mui.plusReady(function() {
+
+				//获取支付通道
+				plus.payment.getChannels(function(channels) {
+					for(var i in channels) {
+						var channel = channels[i];
+						if(channel.id == 'qhpay' || channel.id == 'qihoo') { // 过滤掉不支持的支付通道：暂不支持360相关支付
+							continue;
+						}
+						pays[channel.id] = channel;
+						checkServices(channel);
+					}
+				}, function(e) {
+					outLine('获取支付通道失败：' + e.message);
+				});
+
+			});
+
+			//pays["alipay"]
+			//pays["wxpay"]
+			//document.addEventListener('plusready', plusReady, false);
+			// 检测是否安装支付服务
+			function checkServices(pc) {
+				if(!pc.serviceReady) {
+					var txt = null;
+					switch(pc.id) {
+						case 'alipay':
+							txt = '检测到系统未安装“支付宝快捷支付服务”，无法完成支付操作，是否立即安装？';
+							break;
+						default:
+							txt = '系统未安装“' + pc.description + '”服务，无法完成支付，是否立即安装？';
+							break;
+					}
+					plus.nativeUI.confirm(txt, function(e) {
+						if(e.index == 0) {
+							pc.installService();
+						}
+					}, pc.description);
+				}
+			}
+
+			var w = null;
+			//			var PAYSERVER = SERVER_URL + '/alipayDemo.do?p=toPay';
+			// 支付
+			function pay(id) {
+				if(w) {
+					return;
+				} //检查是否请求订单中
+				if(id === 'appleiap') {
+					outSet('应用内支付');
+					clicked('payment_iap.html');
+					return;
+				}
+
+				if(id == 'alipay') {
+					var PAYSERVER = SERVER_URL + '/rechargepay.do?p=aliPay';
+				} else if(id == 'wxpay') {
+					var PAYSERVER = SERVER_URL + '/rechargepay.do?p=wxPay';
+				} else {
+					plus.nativeUI.alert('当前环境不支持此支付通道！', null, '打赏');
+					return;
+				}
+				var url = PAYSERVER;
+				var appid = plus.runtime.appid;
+				if(navigator.userAgent.indexOf('StreamApp') >= 0) {
+					appid = 'Stream';
+				}
+				url += '&appid=' + appid + '&total=';
+
+				w = plus.nativeUI.showWaiting();
+				//请求支付订单
+				//获取订单号
+				//				mui.ajax(SERVER_URL+'/rechargepay.do?p=getOrderid',{
+				//					type:"get",
+				//					async:false,
+				//					success:function(data){	
+				//						orderid=data;
+				//					}
+				//				})
+				var amount = $("#pay").html();
+
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function() {
+					switch(xhr.readyState) {
+						case 4:
+							w.close();
+							w = null;
+							if(xhr.status == 200) {
+								//outLine('----- 请求订单成功 -----');
+								//outLine(xhr.responseText);
+								var order = xhr.responseText;
+
+								plus.payment.request(pays[id], order, function(result) {
+
+									plus.nativeUI.alert('支付成功！', function() {
+										back();
+									}, '充值');
+									plus.webview.getWebviewById('center.html').reload();
+									mui.openWindow({
+										url: '../center.html',
+										id: 'center'
+									});
+									mui.back();
+
+								}, function(e) {
+									//outLine('----- 支付失败 -----');
+									//outLine('['+e.code+']：'+e.message);
+
+									plus.nativeUI.alert('用户取消支付', function() {}, '提示');
+								});
+							} else {
+								//outLine('----- 请求订单失败 -----');
+								//outLine( xhr.status );
+								plus.nativeUI.alert('获取订单信息失败！', null, '捐赠');
+							}
+							break;
+						default:
+							break;
+					}
+				}
+				xhr.open('POST', url + price + '&orderid=' + orderid);
+				//outLine('请求支付订单：'+url+amount);
+				xhr.send();
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,273 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>系统消息</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		
+		<link href="${pageContext.request.contextPath}/weixin/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/weixin/css/app.css" />
+		<script src="${pageContext.request.contextPath}/weixin/js/jquery-1.9.0.min.js"></script>
+		
+	</head>
+	<style>
+		.message{
+			height: 115px;
+			/*margin:10px 10px;*/
+			position: relative;
+			overflow: hidden;
+			border-radius: 2px;
+			background-color: #fff;
+		}
+		.message-title{
+			color: #000000;
+			height: 30px;
+			line-height: 30px;
+			font-size: 16px;
+		}
+		.message-content{
+			color: #8F8F94;
+			font-size: 14px;
+			padding: 5px 0px;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			overflow: hidden;
+		}
+		.message-bottom{
+			color: #8F8F94;
+			font-size: 14px;
+			margin: 10px 0px ;
+			padding: 5px;
+			border-top:1px solid #a0a0a0 ;
+		}
+		.message-bottom-read{
+			float: right;
+		}
+		.mui-table-view-cell:after {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			left: 0px;
+			height: 1px;
+			content: '';
+			-webkit-transform: scaleY(.5);
+			transform: scaleY(.5);
+			background-color: #efeff4;
+		}
+		#noMsg{
+			text-align: center;
+			margin-top: 150px;
+			display: none;
+		}
+	</style>
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background: #ff7900;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+			<span class="mui-title" style="color: white;">系统消息</span>
+		</header>
+		<div class="mui-content" id="pullrefresh" style="margin-top: 40px;">
+			<ul id="OA_task_1" class="mui-table-view" >
+				<!--<li class="mui-table-view-cell" style="padding-left:10px;background-color: #fff">
+					<div class="mui-slider-right mui-disabled">
+						<a class="mui-btn mui-btn-red">删除</a>
+					</div>
+					<div class="mui-slider-handle">
+						<div class="message">
+							<div class="message-title"> 消息标题</div>
+							<div class="message-content">消息内容正宗仙居杨梅新鲜东魁荸荠鲜杨梅正宗仙居杨梅新鲜东魁荸荠鲜杨梅正宗仙居杨梅新鲜东魁荸荠鲜杨梅容</div>
+							<div class="message-bottom"><span class="message-bottom-time">2017-6-25</span><span class="message-bottom-read">未读</span></div>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell" style="padding-left:10px;">
+					<div class="mui-slider-right mui-disabled">
+						<a class="mui-btn mui-btn-red">删除</a>
+					</div>
+					<div class="mui-slider-handle">
+						<div class="message">
+							<div class="message-title"> 消息标题</div>
+							<div class="message-content">消息内容正宗仙居杨梅新鲜东魁荸荠鲜杨梅正宗仙居杨梅新鲜东魁荸荠鲜杨梅正宗仙居杨梅新鲜东魁荸荠鲜杨梅容</div>
+							<div class="message-bottom"><span class="message-bottom-time">2017-6-25</span><span class="message-bottom-read">未读</span></div>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell" style="padding-left:10px;">
+					<div class="mui-slider-right mui-disabled">
+						<a class="mui-btn mui-btn-red">删除</a>
+					</div>
+					<div class="mui-slider-handle">
+						<div class="message">
+							<div class="message-title"> 消息标题</div>
+							<div class="message-content">消息内容正宗仙居杨梅新鲜东魁荸荠鲜杨梅正宗仙居杨梅新鲜东魁荸荠鲜杨梅正宗仙居杨梅新鲜东魁荸荠鲜杨梅容</div>
+							<div class="message-bottom"><span class="message-bottom-time">2017-6-25</span><span class="message-bottom-read">未读</span></div>
+						</div>
+					</div>
+				</li>-->
+			</ul>
+		</div>
+		<div id="noMsg">
+				<img width="200px" height="200px" src="${pageContext.request.contextPath}/weixin/images/fenxiao_none.png" />
+				<p  style="font-size: 30px; ">暂无消息</p>
+		</div>
+	</body>
+	<script src="${pageContext.request.contextPath}/weixin/js/mui.min.js"></script><script>
+		mui.init()
+		var userid='${userinfo.usersId}'; //会员ID
+		//mui.plusReady(function(){
+			var collfragment=document.createDocumentFragment();
+//			var view = plus.nativeObj.View.getViewById("title");
+//			var bitmap = new plus.nativeObj.Bitmap("back");
+//			bitmap.loadBase64Data("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAb1BMVEUAAAAAev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8AAACubimgAAAAI3RSTlMAGfUTGfQTGPMSGPIYGhgaGBsXGxcbFxwXHBccFhwWHRYdHWufDPQAAAABYktHRACIBR1IAAAAB3RJTUUH4QETEBwooeTlkQAAAJVJREFUSMft1EkSgkAQRNFGUXFWHBDBibr/HTUwD5B/48Ig1y+io7u6MqUhf5hsNEY+j5hMgZ/FJ8Xc9ovos3T96utjbfqN/Nb0O/m96Uv5g+mP8ifTn+Ur01/ka9Nf5RvTt/I309/lH6Z/yr9Mn+Q71/MT8B34K/E58Enzv8R/K98HvnF8p3lr8F7izce7lbf3kJ/lDQp9HdBhgg3PAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTAxLTE5VDE2OjI4OjQwKzA4OjAwpTDFwQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wMS0xOVQxNjoyODo0MCswODowMNRtfX0AAAAASUVORK5CYII=");
+//			view.drawBitmap(bitmap, {}, {
+//				top: "10px",
+//				left: "10px",
+//				width: "24px",
+//				height: "24px"
+//			});
+//				
+//			view.setTouchEventRect({top:"0px",left:"0px",width:"44px",height:"100%"});
+			mui.ajax("${pageContext.request.contextPath}/"+'messages.do?p=getAllMessages&id='+userid,{
+				type:"post",
+				timeout:30000,
+				success:function(data){
+					var map=eval("("+data+")");
+					if(map.list.length>0){
+					for(var i=0;i<map.list.length;i++){
+						var li=document.createElement("li");
+						li.className="mui-table-view-cell";
+						li.id=map.list[i].smId;
+						li.style.borderBottom="15px solid #efeff4";
+						var str=
+									'<div id="del'+map.list[i].smId+'" class="mui-slider-right mui-disabled"><a class="mui-btn mui-btn-red">删除</a></div>'+
+									'<div id="detail'+map.list[i].smId+'" class="mui-slider-handle" ><div class="message">'+
+										'<div class="message-title">'+map.list[i].smTitle+'</div>'+
+										'<div class="message-content">'+map.list[i].smDetail+'</div>'+
+										'<div class="message-bottom"><span class="message-bottom-time">'+map.list[i].smTime+'</span>';
+						if(map.list[i].smStatus==1){
+							str+='<span class="message-bottom-read">已读</span></div></div></div>';
+						}
+						if(map.list[i].smStatus==0){
+							str+='<span class="message-bottom-read">未读</span></div></div></div>';
+						}
+						li.innerHTML=str;
+						collfragment.appendChild(li);
+						$("#OA_task_1").append(collfragment); 
+						var a=document.getElementById('detail'+map.list[i].smId);
+						var b=document.getElementById('del'+map.list[i].smId);
+						var smid=map.list[i].smId;
+						bd(a,b,smid);
+					}
+					}else{
+						$("#noMsg").css('display','block');
+					}
+				}
+				
+			});
+		//});
+		function bd(x,y,smid){
+				x.addEventListener('tap',function(){
+					messageDetail(smid)
+				});
+				y.addEventListener('tap',function(){
+					deletemsg(smid)
+				});
+			}
+		
+		function messageDetail(smid){
+			if(tip==0){
+				window.top.location="${pageContext.request.contextPath}/weixin/center/messagedetail.jsp?mid="+2+"&smid"+smid;
+				/*mui.openWindow({
+					url:'/center/messagedetail.html',
+					id:'messagedetail.html',
+					extras:{
+						mid:2,
+						smid:smid
+					}
+				});*/
+			}else if(tip==1){
+					(function($) {
+							$.swipeoutClose(document.getElementById(activeLi));
+					})(mui);
+					tip-=1;
+				}
+			
+		}
+		
+		function deletemsg(smid){
+			mui.confirm('确定删除该消息吗？',function(e){
+				if(e.index==0)
+				{
+					mui.ajax("${pageContext.request.contextPath}/"+'messages.do?p=delMessage&smid='+smid,{
+						data:{
+							smid:smid
+						},
+						type:'post',
+						timeout:30000,
+						success:function(data)
+						{ 
+							if(data=="ture")
+							{
+								mui.toast("删除成功！");
+								$("#"+smid).remove(); 
+								if(document.getElementsByClassName("mui-slider-right").length==0){ 
+									document.getElementById("OA_task_1").innerHTML="目前没有系统消息！"; 
+								}   
+							}
+						},
+						error: function(xhr, type, errerThrown) {
+							mui.toast('网络异常,请稍候再试'); 
+						}
+					});
+				}
+			});
+		}
+       
+		mui('.mui-scroll-wrapper').scroll();
+		mui('body').on('shown', '.mui-popover', function(e) {
+			//console.log('shown', e.detail.id);//detail为当前popover元素
+		});
+		mui('body').on('hidden', '.mui-popover', function(e) {
+			//console.log('hidden', e.detail.id);//detail为当前popover元素
+		});
+		
+		var activeLi=null;
+			var tip=0;
+			$('#OA_task_1').on('slideleft', '.mui-table-view-cell', function() {
+				activeLi=this.id;
+				if(tip==1){
+					return;
+				}
+				tip+=1;
+			}); 
+		document.addEventListener("tap", function(e){
+	        	if(e.target.nodeName=="HTML"||e.target.nodeName=="LI"){
+	        		if(activeLi!=null){
+	        			tip-=1;
+						(function($) {
+							$.swipeoutClose(document.getElementById(activeLi));
+						})(mui);
+						activeLi=null;
+					}
+	        	}
+	        });
+	        document.addEventListener("swipe", function(e){
+	        	if(e.target.nodeName=="HTML"){
+	        		if(activeLi!=null){
+	        			tip-=1;
+						(function($) {
+							$.swipeoutClose(document.getElementById(activeLi));
+						})(mui);
+						activeLi=null;
+					}
+	        	}
+	        });
+	</script>
+</html>

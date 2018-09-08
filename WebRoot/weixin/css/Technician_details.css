@@ -1,0 +1,119 @@
+.segmented-control {
+	font-size: 15px;
+	font-weight: 400;
+	position: relative;
+	display: table;
+	overflow: hidden;
+	width: 100%;
+	table-layout: fixed;
+	border: 1px solid #007aff;
+	border-left: none;
+	border-radius: 3px;
+	background-color: transparent;
+	-webkit-touch-callout: none
+}
+
+.control-item .item_font {
+	color: #666666;
+	font-family: "微软雅黑";
+	font-size: 14px;
+}
+
+.control-item .active {
+	color: #6CCCCA;
+}
+
+.segmented-control .control-item {
+	line-height: 30px;
+	display: table-cell;
+	overflow: hidden;
+	width: 1%;
+	-webkit-transition: background-color .1s linear;
+	transition: background-color .1s linear;
+	text-align: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: #007aff;
+	border-color: #007aff;
+	border-left: 1px solid white;
+}
+
+.goods_detail {
+	background: #FFFFFF;
+	padding: 10px 0px;
+	margin-top: 0px;
+}
+
+.goods_name {
+	color: #666666;
+	font-size: 16px;
+	float: right;
+}
+
+.price {
+	font-size: 20px;
+	color: #6CCCCA;
+	margin-right: 15px;
+}
+
+.goods_head p {
+	clear: both;
+	padding: 15px 10px;
+	font-size: 16px;
+}
+
+.zhuti {
+	width: auto;
+	height: auto;
+	overflow-y: auto;
+}
+
+.zhuyetupian {
+	width: 360;
+	height: 270px;
+}
+
+.imgeiv {
+	width: 360px;
+	height: 290px;
+}
+
+.xiangjies {
+	width: auto;
+	height: auto;
+}
+
+.div_ul {
+	float: left;
+	list-style: none;
+	margin-top: 30px;
+}
+
+.div_ul li {
+	font-size: 19px;
+	margin-top: 20px;
+	margin-left: -30px;
+}
+
+.daanjishi {
+	float: left;
+	list-style: none;
+	margin-top: 30px;
+	float: right;
+}
+
+.daanjishi li {
+	font-size: 19px;
+	margin-top: 20px;
+}
+
+.jishijiesx {
+	width: 335px;
+	height: 200px;
+	margin-top: 240px;
+	margin-left: 10px;
+}
+
+.body {
+	background-color: white;
+}

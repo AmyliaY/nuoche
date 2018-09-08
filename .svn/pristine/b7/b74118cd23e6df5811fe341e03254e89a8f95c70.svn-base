@@ -1,0 +1,8 @@
+.bk-gray{border:1px solid #DDD;}
+.hy_xianshi{width:200px;height: 50px;line-height: 50px;float: left;}
+.hy_page{width:auto;float: right;height: 50px;margin-top: 20px;}
+.hy_page a:hover {text-decoration:none;}
+.pageSize{padding: 5px 10px;border:1px solid #DDD;}
+.mz{background-color: #5A98DE;color:white;}
+.input-text{width:250px;}
+

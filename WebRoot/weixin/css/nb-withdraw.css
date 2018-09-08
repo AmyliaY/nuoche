@@ -1,0 +1,217 @@
+body {
+	background: #F5F5F9;
+}
+
+
+/*通用类*/
+
+.fq-withdraw-gray {
+	color: #8F8686;
+}
+
+.fq-alipay-black,.fq-wxpay-black, .fq-card-black, .fq-free-black, .fq-record-black, fq-withdraw-massage, .fq-bank-card, .fq-alipay-text, .fq-wxpay-text {
+	color: #333;
+}
+
+.fq-alipay-explain,.fq-wxpay-explain, .fq-card-explain {
+	border: none;
+	color: #B7B7B7;
+}
+
+.fq-alipay-name,.fq-wxpay-name, .fq-card-name {
+	color: #777777;
+}
+
+.fq-alipay-icon, .fq-wxpay-icon,.fq-record-icon, .fq-card-icon {
+	color: #EE6720;
+}
+
+header a {
+	position: absolute;
+	top: 2px;
+	color: #333;
+	width: 45px;
+	font-size: 25px;
+}
+
+.fq-withdraw {
+	border-top: 1px solid #f3e7e3;
+}
+
+.fq-withdraw-gold {
+	width: 60px;
+	height: 60px;
+}
+
+.fq-withdraw-num {
+	color: #EE6720;
+}
+
+.fq-withdraw-red {
+	color: #F43142;
+}
+
+.fq-default-text {
+	color: #C9B174;
+}
+
+.fq-alipay {
+	border-bottom: 1px solid #F3E7E3;
+}
+
+.fq-wxpay {
+	border-bottom: 1px solid #F3E7E3;
+}
+
+
+/*复选框样式*/
+
+.fq-default {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.fq-radio-style input {
+	display: none;
+}
+
+.fq-radio-style label {
+	cursor: pointer;
+	position: relative;
+	width: 26px;
+	height: 26px;
+	border: 2px solid #C9B174;
+	transition: all 0.3s ease-in-out;
+	-webkit-font-smoothing: antialiased;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.fq-radio-style label .fa {
+	position: absolute;
+	-webkit-transform: scale(0);
+	transition: all 0.3s ease-in-out;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.fq-radio-style input:checked+label .fa {
+	opacity: 1;
+	width: 16px;
+	height: 16px;
+	-webkit-transform: scale(1);
+	background: #C9B174;
+}
+
+.fq-radio-text {
+	position: absolute;
+	left: 36px;
+	color: #C9B174;
+}
+
+
+/*点击展开移动*/
+
+.fq-move {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	top: 1rem;
+}
+
+
+/*支付宝绑定界面*/
+
+.fq-alipay-message, .fq-wxpay-message, .fq-card-message {
+	display: none;
+}
+
+.fq-massage-num, .fq-massage-name, .fq-card-details {
+	border: 1px solid #F2EFED;
+}
+
+.fq-massage-num span, .fq-massage-name span, .fq-card-details span {
+	line-height: 30px;
+}
+
+.fq-massage-num input,
+.fq-massage-name input,
+.fq-card-num input, 
+.fq-card-details input {
+	height: 30px;
+	border: none;
+	color: #333;
+	-webkit-tap-highlight-color: none;
+}
+
+
+/*本次提现*/
+
+.fq-free-withdraw a:first-of-type {
+	border-bottom: 1px solid #F2EFED;
+}
+
+.fq-free-withdraw input {
+	border: none;
+	color: #F43142;
+	-webkit-tap-highlight-color: none;
+}
+
+input[type="text"]::-webkit-input-placeholder {
+	color: #B7B7B7;
+}
+
+.fq-withdraw-button {
+	width: 50%;
+	color: #EE6720;
+	border: 1px solid #EE6720;
+}
+
+
+/*提现信息二次确认*/
+
+.fq-withdraw-massage .am-modal-dialog {
+	width: 80%;
+	border-radius: 4px;
+}
+
+.fq-withdraw-massage .am-modal-hd {
+	border-bottom: 1px solid #F2EFED;
+	padding: 1rem;
+}
+
+.fq-withdraw-massage .am-modal-bd {
+	border: none;
+	padding: 1.6rem 1rem;
+}
+
+.fq-withdraw-option li .am-modal-btn {
+	width: 80%;
+	background: white;
+	color: #EE6720;
+	border: 1px solid #EE6720;
+}
+
+.fq-withdraw-option li .am-modal-btn:first-child:last-child {
+	border-radius: 1000px;
+}
+
+
+/*提现记录*/
+
+.fq-record-message .am-table>thead>tr>th, .fq-record-message .am-table>tbody>tr>td {
+	border: none;
+}
+
+.fq-record-message .am-table-striped>tbody>tr:nth-child(odd)>td, .fq-record-message .am-table-striped>tbody>tr:nth-child(odd)>th {
+	background: #F2EFED;
+}
+
+.fq-withdraw-record a {
+	border-bottom: 1px solid #F2EFED;
+}

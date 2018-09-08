@@ -1,0 +1,106 @@
+*{padding: 0px;margin:0px; text-decoration: none;list-style: none;}
+.top{
+	width: 100%;
+	height: 400px;
+	padding-top: 60px;
+	background-color: aliceblue;
+	margin: 0 auto;
+}
+.ming{
+	width: 750px;
+	height: 330px;
+	margin: 0 auto;
+}
+.mindiv{
+	width: 350px;
+	height: 120px;
+	border-radius: 6px;
+}
+#mindiv1{
+	
+}
+#mindiv2{
+	float: right;
+	margin-top: -123px;
+}
+#mindiv3{
+	margin-top:80px;
+}
+#mindiv4{
+	float: right;
+	margin-top: -120px;
+	margin-left: 460px;;	
+}
+.min-left{
+	width: 37%;
+	height: 100%;
+	float: left;
+	background-repeat: no-repeat;
+	border-bottom-left-radius: 6px;	
+}
+.min-right{
+	width: 63%;
+	height: 100%;
+	float: left;
+	background-color: white;
+	font-weight: normal;
+	text-align: center; /*姘村钩灞呬腑*/
+}
+.tit{
+	font-size: 16px;
+	color: steelblue;
+	padding: 4px;
+}
+
+.titp{
+	font-size: 14px;
+	padding: 4px;
+	font-weight: 100;
+	color: #454558;
+	width: 100%;
+}
+.gongneng{
+	background-color: green;
+	color: white;
+	font-size: 12px;
+	width: 70px;
+	border: none;
+	height: 30px;
+	padding: 3px;
+	border-radius: 4px;
+}
+/* 琛ㄦ牸  */
+.info{
+	width: 100%;
+	margin-top: 20px;
+	
+}
+#dailiinfotable{
+	width: 98%;
+	height: auto;
+	border-collapse: collapse;/* 杈规鍚堝苟灞炴��  */
+	border: 1px red solid;
+	margin: 10px;
+	margin-bottom: 50px;
+	
+}
+#dailiinfotable tr{
+	width: 100%;
+	height: 30px;
+	border-collapse: collapse;/* 杈规鍚堝苟灞炴��  */
+	border: 1px gainsboro solid;
+}
+
+.colname{
+	width: 20%;
+	padding: 6px;
+	border: 1px gainsboro solid;
+}
+.colinfo{
+	width:80%;
+	border: 1px gainsboro solid;
+}
+
+
+
+

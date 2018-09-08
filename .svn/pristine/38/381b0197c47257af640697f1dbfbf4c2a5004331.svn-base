@@ -1,0 +1,52 @@
+.xiugai{
+	margin-right: 10px;
+	margin-top: 12px;
+	float: right;
+	color: white;
+}
+.hang{
+	height: 40px;
+	position: relative;
+	border-bottom: 1px solid gainsboro;
+	padding-top: 9px;
+	padding-left: 10px;
+	background: white;
+}
+.zi{
+	font-size: 12px;
+}
+.hang2{
+	position: relative;
+	border-bottom: 1px solid gainsboro;
+	padding-top: 7px;
+	padding-left: 10px;
+	background: white;
+	padding-bottom: 7px;
+}
+.hang2 img{
+	width: 50%;
+	height: 100px;
+	margin-left: 70px;
+}
+.zi2{
+	font-size: 12px;
+	position: absolute;
+	margin-top: 3px;
+}
+.shuchu{
+	width: 60%;
+	height: 30px;
+	border: 1px;
+	font-size: 12px;
+}
+.xiala{
+	background: gainsboro;
+	width: 25%;
+}
+.hang3{
+	position: relative;
+	border-bottom: 1px solid gainsboro;
+	padding-left: 10px;
+	background: white;
+	height: 40px;
+}

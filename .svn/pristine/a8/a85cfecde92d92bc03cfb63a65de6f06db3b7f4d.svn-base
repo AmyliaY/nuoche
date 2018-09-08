@@ -1,0 +1,381 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+session.setAttribute("page", 1);
+%>
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>众筹</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/weixin/css/icons-extra.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/crowdfunding/crowdfunding.css" />
+		<script src="${pageContext.request.contextPath}/weixin/layer/layer.js"></script>
+	</head>
+	<style>
+		#noZC{
+			text-align: center;
+			margin-top: 150px;
+			display: none;
+		}
+		.mui-table-view{
+		    border-bottom: 1px solid whitesmoke;
+		 
+		}
+		.shangpinimg{
+			border-bottom: 1px solid whitesmoke;
+		}
+	</style>
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background: #FF7900;">
+			<span class="mui-title" style="color: white;" id="zc_sum">众筹(0)</span>
+			<!--<button type="button" style="background: gainsboro;" class="buybutton">购买</button>-->
+		</header>
+		
+		
+		<div class="mui-content mui-scroll-wrapper" style="margin-top: 1px;" id="pullrefresh">
+			<div class="mui-scroll">
+				<ul id="zhongchou" class="mui-table-view">
+					    
+				</ul>
+             </div>
+        </div>     
+		
+		<div id="noZC">
+				<img width="200px" height="200px" src="${pageContext.request.contextPath}/weixin/images/fenxiao_none.png" />
+				<p  style="font-size: 30px; ">暂无众筹产品</p>
+		</div>
+		<script src="${pageContext.request.contextPath}/weixin/js/mui.min.js"></script>
+		<script src="${pageContext.request.contextPath}/weixin/js/mui.lazyload.js"></script>
+		<script src="${pageContext.request.contextPath}/weixin/js/mui.lazyload.img.js"></script>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="${pageContext.request.contextPath}/weixin/url.js"></script>	
+		<script src="${pageContext.request.contextPath}/weixin/shuaxin.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				keyEventBind: {
+				backbutton: false
+			},
+				pullRefresh: {
+					container: "#pullrefresh",
+					up: {
+						contentrefresh: "正在加载·····",
+						auto: false,
+						callback: pullupRefresh
+					}
+				}
+			});
+			
+			
+			window.onload = function (){
+				pullupRefresh();
+			}
+		   window.addEventListener("showMsg",function(e){
+			
+			    //var me = plus.webview.currentWebview();
+			    //me.hide();  
+			    //plus.webview.show("home/home.html");
+		  })
+			var page = 1; //页数
+			var size = 4;
+			var userid = '${userinfo.usersId}'; //会员ID
+			var usertype = 'weixinuser.userinfo.usersType';; //会员类型
+			var timer= null;   //倒计时
+			var timer2 = null;//折扣
+			var zclist = null;
+			function pullupRefresh() {
+				setTimeout(function() {
+					var sum = null; //总条数
+					var count = null; //总页数
+					$(function() {
+					
+						//userid = ${param.userid}
+						//usertype =${param.userstype};
+						mui.ajax("${pageContext.request.contextPath}/appzhongchou.do?p=getAllZhongchou", {
+							data: {		
+								page: page,
+								size: size
+							},
+							type: 'post',
+							timeout: 30000,
+							success: function(data) {
+								var map = eval("(" + data + ")");
+								for(var key in map) {
+									if(key == "sum") {
+										sum = map[key];
+										$("#zc_sum").html('众筹(' + sum + ')');
+									}
+									if(key == "count") {
+										count = map[key];
+									}
+									if(key == "list") {
+										zclist = map[key];
+									}
+								}
+							
+								
+								//得到服务器时间	每隔10去查一次
+								var wucha = 0;
+
+								function servertime() {
+									mui.ajax("${pageContext.request.contextPath}/appzhongchou.do?p=getServiceTime", {
+										type: 'get',
+										cache: false,
+										async: true,
+										dataType: 'text',
+										success: function(data) {
+											var dd = new Date(data).getTime();
+											var thisdate = new Date().getTime();
+											wucha = dd - thisdate;
+										},
+										 error: function(xhr, type, errerThrown) {
+											//plus.nativeUI.closeWaiting();
+											mui.toast('网络异常,请稍候再试');
+	       								}
+									});
+								}
+								setInterval(function() {
+									servertime();
+								}, 10000);
+
+								page = page * 1 + 1;
+								
+								mui("#pullrefresh").pullRefresh().endPullupToRefresh(page > count);
+								for(var i = 0; i < zclist.length; i++) {
+									var str = '<li class="mui-table-view-cell mui-media"    id="li' + zclist[i].gid + '">' +
+									    '<div class="include">'+
+										'<div class="a1 jieshu"><input type="hidden" id="gid" value="' + zclist[i].gid + '"/><span class="mui-icon-extra mui-icon-extra-outline" style="font-size: 18px;"></span> 距结束:<span id="time' + zclist[i].gid + '">' + zclist[i].gendtime + '</span></div>' +
+										'<div class="a2"><a href="#" class="haha" id="spxq" gid='+zclist[i].gid+' gname='+zclist[i].gname+' gprice='+zclist[i].gprice+' gvipprice='+zclist[i].gvipprice+' gdanwei='+zclist[i].gdanwei+' gimages='+SERVER_URL+zclist[i].gimages+' )">'+
+										'<img class="shangpinimg" src="' + SERVER_URL + zclist[i].gimages + '"><div class="mui-media-body">' +
+										'<p class="shangpin-ellipsis">' + zclist[i].gname + '</p>' +
+										'<div class="shangpin-message"><input type="hidden" id="rebate' + zclist[i].gid + '"/><input type="hidden" id="rebateid' + zclist[i].gid + '"/><p> <span style="" id="jj'  + zclist[i].gid + '">价格</span>：<span  class="nowprice">￥</span><span class="nowprice" id="zcprice' + zclist[i].gid + '"></span> (已有<span id="thiskg' + zclist[i].gid + '">15</span>)</p>' +
+										'<p id="next' + zclist[i].gid + '"> 下一价格：￥<span id="nextprice' + zclist[i].gid + '">8</span>(差:<span id="nextthiskg' + zclist[i].gid + '">5斤</span>)</p></div></a>' +
+										'<button type="button" id="btn'+ zclist[i].gid +'" onclick="goumai(\'' + zclist[i].gid + '\',\'' + zclist[i].gname + '\',\'' + SERVER_URL + zclist[i].gimages + '\',\''+zclist[i].gdanwei+'\')" class="buybutton" style="margin-top:-26px;height: 24px;line-height: 12px;text-align: center;font-size: 11px;">购买</button></div></div>'+
+										'</div>'+
+										'</li>';
+									var djs = function(time, gid) {
+										var t;
+										   //if (timer)
+										  //clearInterval(timer);
+										   timer = setInterval(function() {
+											var endtime = (new Date(time)).getTime(); //得到毫秒数
+											var date = new Date().getTime(); //当前时间的毫秒数
+											var nms = endtime - date - wucha;
+											var day = Math.floor(nms / (1000 * 60 * 60 * 24)); //天
+											var h = Math.floor(nms / (1000 * 60 * 60)) % 24; //小时
+											var m = Math.floor(nms / (1000 * 60)) % 60; //分钟
+											var s = Math.floor(nms / 1000) % 60; //秒
+											var ms = Math.floor(nms / 100) % 10; //拆分秒
+											if(day >= 0) {
+												var str = day + "天" + h + "小时" + m + "分" + s + "秒";
+											} else {
+												var str = "已结束!";
+												$("#btn"+gid).css('background','gainsboro'); //购买按钮变灰
+												//clearInterval(timer);
+												//众筹结束后 返回余额
+												var price = $("#zcprice" + gid).html(); //商品单价
+//												mui.post(SERVER_URL + "appzhongchou.do?p=checkUidIsCatGoods", {
+//													userid: userid,
+//													gid: gid,
+//													price: price
+//												}, function(data) {
+//													if(data=="请先登录")
+//													{
+//														plus.nativeUI.toast("众筹已结束！请登录");
+//														return;
+//													}
+//													plus.webview.getWebviewById('center.html').reload();
+//												});
+												/**			
+												//众筹结束24小时后 不显示
+												setTimeout(function(){
+													mui.post(SERVER_URL+"appzhongchou.do?p=editGoodsStatus",{gid:gid},function(data){
+														if(data=="0"){
+															location.reload();	
+														}
+													});
+												},10000);	
+												**/		
+											}
+										var djsstr = document.getElementById("time" + gid);
+											djsstr.innerHTML = str;
+										}, 1000);
+								}	
+									var gid = zclist[i].gid; //商品ID
+									var time = zclist[i].gtime; //商品结束时间
+									djs(time, gid); //倒计时
+									var rebate=function(gid){	
+										
+									//if (timer2!=null)
+									 // clearInterval(timer2);
+									var timer2=setInterval(function(){
+									//查找商品折扣
+									mui.post('${pageContext.request.contextPath}/appzhongchou.do?p=findByIdRebate&gid=' + gid, {
+		
+									}, function(data) {
+										var rebatelist = eval("(" + data + ")");
+										for(var j = 0; j < rebatelist.length; j++) {
+											if(rebatelist[j].goods.gsellnum >= rebatelist[j].gcfrBeginkg && rebatelist[j].goods.gsellnum <= rebatelist[j].gcfrEndkg) {
+													
+												$("#rebate" + rebatelist[j].goods.gid).attr('value', rebatelist[j].gcfrRebate);
+												$("#rebateid" + rebatelist[j].goods.gid).attr('value', j);
+												var price = null; //当前价格
+												var nextprice = null; //下一个价格
+												//判断商品价格
+												if(usertype == 0) {
+													price = (rebatelist[j].goods.gprice * 1) * (rebatelist[j].gcfrRebate * 1); //当前价格
+												} else {
+													price = (rebatelist[j].goods.gvipprice * 1) * (rebatelist[j].gcfrRebate * 1); //当前价格
+												}
+												price = price.toFixed(2);
+												//当前价格
+												$("#zcprice" + rebatelist[j].goods.gid).html(price);
+												//已购买多少斤
+												$("#thiskg" + rebatelist[j].goods.gid).html(rebatelist[j].goods.gsellnum+''+rebatelist[j].goods.gdanwei+'');	
+												//如果到了最后一个商品折扣	显示最后价格
+												if(rebatelist.length == j + 1) {
+													//$("#rebate" + rebatelist[j].goods.gid).attr('value', rebatelist[rebatelist.length-1].gcfrRebate);
+													$("#next" + rebatelist[j].goods.gid).css('display', 'none');
+													$("#jj" + rebatelist[j].goods.gid).html('最后价格');
+												} else {
+													//还没到最后一个商品折扣  得到下一个价格  还差多少斤
+													//$("#rebate" + rebatelist[j].goods.gid).attr('value', rebatelist[j + 1].gcfrRebate);
+													if(usertype == 0) {	
+														nextprice = (rebatelist[j + 1].goods.gprice * 1) * (rebatelist[j + 1].gcfrRebate * 1); //下一个价格
+													} else {
+														nextprice = (rebatelist[j + 1].goods.gvipprice * 1) * (rebatelist[j + 1].gcfrRebate * 1); //下一个价格
+													}
+													$("#nextprice" + rebatelist[j].goods.gid).html(nextprice);
+													//还差多少斤 
+													var nextkg = (rebatelist[j + 1].gcfrBeginkg * 1) - (rebatelist[j].goods.gsellnum * 1);
+													$("#nextthiskg" + rebatelist[j].goods.gid).html(nextkg + ''+rebatelist[j].goods.gdanwei+'');
+												}
+											}	
+											//如果购买的数量超过最后一个商品折扣的结束重量  得到最后价格	
+											if(rebatelist[j].goods.gsellnum>rebatelist[rebatelist.length-1].gcfrEndkg)
+											{
+													$("#rebate" + rebatelist[j].goods.gid).attr('value', rebatelist[rebatelist.length-1].gcfrRebate);
+													$("#next" + rebatelist[j].goods.gid).css('display', 'none');
+													$("#jj" + rebatelist[j].goods.gid).html('最后价格');
+													if(usertype == 0) {
+														price = (rebatelist[rebatelist.length-1].goods.gprice * 1) * (rebatelist[rebatelist.length-1].gcfrRebate * 1); //当前价格
+													} else {
+														price = (rebatelist[rebatelist.length-1].goods.gvipprice * 1) * (rebatelist[rebatelist.length-1].gcfrRebate * 1); //当前价格
+													}
+													$("#zcprice" + rebatelist[j].goods.gid).html(price.toFixed(2));
+													$("#thiskg" + rebatelist[j].goods.gid).html(rebatelist[j].goods.gsellnum+''+rebatelist[j].goods.gdanwei+'');
+											}		
+										}		
+									});
+									},1000);
+									var zhongchou = document.getElementById("zhongchou");
+									zhongchou.innerHTML += str;
+									mui(document).imageLazyload({
+											placeholder: '${pageContext.request.contextPath}/weixin/images/timg.gif'
+										});
+									}
+									rebate(gid);
+								}
+							}
+						});
+					});
+				}, 800);
+			}
+			/*if(mui.os.plus) {
+				mui.plusReady(function() {
+					setTimeout(function() {
+						mui("#pullrefresh").pullRefresh().pullupLoading();
+					}, 1000)
+				});
+			} else {
+				mui.plusReady(function() {
+					mui("#pullrefresh").pullRefresh().pullupLoading();
+				});
+			}*/
+			window.addEventListener('userinfo', function(e) {
+				userid = '${userinfo.usersId}';
+				location.reload();
+				shuaxin();
+
+			});
+			//详情页面
+			mui('body').on('tap','.haha',function(){
+			    var gid = this.getAttribute("gid");
+				var	gname =this.getAttribute("gname");	
+				var	gprice= this.getAttribute("gprice");
+				var	gvipprice= this.getAttribute("gvipprice");
+				var	gdanwei= this.getAttribute("gdanwei");
+				var	gimages=this.getAttribute("gimages");
+				var rebateid=$("#rebateid" + gid).val();
+				var rebate=$("#rebate" + gid).val();
+				var timestr=$("#time"+gid).html();
+				window.top.location="${pageContext.request.contextPath}/weixin/crowdfunding/zcdetail.jsp?gid="+gid+"&gname="+gname+"&gprice="+gprice+"&gvipprice="+gvipprice+"&gdanwei="+gdanwei+"&gimages="+gimages+"&rebateid="+rebateid+"&rebate="+rebate+"&timestr="+timestr;
+			
+			});
+			/*function zcdetail(gid,gname,gprice,gvipprice,gdanwei,gimages)
+			{
+					//alert(gid+gname+gprice+gvipprice+gdanwei);
+					alert('来了');
+				var rebateid=$("#rebateid" + gid).val();
+				var rebate=$("#rebate" + gid).val();
+				var timestr=$("#time"+gid).html();
+					window.top.location="${pageContext.request.contextPath}/weixin/crowdfunding/zcdetail.jsp?gid="+gid+"&gname="+gname+"&gprice="+gprice+"&gvipprice="+gvipprice+"&gdanwei="+gdanwei+"&gimages="+gimages+"&rebateid="+rebateid+"&rebate="+rebate+"&timestr="+timestr;
+			
+			     mui.openWindow({
+					url:'zcdetail.jsp',
+					id:'zcdetail',
+					extras:{
+						gid:gid,
+						gname:gname,	
+						gprice:gprice,
+						gvipprice:gvipprice,
+						gdanwei:gdanwei,
+						gimages:gimages,
+						rebateid:rebateid,
+						rebate:rebate,
+						timestr:timestr
+					}
+				});
+			}*/
+			//购买
+			function goumai(gid, gname, gimages,gdanwei) {
+				if(userid == null) {
+					//plus.nativeUI.toast("请先登录");
+					mui.openWindow({
+						url: '${pageContext.request.contextPath}/weixin/home/login.jsp',
+						id: 'login'
+					});
+					return;
+				}
+				var timestr=$("#time"+gid).html();
+				if(timestr=="已结束!")
+				{
+					//plus.nativeUI.toast("该众筹已结束!");
+					return;
+				}
+				var rebate = $("#rebate" + gid).val(); //折扣
+				var price = $("#zcprice" + gid).html(); //商品单价
+				window.top.location="${pageContext.request.contextPath}/weixin/crowdfunding/crowdfunding-order.jsp?gid="+gid+"&gname="+gname+"&gprice="+price+"&gdanwei="+gdanwei+"&gimages="+gimages+"&grebate="+rebate;
+				/*mui.openWindow({
+					id: 'crowdfunding.html',
+					url: 'crowdfunding-order.jsp',
+					extras: {
+						gid: gid,
+						gname: gname,
+						gimages: gimages,
+						gprice: price,
+						grebate: rebate,
+						gdanwei:gdanwei
+					}
+				});*/
+			}
+		</script>
+	</body>
+
+</html>

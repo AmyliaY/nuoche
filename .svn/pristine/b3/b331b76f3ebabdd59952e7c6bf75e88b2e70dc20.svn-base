@@ -1,0 +1,496 @@
+body{ background-color: #f7f7f7; overflow: hidden;}
+.topA{ width: 100%; height: 50px; box-sizing: border-box; padding: 0 15px; background-color: #fff; box-shadow: 1px 1px 2px rgba(34, 25, 25, 0.1); position: absolute; top: 0; left: 0; z-index: 99;}
+.logoA{display: block; float: left; width: 70px; margin-top: 14px;}
+.weather{ float: right; line-height: 20px; margin-top: 14px;}
+.weather span{ float: left; display: block; color: #999;}
+.weather span img{ width: 20px; height: 20px; display: block;}
+/*#wrapper{ width: 100%; top: 50px; bottom: 50px; z-index: 98; position: absolute; overflow: auto;}*/
+#wrapper { position: absolute; z-index: 90; top: 50px; bottom: 50px; left: 0; width: 100%; overflow: auto;}
+.swiper-slide img{ width: 100%; display: block;}
+.con_a{ width: 100%; padding: 15px; box-sizing: border-box;}
+.Car_inf{ width: 100%; background-color: #fff; position: relative; border-radius: 5px; box-shadow: 1px 1px 2px #ddd; overflow: hidden;}
+.Car_infA{ width: 100%;}
+.Car_infAc{ width: 100%; padding: 15px; box-sizing: border-box;}
+.CarMore{ display: table;}
+.CarMore a{ width:100%; display: table-cell; height: 90px; vertical-align: middle; color: #999; color: #ccc; font-size: 60px;}
+
+.Car_logo{ width: 90px; height: 90px; float: left; overflow: hidden;}
+.Car_logo img{ display: block; width: 100%; height: 90px}
+.Car_txt{ width: calc(100% - 100px); height: 90px; float: right; display: block;}
+.Car_code{ width: 114px; height: 30px; text-shadow: 1px 1px 2px #003d82; line-height: 30px; font-size: 14px; color: #fff; background-image: url(../images/car_code_19.jpg); background-repeat: no-repeat; background-size: 100% 30px;}
+.Car_txt ul{ width: 100%; height: 50px; margin-top: 8px; border: 1px solid #ddd; border-radius: 3px; box-sizing: border-box; overflow: hidden; display: table;}
+.Car_txt ul li{ width: 33.33%; height: 50px; display: table-cell; vertical-align: middle; box-sizing: border-box; border-right: 1px solid #ddd;}
+.Car_txt ul li strong{ display: block; font-size: 16px;}
+.Car_txt ul li span{ display: block; font-size: 12px; color: #999;}
+
+
+.Car_infB{ width: 100%; height: 30px; line-height: 30px; background-color: #008dde; color: #fff; border-radius:0 0 5px 5px; overflow: hidden;}
+.Car_infB span{ width: calc(100% - 90px); font-size: 12px; text-align: left; display: block; float: left; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; box-sizing: border-box; padding-left: 10px;}
+.Car_infB span strong{ color: yellow;}
+.Car_infB span i{ padding-right: 5px; font-size: 14px;}
+.car_page{ width: 80px; float: right;}
+.car_page a{ display:block; width: 20px; float: right; color: #FFF; box-sizing: border-box;}
+.car_page strong{ font-size: 10px; float: right; width: 20px;}
+
+.Car_infC{ width: 70px; height: 25px; text-align: center; line-height: 25px; font-size: 12px; position: absolute; top: 10px; right: 0; color: #fff;  background-repeat: no-repeat; background-size: 100% 25px; box-sizing: border-box; padding-left: 10px;}
+.car_a{ background-image: url(../images/red.gif);}
+.car_b{ background-image: url(../images/green.jpg);}
+.car_c{ background-image: url(../images/blue.jpg);}
+.car_d{ background-image: url(../images/gray.jpg);}
+
+.index_menu{ width: 100%; height: 80px; margin-top: 15px; display: table; background-color: #fff; border-radius: 5px; box-shadow: 1px 1px 2px #ddd;}
+.index_menu a{ width: 25%; display: table-cell; vertical-align: middle; border-right: 1px solid #eee;}
+.index_menu a img{ width: 35px; display: block; margin: 0 auto;}
+
+.Advertisement{ width: 100%; margin-top: 15px;}
+.Advertisement img{ width: 100%; display: block; box-shadow: 1px 1px 2px #ddd;}
+.tit{ width: 100%; margin-top: 15px; position: relative;}
+.tit img{ width: 200px; display: block; margin: 0 auto;}
+.tit a{ display: block; position: absolute; line-height: 26px; right: 0; top: 0;}
+
+.new_A{ width: 100%; margin-top: 10px; display: block; position: relative; box-shadow: 1px 1px 2px #ddd;}
+.new_A img{ width: 100%; display: block;}
+.new_A span{ width: 100%; height: 25px; line-height: 25px; padding:0 10px; box-sizing: border-box; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; position: absolute; left: 0; bottom: 0; background: rgba(0,0,0,0.7) none repeat scroll 0 0; color: #fff; font-size: 12px; text-align: left;}
+
+.new_list{width: 100%;}
+.new_list a{ width: 100%; display: block; background-color: #fff; box-shadow: 1px 1px 2px #ddd; margin-top: 15px;}
+.new_list a img{ width: 100px; height: 80px; display: block; float: left;}
+.new_listC{ width: calc(100% - 100px); height: 80px; padding: 10px; float: right; line-height: 20px; text-align: left; box-sizing: border-box;}
+.new_listC span{ display: block; width: 100%; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.new_listC strong{ display: block; width: 100%; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; font-size: 12px; color: #999;}
+.new_listC i{ font-size: 10px;}
+.new_more{ width: 100%; padding-top: 10px; display: block; text-align: right; color: #008dde;}
+
+
+.footA{ width: 100%; height: 50px; box-sizing: border-box; border-top: 1px solid #ddd;  position: absolute; bottom: 0; left: 0; z-index: 99;
+background: -ms-linear-gradient(top, #fff,  #ddd);        /* IE 10 */
+background: -moz-linear-gradient(top,#fff,#ddd);/*火狐*/ 
+background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#fff), to(#ddd));/*谷歌*/ 
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#ddd));      /* Safari 4-5, Chrome 1-9*/
+background: -webkit-linear-gradient(top, #fff, #ddd);   /*Safari5.1 Chrome 10+*/
+background: -o-linear-gradient(top, #fff, #ddd);  /*Opera 11.10+*/
+}
+.footA span{ width: 70px; height: 50px; display: block; float: left; position: relative;}
+.footA span a{ width: 70px; height: 70px; border-radius: 50%; position: absolute; left: 0; bottom: 5px; background-color: #fff; box-shadow:0px 0px 10px #87d6fb;}
+.footA span a strong{ width: 60px; height: 60px; line-height: 56px; font-size: 30px; color: #fff; background-color: #008dde; display: block; border-radius: 50%; box-sizing: border-box; border: 2px solid #0074b6; margin: 5px auto 0;}
+.foot_menu{ width:calc(50% - 35px); height: 50px; position: relative; display: block; float: left;}
+.foot_menu img{ display: block; margin: 12px auto 0; width: 25px;}
+
+
+/*个人中心*/
+.main_top{ width: 100%; padding: 30px 0 20px; color: #fff; box-sizing: border-box; background-image: url(../images/main_img.jpg); background-position: center; background-repeat: no-repeat; background-size: cover; position: relative;}
+.main_head img{ width: 100px; height: 100px; display: block; margin: 0 auto; border-radius: 50%;}
+.main_head span{ width: 100%; display: block; font-size: 24px; padding-top:5px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.main_Tmenu{ width: 100%; margin-top: 20px; overflow: hidden; overflow: hidden;}
+.main_Tmenu a{ width: 50%; display: block; color: #fff; float: left; border-right: 1px solid #838282; box-sizing: border-box;}
+.main_Tmenu a strong{ display: block; font-size: 24px;}
+.main_Tmenu a span{ display: block;}
+.main_SetUp{ width: 30px; height: 30px; line-height: 30px; display: block; position: absolute; top: 10px; right: 10px; color: #ddd; font-size: 24px;}
+
+.main_list{ width: 100%; height: 50px; line-height: 50px; font-size: 16px; padding: 0 15px; box-sizing: border-box; display: block; background-color: #fff; border-bottom: 1px solid #ddd; overflow: hidden;}
+.main_list img{ width: 24px; display: block; float: left; margin: 15px 10px 0 0;}
+.main_list span{ float: left;}
+.main_listR{ float: right; color: #00b4ff;}
+.main_listR i{ font-size: 18px; padding-left: 10px;}
+.main_list span strong{ color: #008DDE; padding:0 10px;}
+
+.main_menu{ width: 100%; margin: 5px 0; background-color: #fff; border-top: 1px solid #eee; overflow: hidden;}
+.main_menu a{ width: 33.33%; display: block; float: left; border-right: 1px #eee solid; border-bottom: 1px #eee solid; box-sizing: border-box; padding: 12px 0;}
+.main_menu a img{ width: 35px; display: block; margin: 0 auto;}
+
+/*10-11-充值*/
+.Rec_Nub{ width: 100%; padding: 0 25px 15px; text-align: left; box-sizing: border-box; background-color: #fff; border-bottom: 1px solid #eee; overflow: hidden; display: table;}
+.Rec_Nub span{ line-height: 40px; display: table-cell; vertical-align: bottom;}
+.Rec_NubA{ width: 30px; font-size: 30px; }
+.Rec_NubB{ font-size: 30px;}
+.Rec_NubB input{ width: 100%; height: 40px; font-size: 30px; border: none;}
+.pop_Password{ width: 100%; padding: 15px; box-sizing: border-box; background-color: #f7f7f7;}
+.pop_Password input{ width: 100%; height: 30px; text-align: center; font-size: 18px; background: none; border: none;}
+.pay_over{ width: 100%; padding: 30px; box-sizing: border-box; background-color: #fff; border-bottom: 1px solid #eee; font-size: 18px; color: #999;}
+.pay_over img{ width: 80px; display: block; margin: 0 auto 10px;}
+.pay_over span{ display: block; padding-bottom: 5px; color: #008dde;}
+.pay_over strong{ display: block; font-size: 12px;}
+.Recharge_tips{ width: 100%; padding: 0 20px; box-sizing: border-box; background-color: #fff; line-height: 40px; color: #999; text-align: left; border-bottom: 1px solid #eee;}
+.Recharge_tips a{ float: right; color: #00b4ff;}
+
+/*支付中心*/
+.main_menuAT{ width: 100%; background-color: #008dde; display: flex; padding: 0 15px; box-sizing: border-box;}
+.main_menuAT a{ display: block; flex: 1 1 auto; color: #fff; padding: 15px 0;}
+.main_menuAT a span{ font-size: 30px;}
+.main_menuAT a strong{ color: yellow;}
+.main_menuAC{ width: 100%; background-color: #fff; border-bottom: 1px solid #eee; display: flex; padding:20px 15px; box-sizing: border-box;}
+.main_menuAC a{ display: block; flex: 1 1 auto; box-sizing: border-box;}
+.main_menuAC a span{ font-size: 12px; color: #999;}
+.payList{ width: 100%;}
+.payList a{ width: 100%; display: table; padding: 10px 15px; box-sizing: border-box; border-bottom: 1px solid #eee;}
+.payList_L{ display: table-cell; width: 50%; text-align: left; vertical-align: middle; font-size: 16px;}
+.payList_L span{ color: #999; font-size: 12px;}
+.payList_R{ display: table-cell; width: 50%; text-align: right; vertical-align: middle; line-height: 30px; font-size: 20px;}
+.payList_R span{ color: #008dde;}
+.payList_R i{ padding-left: 5px; color: #999;}
+.pay_txtT{ width: 100%; line-height: 100px; text-align: left; box-sizing: border-box; padding: 0 15px; background-color: #fff; border-bottom: 1px solid #eee; font-size: 16px;}
+.pay_txtT span{float: right; font-size: 30px; color: #008dde;}
+.pay_txtList{ width: 100%; box-sizing: border-box; padding:15px; background-color: #fff; border-bottom: 1px solid #eee;}
+.pay_txtList li{ padding: 5px 0; width: 100%; overflow: hidden;}
+.pay_txtList li strong{ width: 50%; float: left; text-align: left; color: #999;}
+.pay_txtList li span{ width: 50%; float: right; text-align: right;}
+
+/*扫一扫挪车*/
+.scanning_banner{ width: 100%; padding: 15px 0; background-color: #008dde;}
+.scanning_banner img{ width: 240px; display: block; margin: 0 auto;}
+.Car_txtS{ width: calc(100% - 110px); height: 90px; float: right; padding-top: 10px;}
+.Car_codeS{ width: 150px; height: 40px; text-shadow: 1px 1px 2px #003d82; line-height: 40px; font-size: 18px; color: #fff; background-image: url(../images/car_code_19.jpg); background-repeat: no-repeat; background-size: 100% 40px;}
+.Car_txtS span{ font-size: 20px; display: block; text-align: left; padding-top: 10px;}
+
+.Car_Cx{ width: 100%; border-radius: 5px; box-shadow: 1px 1px 2px #ddd; background-color: #fff; margin-top: 15px;}
+.fill_in{ display: table; border-bottom: 1px solid #eee; padding: 10px; width: 100%; box-sizing: border-box; text-align: left; vertical-align: top;}
+.fill_in span{ display: table-cell;}
+.fill_in span input{ width: 100%; border: none; height: 30px; box-sizing: border-box; padding-left:5px;}
+.fill_inA{ width: 80px; text-align: right;}
+.fill_inC{ width: 80px; text-align: right;}
+.fill_inC a{ width: 80px; height: 30px; line-height: 30px; background-color: #008dde; display: block; border-radius: 3px; color: #fff; font-size: 12px; text-align: center;}
+.fill_inCs{ width: 80px; text-align: right;}
+.fill_inCs a{ width: 30px; height: 30px; display: inline-block; color: #999;}
+.lineHeightA{line-height: 30px;}
+
+.butA{ width: 100%; height: 40px; line-height: 40px; color: #fff; display: block; border-radius: 5px; margin-top: 15px; font-size: 16px;}
+.butB{ width: 100%; overflow: hidden; padding: 15px; box-sizing: border-box;}
+.butB a{ width: calc(50% - 5px); float: left; display: block; border-radius: 5px; line-height: 40px;}
+.butC{ width: 100%; padding: 0 15px; box-sizing: border-box;}
+.butC a{ width: 100%; height: 40px; line-height: 40px; display: block; border-radius: 5px; font-size: 16px;}
+.butWhite{ background-color: #fff; border: 1px solid #ddd;}
+.butRed{ background-color: #eb4855; color: #fff;}
+.butGreen{ background-color: #9FBC2C; color: #fff;}
+.butGray{ background-color: #999; color: #fff;}
+.butGrayX{ background-color: #fff; color: #999; border: 1px solid #ddd;}
+.butBlue{ background-color: #008dde; color: #fff;}
+.butBlueX{ border: 1px solid #008dde; color: #008dde;}
+.Reminder{ width: 100%; text-align: left; margin-top: 50px;}
+.Reminder strong{ display: block; font-size: 16px;}
+.Reminder span{ padding-top: 5px; display: block; color: #999; font-size: 12px;}
+.Reminder span strong{ color: #008dde; font-size: 14px; display: inline-block;}
+
+.Count_down{ width: 100%; padding-top: 60px;}
+.Count_down img{ width: 100px; margin: 0 auto;}
+.Count_down strong{ display: block; color: #e85774; font-size: 40px;}
+.Count_down span{ display: block; font-size: 16px;}
+
+.time_txt{ width: 320px; height: 143px; background-image: url(../images/time_img_10.png); line-height: 25px; background-repeat: no-repeat; background-size: 100%; margin: 20px auto 10px;}
+.time_txt span{ width: 200px; margin: 0 auto; display: block; padding-top: 40px; font-size: 15px;}
+.time_txt span strong{ color: #e85774;}
+
+.wait_but{ width: 320px; line-height: 40px; margin: 0 auto; box-sizing: border-box; padding: 0 20px; overflow: hidden;}
+.wait_but a{ display: block; width: 130px; border-radius: 3px; box-sizing: border-box;}
+.wait_butA{ float: left; background-color: #fff; border: 1px solid #ddd; color: #ccc;}
+.wait_butB{ float: right; background-color: #e54a4b; border: 1px solid #e54a4b; color: #fff;}
+.wait_butC{ float: left; background-color: #fff; border: 1px solid #e54a4b; color: #e54a4b;}
+
+
+
+/*新闻内容页*/
+.new_c{ width: 100%; padding: 15px; box-sizing: border-box; text-align: left;}
+.new_cT{ width: 100%; padding-bottom: 15px;}
+.new_cT span{ width: 100%; display: block; font-size: 18px; padding-bottom: 5px;}
+.new_cT strong{ width: 100%; display: block; font-size: 12px; color: #999;}
+.new_cC{ width: 100%;}
+.new_cC img{ width: 100%; display: block; padding: 5px 0;}
+.new_cC p{ padding: 5px 0; text-indent:2em;}
+
+
+/*注册及编辑列*/
+.fillList{ width: 100%; background-color: #fff; margin-top: 5px; border-top: 1px solid #eee;}
+.fillList li{ display: table; border-bottom: 1px solid #eee; padding: 10px 15px; width: 100%; box-sizing: border-box; text-align: left; vertical-align: top;}
+.fillList li span{ display: table-cell;}
+.fill_inB input{ width: 100%; border: none; height: 30px; box-sizing: border-box; padding-left:5px;}
+.fill_inB select{ width: 100%; border: none; height: 30px; box-sizing: border-box;}
+.fill_inBx{ color: #999; padding-left: 15px;}
+.fill_inBs{ text-align: right; color: #eb4855; overflow: hidden; vertical-align: middle;}
+.moreAB{ width: 90px; float: right; text-align: center;}
+.moreAB a{ width: 30px; height: 30px; float: left; display: block; border: 1px #ddd solid; box-sizing: border-box; border-radius: 3px; font-size: 20px; line-height: 26px;}
+.moreAB span{ width: 30px; height: 30px; float: left; display: block;}
+
+.fillList_butA{ width: 80px; height: 30px; line-height: 30px; background-color: #008dde; display: block; border-radius: 3px; color: #fff; font-size: 12px; text-align: center;}
+
+
+/*车贴申请*/
+.QR_codeA{ width: 100%; background-color: #008dde; color: #fff;}
+.QR_codeA ul{ width: 100%; padding: 30px 0 15px; overflow: hidden; display: table;}
+.QR_codeA ul li{ width: 33.33%; display: table-cell; vertical-align: middle;}
+.QR_codeAa img{ width:80%; display: block; margin: 0 auto;}
+.QR_codeAb img{ width: 100%; display: block; margin: 0 auto; box-shadow: 0 0 6px #00629b; box-sizing: border-box; /*border: 5px solid #fff;*/}
+.QR_codeA span{ display: block; line-height: 20px;}
+.QR_codeA span strong{ color: yellow;}
+/*10-11*/
+.paymentIngT{ width: 100%; padding: 15px 0; background-color: #008dde; color: #fff}
+.paymentIngT i{ padding-right: 5px; font-size: 16px;}
+.paymentA{ width: 100%; padding: 15px; background-color: #fff; box-sizing: border-box; border-bottom: 1px solid #eee; text-align: left;}
+.paymentA span{ display: block; width: 100%; padding-left: 35px; box-sizing: border-box; overflow: hidden; background-image: url(../images/Location.png); background-position: center left; background-repeat: no-repeat; background-size: 20px auto;}
+.paymentA span strong{ display: block; float: left; padding: 2px 0;}
+.paymentB{ width: 100%; display: block; padding: 15px; box-sizing: border-box; background-color: #fff; text-align: left; overflow: hidden; border-bottom: 1px solid #eee; line-height: 20px;}
+.paymentB img{ width: 65px; height: 65px; display: block; float: left;}
+.paymentBT{ width: calc(100% - 80px); float: right;}
+.paymentBTa{ width: 100%; min-height: 40px; padding-bottom: 5px;}
+.paymentBTb{ width: 100%; overflow: hidden; font-size: 12px;}
+.paymentBTb span{ float: left; font-size: 16px;}
+.paymentBTb span i{ text-decoration: line-through; color: #999; padding-left: 10px; font-size: 12px;}
+.paymentBTb strong{float: right;}
+.pay_txt{width: 100%; padding: 15px; box-sizing: border-box; background-color: #fff; text-align: left; overflow: hidden; border-bottom: 1px solid #eee;}
+.pay_txt li{ width: 100%; padding: 5px 0;}
+.pay_txt li span{ float: right;}
+.pay_txt li span strong{ color: #008dde;}
+
+/*弹窗*/
+.pop{ width: 100%; height: 100%; position: fixed; left: 0; top: 0; background: rgba(0,0,0,0.7) none repeat scroll 0 0; z-index: 100;}
+.popC{ width: 300px; border-radius: 5px; overflow: hidden; background-color: #fff;
+position: fixed;left: 50%;top: 50%; 
+transform:translate(-50%,-50%);
+-ms-transform:translate(-50%,-50%);		/* IE 9 */
+-webkit-transform:translate(-50%,-50%);	/* Safari and Chrome */
+-o-transform:translate(-50%,-50%);		/* Opera */
+-moz-transform:translate(-50%,-50%);		/* Firefox */
+}
+.popCC{ width: 100%; padding: 30px; box-sizing: border-box;}
+.popCC strong{ color: red;}
+.popBut{ width: 100%; height: 40px; line-height: 40px; display: flex; background-color: #eee; box-shadow: inset 0 0 2px #ccc;}
+.popBut a{ display: block; flex: 1 1 auto;}
+.pop_tit{ width: 100%; height: 40px; line-height: 40px; border-bottom: 1px solid #ddd; font-size: 16px;}
+.yesMoney{ width: 100%; padding: 15px 0; color: #fff; background-color: #008dde; font-size: 20px;}
+.popC_img{ width: 100%; padding: 8px; box-sizing: border-box;}
+.popC_img img{ width: 100%; display: block;}
+
+
+/*个人信息相关*/
+.CarMistake{ width: 100%; padding: 20px 0; display: flex; background-color: #008dde; color: #fff;}
+.CarMistake span{ display: block; flex: 1 1 auto;}
+.CarMistake span strong{ display: block; font-size: 20px;}
+.CarInf_list{ width: 100%; padding: 15px; box-sizing: border-box;}
+.CarInf_list li{ width: 100%; background-color: #fff; border-radius: 5px; box-shadow: 1px 1px 3px #ddd; margin-bottom: 10px;}
+.CarInf_listT{ width: 100%; line-height: 35px; border-bottom: 1px solid #eee; text-align: left; padding: 0 15px; box-sizing: border-box;}
+.CarInf_listT span{ float: right; color: #999;}
+.CarInf_listC{ width: 100%; padding: 15px; box-sizing: border-box; text-align: left;}
+.CarInf_listC span{ display: block; padding-bottom: 5px;}
+.CarInf_listC i{ font-size: 12px; color: #999; display: block; padding-bottom: 10px;}
+.CarInf_listC strong{ display: inline-block; line-height: 25px; border: 1px solid #eb4855; color: #eb4855; border-radius: 3px; padding: 0 5px; margin-right: 5px;}
+.headImg img{ border-radius: 50%; width: 30px; height: 30px; margin: 10px 0 0 0;}
+.main_listR span{ color: #999;}
+.aboutUS{ width: 100%; padding: 50px 15px; box-sizing: border-box; background-color: #fff; border-bottom: 1px solid #eee;}
+.aboutUS img{ width: 150px; display: block; margin: 0 auto 10px;}
+.aboutUS span{ display: block;}
+
+/*汽车估价*/
+.EvaluationT{ width: 100%; height: 95px; text-align: left; margin-bottom: 5px; line-height: 20px; overflow: hidden; border-bottom: 1px solid #eee; padding: 15px; background-color: #fff; box-sizing: border-box;}
+.EvaluationT img{ width: 65px; height: 65px; display: block; float: left;}
+.EvaluationT span{ width: calc(100% - 75px); float: right; display: block; height: 65px;}
+.EvaluationT strong{ width: 100%; display: block; max-height: 40px; overflow: hidden; padding-bottom: 5px;}
+.EvaluationT i{ display: block; color: #999; font-size: 12px;}
+
+.EvaC{ width: 100%; margin-bottom: 5px; border-bottom: 1px solid #eee; border-top: 1px solid #eee; box-sizing: border-box; background-color: #fff;}
+.EvaCT{ width: 100%; height: 40px; line-height: 40px; border-bottom: 1px solid #eee; display: flex; background-color: #fff;}
+.EvaCT a{ display: block; float: left; box-sizing: border-box; flex: 1 1 auto;}
+.EvaCTa{ color: #008dde; border-bottom: 1px solid #008dde;}
+.EvaC_txt{ width100%; color: #999; text-align: left; padding: 10px 15px; box-sizing: border-box; font-size: 12px;}
+.EvaC ul{ width: 100%; padding: 10px 5px 20px; box-sizing: border-box; overflow: hidden; display: table;}
+.EvaC ul li{ display: table-cell; vertical-align: middle; padding: 0 5px; box-sizing: border-box;}
+.EvaC ul li span{ width: 100%; display: block; border-radius: 10px; box-shadow: 0 0 3px #ddd; padding: 15px 0;}
+.EvaC ul li span strong{ font-size: 20px; color: yellow;}
+.EvaCs span{ background-color: #f7f7f7; border: 1px solid #ddd;}
+.EvaCx span{ background-color: #008dde; color: #fff;}
+.EvaCx{ width: 40%;}
+
+/*呼叫挪车*/
+.CallNub{ width: 100%;}
+.CallNub li{ width: 100%; background-color: #fff; padding: 15px; margin-bottom: 10px; text-align: left; box-sizing: border-box; border-radius: 5px; box-shadow: 1px 1px 3px #ddd; position: relative;}
+.CallNub li span{ display: block; line-height: 20px;}
+.CallNub li strong{ display: block; font-size: 12px; color: #999; padding-bottom: 10px;}
+
+
+
+
+/*我的订单*/
+.payBX{ width: 100%; background-color: #fff; margin-bottom: 5px; border-top: 1px solid #eee;}
+.OrderBut{ width: 100%; height: 50px; border-bottom: 1px solid #eee; padding: 10px 15px; box-sizing: border-box; text-align: left; line-height: 30px;}
+.red{ color: red;}
+.Gray{ color: #999;}
+.blue{ color: #008DDE;}
+.OrderBut a{ width: 80px; float: right; line-height: 30px; border-radius: 3px; text-align: center; box-sizing: border-box; margin-left: 5px; font-size: 12px;}
+.logistics{ width: 100%; text-align: left; color: #999; background-color: #fff; border-top:1px solid #eee; border-bottom:1px solid #eee; padding: 15px; box-sizing: border-box; overflow: hidden;}
+.logistics li{ position: relative; height: 60px;}
+.logisticsL{ width: 70px; float: left; text-align: right; border-right: 1px solid #ddd; padding-right: 25px; box-sizing: border-box;}
+.logisticsL li strong{ font-size: 12px;}
+.logisticsL li i{ font-size: 20px; position: absolute; right: -34px; top: 0; background-color: #fff;}
+.logisticsR{ width: calc(100% - 95px); float: right; height: 100px; font-size: 12px;}
+.logisticsR li{ overflow: hidden;}
+
+/*10-22*/
+.cod{ width: 300px; height: 404px; margin: 0 auto 20px; background-image: url(../images/cod2_03.jpg); background-repeat: no-repeat; background-size: 100% 100%;}
+.wait_butBx{ margin: 0 auto; background-color: #e85774; border: 1px solid #e85774; color: #fff;}
+
+.cod img{  width: 160px; height: 160px; display: block; padding: 40px 0 0; margin: 0 auto;}
+
+
+/*10-27*/
+.ab_uc{ width: 100%; background-color: #fff; padding: 20px 0; border-bottom: 1px solid #eee;}
+.ab_uc img { display: block; margin: 0 auto; width: 160px;}
+.ab_uc span{ width: 100%; display: block; margin: 0 auto; line-height: 40px; color: #008dde; font-size: 20px;}
+.ab_uc strong{ width: 100%; line-height: 20px; padding: 10px 20px 0; box-sizing: border-box; text-align: left; display: block;}
+.ab_uc strong p{ padding-bottom: 5px; text-indent:2em;}
+
+
+/*10-29*/
+.user_list{ width: 100%; margin-bottom: 5px; text-align: left; background-color: #fff; border-top: 1px solid #eee;}
+.user_listT{ width: 100%; padding: 10px; box-sizing: border-box; overflow: hidden; border-bottom: 1px solid #eee;}
+.user_listT img{ width: 50px; height: 50px; display: block; float: left;}
+.user_listT span{ width: calc(100% - 60px); float: right; line-height: 25px; font-size: 18px;}
+.user_listT span i{ color: #999; font-size: 12px;}
+.user_list ul{ width: 100%;}
+.user_list ul li{ width: 100%; padding: 0 10px; line-height:35px; box-sizing: border-box; border-bottom: 1px solid #eee;}
+.user_list ul li span{ float: right;}
+
+
+/*11-06*/
+.CarNumList{ width: 100%; overflow: hidden;}
+.CarNumList li{ width: 33.33%; padding: 5px; box-sizing: border-box; float: left;}
+.CarNumList li a{ width: 100%; line-height: 35px; display: block; border-radius: 3px;}
+.CarNumA{ border: 1px solid #E54A4B; color: #E54A4B;}
+.CarNumB{ border: 1px solid #ddd; color: #ccc;}
+
+
+
+
+.payListX{ width: 100%; background-color: #fff;}
+.payListX li{ width: 100%; padding:15px; border-bottom: 1px solid #ddd; box-sizing: border-box; text-align: left; display: table;}
+.payListXL{ display: table-cell; vertical-align: middle; font-size: 12px;}
+.payListXL span{ font-size: 16px; padding-right: 10px;}
+.payListXL span strong{ color: #f42b41; padding-left: 5px;}
+.payListXL p{ display: inline-block; padding: 3px 8px; background-color: #eb4855; color: #fff; border-radius: 5px; font-size: 10px;}
+.payListXL i{ color: #999; padding-top: 3px; display: block;}
+.payListXR{ width: 80px;  display: table-cell; vertical-align: middle;}
+.payListXR a{ display: block; width: 70px; height: 30px; line-height: 30px; float: right; border-radius: 5px; text-align: center; border: 1px solid #3598db; color: #3598db;}
+.A_number{ width: 100%; line-height: 40px; background-color: #00a0db; color: #fff;}
+.A_number span{ padding-right: 20px;}
+.tx{ width: 100%; font-size: 16px; text-align: left; padding: 10px 15px; box-sizing: border-box;}
+.Prompt{ width: 100%; padding: 0 15px; box-sizing: border-box; text-align: left; padding-top: 50px; color: #999;}
+.Prompt span{ display: block; color: #333; padding-bottom: 5px;}
+
+.carCardT{ width: 100%; padding: 20px 20px 0; background-color: #00a0db; box-sizing: border-box;}
+.carCardTc{ width: 300px; height: 300px; padding: 15px; box-sizing: border-box; margin: 0 auto; background-image: url(../images/bc.png); background-repeat: no-repeat; background-size: 100% 100%; position: relative;}
+.carCardTc img{ width: 100%; display: block; border-radius: 3px;}
+.carCardTc span{ width: 120px; height: 120px; position: absolute; top: 118px; left: 90px;}
+.carCardTc span img{ width: 100%; height: 120px; display: block;}
+
+
+/*以下代码有改动12-02*/
+.colorX{ width: 80px;  display: table-cell; vertical-align: middle; text-align: right;}
+.colorX a{ width: 30px; height: 30px; display: inline-block; box-sizing: border-box; border-radius: 5px;}
+.colorXa{ background-color: #0a4ca0; margin-right: 6px;}
+.colorXb{ background-color: #ed7b0f;}
+.colorXs{ border:2px solid #000;}
+
+
+/*1202*/
+.Car_codeX{ width: 100%; overflow: hidden;}
+.Car_codeX span{ float: right; width: 60px; line-height: 25px; display: block; font-size: 12px; margin-top: 3px; border-radius: 3px; color: #fff;}
+.Car_codeXa{ background-color: #c73434;}
+.Car_codeXb{ background-color: #5db75d;}
+
+
+/*1205*/
+.SearchT {
+    width: 100%;
+    padding: 5px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.Letter {
+    width: 30px;
+    position: fixed;
+    top: 80px;
+    right: 5px;
+    z-index: 9999;
+}
+
+.Letter a {
+    width: 30px;
+    line-height: 20px;
+    display: block;
+    font-size: 12px;
+    color: #3598db;
+}
+
+.topSearch {
+    width: 100%;
+    height: 60px; position: fixed; top: 0; left: 0;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 15px;
+    box-sizing: border-box;
+    display: flex;
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+.topSearch li {
+    box-sizing: border-box;
+    height: 40px;
+}
+.topSearchA {
+    flex: auto;
+}
+.topSearchA input {
+    width: 100%;
+    height: 30px;
+    border: 1px solid #ddd;
+    background-color: #f7f7f7;
+    border-radius: 3px;
+    line-height: 20px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.topSearchB {
+    flex: 0 0 80px;
+    padding-left: 5px;
+}
+.topSearchB a {
+    width: 100%;
+    height: 30px;
+    font-size: 12px;
+    line-height: 28px;
+    border: 1px solid #3598db;
+    box-sizing: border-box;
+    display: block;
+    border-radius: 3px;
+    background-color: #3598db;
+    color: #fff;
+}
+
+.CarBrand{ width: 100%; margin-bottom: 15px; overflow: hidden;}
+.CarBrand a{ width: 25%; float: left; display: block; padding: 15px; box-sizing: border-box; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; background-color: #fff;}
+.CarBrand a img{ width: 100%;}
+
+.popCarList{ width: 100%; height: 100%; padding-top: 60px; box-sizing: border-box; background-color: #f7f7f7; position: fixed; left: 0; top: 0; z-index: 9999; overflow-y: auto;}
+
+
+/*1208g*/
+.mapList{ width: 100%; padding: 10px 10px 0; box-sizing: border-box;}
+.mapList li{ width: 100%; background-color: #fff; box-shadow: 1px 1px 2px #ccc; border-radius: 5px; margin-bottom: 10px;}
+.mapListA{ width: 100%; overflow: hidden; border-bottom: 1px solid #eee;}
+.mapListAL{ width: calc(100% - 60px); height: 70px; line-height: 25px; float: left; padding: 10px; box-sizing: border-box;}
+.mapListAL img{ width: 50px; height: 50px; display: block; float: left; border-radius: 3px;}
+.mapListAL span{ width: calc(100% - 50px); float: left; display: block; text-align: left; padding-left: 10px; box-sizing: border-box;}
+.mapListAL span strong{ width: 100%; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.mapListAL span i{ width: 100%; color: #999; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px;}
+.mapListA a{ width: 60px; height: 70px; display: block; float: right; line-height: 70px; box-sizing: border-box; border-left: 1px solid #eee; color: #007AFF; font-size: 26px;}
+.MapAddress{ width: 100%; line-height: 35px; display: block; font-size: 12px; text-align: left; overflow: hidden; padding: 0 10px; box-sizing: border-box; border-bottom: 1px solid #eee;}
+.MapAddress span{ width: calc(100% - 30px); float: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.MapAddress strong{ float: right; font-size: 16px; color: #999;}
+.mapAB{ width: 100%; overflow: hidden; height: 35px;}
+.mapAB span{ width: 50%; float: left; display: block; line-height: 35px; font-size: 12px; color: #999;}
+.mapAB span strong{ display: inline-block; margin: 0 auto; background-repeat: no-repeat; background-position: left center; background-size: 16px 16px; padding-left: 20px;}
+.mapAB_imgA{ background-image: url(../images/car.png);}
+.mapAB_imgB{ background-image: url(../images/walk.png);}
+
+.mapC{ width: 100%; height: 100%; position: relative; z-index: 1;}
+.mapCa{ width: 100%; height: 40px; box-sizing: border-box; line-height: 40px; z-index: 9999; text-align: left; background: rgba(0,0,0,0.7) none repeat scroll 0 0; padding: 0 15px; overflow: hidden; position: fixed; bottom: 0; left: 0; color: #fff; }
+.mapCa i{ float: right; line-height: 40px;}
+

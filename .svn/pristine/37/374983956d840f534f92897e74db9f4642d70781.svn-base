@@ -1,0 +1,241 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/wap/css/mui.min.css">
+		<!--App自定义的css-->
+		<style type="text/css">
+			.mui-preview-image.mui-fullscreen {
+				position: fixed;
+				z-index: 20;
+				background-color: #000;
+			}
+			.mui-preview-header,
+			.mui-preview-footer {
+				position: absolute;
+				width: 100%;
+				left: 0;
+				z-index: 10;
+			}
+			.mui-preview-header {
+				height: 44px;
+				top: 0;
+			}
+			.mui-preview-footer {
+				height: 50px;
+				bottom: 0px;
+			}
+			.mui-preview-header .mui-preview-indicator {
+				display: block;
+				line-height: 25px;
+				color: #fff;
+				text-align: center;
+				margin: 15px auto 4;
+				width: 70px;
+				background-color: rgba(0, 0, 0, 0.4);
+				border-radius: 12px;
+				font-size: 16px;
+			}
+			.mui-preview-image {
+				display: none;
+				-webkit-animation-duration: 0.5s;
+				animation-duration: 0.5s;
+				-webkit-animation-fill-mode: both;
+				animation-fill-mode: both;
+			}
+			.mui-preview-image.mui-preview-in {
+				-webkit-animation-name: fadeIn;
+				animation-name: fadeIn;
+			}
+			.mui-preview-image.mui-preview-out {
+				background: none;
+				-webkit-animation-name: fadeOut;
+				animation-name: fadeOut;
+			}
+			.mui-preview-image.mui-preview-out .mui-preview-header,
+			.mui-preview-image.mui-preview-out .mui-preview-footer {
+				display: none;
+			}
+			.mui-zoom-scroller {
+				position: absolute;
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-box-align: center;
+				-webkit-align-items: center;
+				align-items: center;
+				-webkit-box-pack: center;
+				-webkit-justify-content: center;
+				justify-content: center;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				-webkit-backface-visibility: hidden;
+			}
+			.mui-zoom {
+				-webkit-transform-style: preserve-3d;
+				transform-style: preserve-3d;
+			}
+			.mui-slider .mui-slider-group .mui-slider-item img {
+				width: auto;
+				height: auto;
+				max-width: 100%;
+				max-height: 100%;
+			}
+			.mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+				width: 100%;
+			}
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+				display: inline-table;
+			}
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+				display: table-cell;
+				vertical-align: middle;
+			}
+			.mui-preview-loading {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				display: none;
+			}
+			.mui-preview-loading.mui-active {
+				display: block;
+			}
+			.mui-preview-loading .mui-spinner-white {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -25px;
+				margin-top: -25px;
+				height: 50px;
+				width: 50px;
+			}
+			.mui-preview-image img.mui-transitioning {
+				-webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+				transition: transform 0.5s ease, opacity 0.5s ease;
+			}
+			@-webkit-keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			@keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			@-webkit-keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			@keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			p img {
+				max-width: 100%;
+				height: auto;
+			}
+			
+			#serviceDesc p{
+			width:100%;
+			height:200px;
+			overflow-y:hidden;
+			margin:20px auto;
+			}
+			#btndesc{
+			width:100%;
+			margin:10px auto;
+			text-align: center;
+			display: none;
+			}
+				
+			
+			
+			
+		</style>
+
+	</head>
+
+	<body style="background-color: white;">
+		<header class="mui-bar mui-bar-nav" style="background-color: #3598DB;color: white;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+			<h1 class="mui-title" style="color: white;">服务详情</h1>
+		</header>
+		<input type="hidden" id="openid" value="${openid }"/>
+		<div class="mui-content" style="background-color: white;">
+			<div class="mui-content-padded">
+			
+				<p style="text-align: center;">${service.title }</p>
+				<p>
+					<img src="${pageContext.request.contextPath}/${service.image }" data-preview-src="" data-preview-group="1" />
+				</p>
+				<p>服务卖点</p>
+				<p id="serviceDesc">${service.serviceDesc }</p>
+				<button id="btndesc">查看更多……</button>
+				<div class="pic">市场价：<span style="color: #333333;font-size: 16px;"/>￥${service.shichangPrice }</span>
+				<div class="pic">预约价：<span style="color: red;font-size: 18px;"/>￥${service.yuyuePrice }</span>
+				<p style="text-align: right;color: red;">预约仅收${yuyueprice }元服务费</p>
+				<button type="button" onclick="btngo(${shopid},${service.id })" class="mui-btn mui-btn-primary mui-btn-block" style="margin-top: 15px;height: 10%;">立即预约</button>
+				
+			</div>
+		</div>
+	</body>
+	<script src="${pageContext.request.contextPath}/wap/js/mui.min.js"></script>
+	<script src="${pageContext.request.contextPath}/wap/js/mui.zoom.js"></script>
+	<script src="${pageContext.request.contextPath}/wap/js/mui.previewimage.js"></script>
+	<script>
+		//mui.previewImage();
+		function btngo(shopid,fuwuid)
+		{
+			//  去预约页面
+			var openid = '${openid}';
+			window.location="${pageContext.request.contextPath}/fuwuyuyue.do?p=fuwuyuyuebyid&fuwuid="+fuwuid+"&shopid="+shopid+"&openid="+openid;
+		}
+	var btn = document.getElementById('btndesc');
+	var obj = document.getElementById('serviceDesc');
+    var total_height =  obj.scrollHeight;//文章总高度
+    var show_height = 200;//定义原始显示高度
+    if(total_height>show_height){
+    btn.style.display = 'block';
+    btn.onclick = function(){
+    obj.style.height = total_height + 'px';
+    btn.style.display = 'none';
+    }
+    
+    }
+		
+		
+	</script>
+
+</html>

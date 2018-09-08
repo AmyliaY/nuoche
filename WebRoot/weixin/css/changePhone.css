@@ -1,0 +1,48 @@
+/*.mui-input-row{
+	margin-top: 26px;
+}*/
+/*.mui-input-row p{
+	position: fixed;
+	top:44px;
+	padding:3px 25px ;
+	
+}*/
+input[type=password],input[type=text]{
+	margin: 0px;
+	border: none;
+	border-bottom: 1px solid #E4E4E4;
+	padding: 25px;
+}
+
+.mui-btn{
+	margin-top: 20px;
+	padding: 15px 0px;
+	width: 100%;
+	background: #6cccca;
+	color: white;
+}
+.mui-btn:enabled:active{
+	background: red;;
+}
+#resend,#resend1{
+	position: absolute;
+	top: 8px;
+	right: 10px;
+	background: #6cccca;
+	color: white;
+}
+#resend1{
+	top: 58px;
+}
+#code button:enabled:active{
+	background: red;;
+}
+ #new img{
+ 	position: absolute;
+ 	right: 10px;
+ 	top: 50px;
+	height: 1.5em;
+	float: right;
+	width: 24px;
+	margin-top: 12px;
+}

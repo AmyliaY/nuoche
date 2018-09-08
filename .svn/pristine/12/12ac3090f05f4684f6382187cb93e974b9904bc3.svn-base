@@ -1,0 +1,268 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+
+		<link rel="stylesheet" type="text/css" href="css/zixie.css" />
+		<link rel="stylesheet" href="css/zepto.mdatetimer.css" />
+		<link rel="stylesheet" type="text/css" href="css/app.css" />
+		<script src="js/mui.min.js"></script>
+		<script src="../js/jquery-1.9.0.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</head>
+	<style>
+.mui-content .anniu {
+	width: 90%;
+	margin-left: 10%;
+	margin-top: 20px;
+}
+</style>
+	<body>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" style="display: none;">
+					<a class="mui-navigate-right"> <label>
+							商业险到期时间:
+						</label> <input type="button" id="shangye" value="请输入..." readonly /> </a>
+				</li>
+				<li class="mui-table-view-cell" style="display: none;">
+					<a class="mui-navigate-right"> <label>
+							交强险到期时间:
+						</label> <input type="button" id="jiaoqiang" value="请选择..." readonly /> </a>
+				</li>
+
+				<li class="mui-table-view-cell">
+					<a class="">
+						<div class="min_input tr0">
+							<select class="mui-btn mui-btn-block" id="dataSource">
+								<!--  
+								<option value="交强险">
+									交强险
+								</option>
+								<option value="车船税">
+									车船税
+								</option>
+								<option value="车辆损失险">
+									车辆损失险
+								</option>
+								<option value="第三者责任险">
+									第三者责任险
+								</option>
+								<option value="车上人员责任险">
+									车上人员责任险
+								</option>
+								<option value="全车盗抢险">
+									全车盗抢险
+								</option>
+								<option value="玻璃单独破碎险">
+									玻璃单独破碎险
+								</option>
+								<option value="自燃损失险">
+									自燃损失险
+								</option>
+								<option value="车身划痕险">
+									车身划痕险
+								</option>
+								-->
+							</select>
+							<button id="add" class="append_btu">
+								添加
+							</button>
+						</div> <img style="width: 100%; margin-top: -40px;" src="img/tabtop.jpg" />
+					</a>
+				</li>
+			</ul>
+
+			<div class="mui-content-padded">
+				<button type="button"
+				    id="btnSubmit"
+					class="mui-btn mui-btn-warning mui-btn-block mui-btn-outlined"
+					style="width: 100%">
+					确 认
+				</button>
+			</div>
+		</div>
+
+
+
+		<script>
+		    
+		     var all = ["交强险","车船税","车辆损失险","第三者责任险","车上人员责任险","全车盗抢险","玻璃单独破碎险","自燃损失险","车身划痕险"];
+		     var has = [];
+			 //车险险种
+			 $(function(){
+		     var url = getRootPath()+"/weixinChexian.do?p=getBaoxianInfo";
+		     var data={};
+		     var callback = function(data)
+		     {
+		         if (data=="请登录")
+		         {
+		            mui.toast("请登录先");
+		         }
+		         else
+		         {
+		            var json = eval(data);
+		            if (json.length>0)
+		            {
+		                for (var i=0;i<json.length;i++)
+		                {
+		                   var name = json[i].name;
+		                   var money = json[i].money;//保多少或人数
+		                   var nomianpei = json[i].nomianpei;//不计免赔
+		                   //var sel = document.getElementById('dataSource'),
+						   text = name;
+						   has.push(name);
+						   var id = ($(".txt_1").length) / 1;
+						   $(".min_input").parent().append('<div class="min_input tr' + id + '">' +
+							'<table id="tab">' +
+							'<tr class="trjia">' +
+							'<td  class="names" id="choosed" style="width: 60%;">' + text + '</td>' +
+							'<td style="width: 20%;height: 40px;">' +
+							'<select style="width: 75px;height: 40px;margin-left: -25%;"><option value="mon-1">10万</option>' +
+							'<option value="mon-2">20万</option>' +
+							'<option value="mon-3">30万</option>' +
+							'</select></td>' +
+							'<td style="width: 20%;">' +
+							'<div class="mui-switch mui-active" style="margin-left:3%;">' +
+							'<div class="mui-switch-handle"></div>' +
+							'</div>' +
+							'</td>' +
+							'</tr><hr style="width: 90%;margin-left: 15px;margin-top: -10px;"/>' +
+							'</table>');
+						    //<button  class="delete_btu">删除</button>
+						
+					        id += 1;
+					
+							//初始化switch开关
+							mui('.mui-switch').each(function() {
+		                    	mui(this).switch();
+		                	});
+				           };
+		                   
+		                
+		            }
+		            else
+		            {
+		               
+		            }
+		         }
+		         
+		         var dataSource =  document.getElementById("dataSource");
+		         for (var j=0;j<all.length;j++)
+		         {
+		            var exists = false;
+		            for (var k=0;k<has.length;k++)
+		            {
+		               if (has[k]==all[j])
+		               {
+		                  exists = true;
+		                  break;
+		               }
+		            }
+		            if (exists==false)
+		            {
+		               var op = new Option(all[j],all[j]);
+		               dataSource.add(op);
+		            }
+		            
+		         }
+		     };
+		     
+		     $.post(url,data,callback);
+		  
+		    });
+			
+			$("#btnSubmit").click(function(){
+			    var names = '';
+			    $(".names").each(function(i,tr){
+			       var name = tr.innerHTML;
+			       names = names+name+',';
+			    });
+			    
+			 var url = getRootPath()+"/weixinChexian.do?p=saveBaoxianInfo";
+		     var data={names:names};
+		     var callback = function(data)
+		     {
+		         if (data=="请登录")
+		         {
+		            mui.toast("请登录先");
+		         }
+			     mui.toast('成功');
+			     top.location = 'company.html'; 
+			}
+			$.post(url,data,callback);
+		  }
+		);
+			
+		    //车险险种
+			$(function() {
+				$('#add').click(function() {
+					var sel = document.getElementById('dataSource'),
+						text = sel.options[sel.selectedIndex].innerHTML;
+					var id = ($(".txt_1").length) / 1;
+					$(".min_input").parent().append('<div class="min_input tr' + id + '">' +
+						'<table id="tab">' +
+						'<tr class="trjia">' +
+						'<td class="names" id="choosed" style="width: 60%;">' + text + '</td>' +
+						'<td style="width: 20%;height: 40px;">' +
+						'<select style="width: 75px;height: 40px;margin-left: -25%;"><option value="mon-1">10万</option>' +
+						'<option value="mon-2">20万</option>' +
+						'<option value="mon-3">30万</option>' +
+						'</select></td>' +
+						'<td style="width: 20%;">' +
+						'<div class="mui-switch mui-active" style="margin-left:3%;">' +
+						'<div class="mui-switch-handle"></div>' +
+						'</div>' +
+						'</td>' +
+						'</tr><hr style="width: 90%;margin-left: 15px;margin-top: -10px;"/>' +
+						'</table>');
+					//<button  class="delete_btu">删除</button>
+					sel.removeChild(sel.options[sel.selectedIndex]);
+					if (sel.length>0)
+					  sel.selectedIndex = 0;
+					
+					    
+					id += 1;
+					
+					//初始化switch开关
+					mui('.mui-switch').each(function() {
+                    	mui(this).switch();
+                	});
+				})
+				
+				
+			});
+			
+
+			function getRootPath() {
+			//http://localhost:8083/uimcardprj/share/meun.jsp
+			var curWwwPath = window.document.location.href;
+			//uimcardprj/share/meun.jsp
+			var pathName = window.document.location.pathname;
+			var pos = curWwwPath.indexOf(pathName);
+			//http://localhost:8083
+			var localhostPaht = curWwwPath.substring(0, pos);
+			// uimcardprj
+			var projectName = pathName.substring(0, pathName.substr(1).indexOf(
+					'/') + 1);
+			if (projectName == "/admin" || projectName == "/daili"
+					|| projectName == "/weixin" || projectName == "/wap")
+				projectName = "";
+
+			return (localhostPaht + projectName);
+		 }	
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,49 @@
+		.html,
+		body {
+			background: #ffffff !important;
+		}
+	
+		.quanbu {
+			width: 100%;
+			height: 100%;
+		}
+		
+		.yi {
+			width: 100%;
+			height: 50px;
+			background-color: #33c3f7;
+		}
+		
+		.yi_ye {
+			font-size: 24px;
+			float: left;
+			margin-left: 26%;
+			margin-top: 12px;
+			color: white;
+			font-weight: bold;
+		}
+		
+		.zhong {
+			width: 100%;
+			height: 100%;
+			margin-top: 20px;
+		}
+		
+		.tu-yue {
+			width: 100%;
+			text-align: center;
+			font-family: "微软雅黑";
+			font-weight: bold;
+		}
+		.tu-yue img{
+			width:150px;
+			height:120px;
+		}
+		.tu-yue p{
+			color: #000000;
+			font-size: 18px;
+			padding-top:10px;
+		}
+		.txsz{
+			padding:0px 10px 0px 10px;
+		}

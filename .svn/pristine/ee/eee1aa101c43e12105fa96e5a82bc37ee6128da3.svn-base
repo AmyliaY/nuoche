@@ -1,0 +1,305 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+request.getSession().setAttribute("page", 0);
+String gname = request.getParameter("gttname");
+String keyword = request.getParameter("keyword");
+if (gname!=null)
+{
+  gname = new String(gname.getBytes("iso8859-1"),"utf-8");
+  pageContext.setAttribute("gttname",gname);
+}
+
+if (keyword!=null)
+{
+  keyword = new String(keyword.getBytes("iso8859-1"),"utf-8");
+  pageContext.setAttribute("keyword",keyword);
+}
+%>
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>分类</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="${pageContext.request.contextPath}/weixin/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/collection/collection.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/css/mui.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/css/gg.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/css/icons-extra.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/css/iconfont.css">
+		
+	</head>
+	<style>
+		.gli: {
+			border: 1px solid red;
+		}
+		.miaosu{
+			font-size: 11px;
+			margin-top: 6px;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			overflow: hidden;
+		}
+	</style>
+
+	<body>
+		
+		<header class="mui-bar mui-bar-nav" style="background: #FF7900;">
+			<span class="mui-icon mui-icon-arrowleft mui-action-back" style="color: white;"></span>
+			<span id="gttname" class="mui-title" style="color: white;"></span>
+		</header>
+		<div class="mui-content mui-scroll-wrapper" style="margin-top: 15px;" id="pullrefresh">
+			<div class="mui-scroll">
+				<ul id="goodslist" class="mui-table-view ">
+				
+					<!--<li>
+					<div class="mui-slider-handle collection_product">
+						<a href="javascript:void(0)">
+							<div class="collection_detail ">
+								<span id="gname" class="collection_gname ">glist[i].gname</span>
+								<span class="collection_gprice ">￥glist[i].gprice</span>
+								<span class="collection_name ">glist[i].gdetail</span>
+							</div>
+							<div class="collection_img ">
+								<img src="'+"${pageContext.request.contextPath}/"+glist[i].gimages+'" />
+							</div>
+						</a>
+					</div>
+				</li>-->
+
+				</ul>
+			</div>
+		</div>
+
+		<script src="${pageContext.request.contextPath}/weixin/js/mui.min.js"></script>
+		<!-- 
+			<script src="${pageContext.request.contextPath}/weixin/js/mui.lazyload.js"></script>
+			<script src="${pageContext.request.contextPath}/weixin/js/mui.lazyload.img.js"></script>
+			<script src="${pageContext.request.contextPath}/weixin/js/layzr.min.js" type="text/javascript" charset="utf-8"></script>
+		 -->
+	
+		<script src="${pageContext.request.contextPath}/weixin/url.js"></script>
+		<script src="${pageContext.request.contextPath}/weixin/js/jquery-1.9.0.min.js"></script>
+		
+		<script type="text/javascript">
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					up: {
+						contentrefresh: "正在加载·····",
+						auto: false,
+						callback: pullupRefresh
+					}
+				}
+			});
+			//mui(".mui-content").scroll();
+			window.onload = function (){
+			
+				pullupRefresh();
+			}
+			
+			var userid = '${userinfo.usersId}';
+			
+			  function getUrlParam (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                    if (r!= null) {
+        				 return unescape(r[2]);
+     			 	 }else{
+        			 	 return null;
+      				}
+ 		    	} 
+			
+			
+			var page = 1;
+			var size = 6;
+			//上拉加载
+			function pullupRefresh() {
+		     
+				var glist = null;
+				var count = null
+				var url = null;
+				//mui.plusReady(function() {
+					
+					//var goods = plus.webview.currentWebview();
+					var gttname = document.getElementById("gttname");
+					gttid = '${param.gttid}';
+					gttid = gttid.trim().length>0?gttid:null;
+					//关键词
+					keyword = '${keyword}';
+					//判断是从主页过来的，还是从关键词搜索过来
+					if(gttid == null && keyword != null) {
+						gttname.innerHTML = keyword + "的搜索结果";
+						url = "${pageContext.request.contextPath}/" + "appsearch.do?p=search"
+					} else {
+						gttname.innerHTML = '${gttname}';
+						url = "${pageContext.request.contextPath}/" + "goodstype.do?p=findByIdGoods&gttid=" + gttid;
+					}
+					setTimeout(function() {
+						mui.post(url, {
+								"keyword": keyword,
+								"page": page,
+								"size": size
+							},
+							function(data) {
+								var map = eval("(" + data + ")");
+								for(var key in map) {
+									if(key == "goodslist") {
+										glist = map[key];
+									}
+									if(key == "count") {
+										count = map[key];
+
+									}
+								}
+								page = page * 1 + 1; 
+
+								var goodsfragment = document.getElementById("goodslist");//document.createDocumentFragment();
+								for(var i = 0; i < glist.length; i++) {
+									
+									var goodsli = document.createElement("li");
+									goodsli.id = glist[i].gid;
+									goodsli.className = "mui-table-view-cell";
+//									goodsli.style.padding = '0px';
+									goodsli.style.paddingLeft='0px';
+									goodsli.style.paddingTop='0px';
+									goodsli.style.paddingRight='0px';
+									goodsli.style.paddingBottom='1px';
+									var state = glist[i].gstatus;
+									var jianjie = glist[i].jianjie;
+//									if(jianjie.length==0){
+//										jianjie = glist[i].gname;
+//									}
+									goodsli.setAttribute("state",state) ;
+									if(i!=glist.length-1){
+									//	alert(SERVER_URL + glist[i].gimages);
+										var button = '<button type="button" onclick="goumai(\'' + glist[i].price + '\',\'' + glist[i].userid + '\',\'' + glist[i].gid + '\',\'' + glist[i].gname + '\',\'' + "${pageContext.request.contextPath}" + glist[i].gimages + '\',\''+glist[i].gdanwei+'\')"  class="buybutton" style="margin-top:-39px;left:180px;height: 24px;line-height: 12px;text-align: center;font-size: 11px;">购&nbsp;买</button>';
+										if(state==0){
+											button = button = '<button type="button" onclick=""  class="buybutton" style="margin-top:-39px;left:180px;height: 24px;line-height: 12px;text-align: center;font-size: 11px;background:#C0C0C0	">已下架</button>';
+										}
+										goodsli.innerHTML = '<div class="mui-slider-handle collection_product"><a href="javascript:void(0)" _onclick="goodsdetail(\'' + glist[i].jianjie + '\',\'' + glist[i].gname + '\',\'' + glist[i].gprice + '\',\'' + glist[i].gvipprice + '\',\'' + "${pageContext.request.contextPath}" + glist[i].gimages + '\',\'' + 1+ '\',\'' + glist[i].gdanwei + '\',\'' + glist[i].youfei + '\',\'' + glist[i].buyCount + '\')"><div class="collection_detail"><div class="collection_detail1" style="margin-top:1px;"><span  style="color:#333333; font-size:13px;">' + glist[i].gname+ '</span><p class="miaosu">' + glist[i].jianjie+ '</p></div>' +
+										'<div class="collection_detail2"></div><div class="collection_detail3" style="margin-top:-12px"><span class="" style="color:#FF4500; font-size:18px">￥' + glist[i].price + '</span><span class=""  style="color:#999999; font-size:12px"> ' + glist[i].buyCount + '人付款</span></div><div>'+button+'</div></div>' +
+										'<div class="collection_img" style="margin-top:-1px;"><img border=0 src="' + "${pageContext.request.contextPath}" + glist[i].gimages + '" /></div></a></div>';
+									}else{
+										var button = '<button type="button" onclick="goumai(\'' + glist[i].price + '\',\'' + glist[i].userid + '\',\'' + glist[i].gid + '\',\'' + glist[i].gname + '\',\'' + "${pageContext.request.contextPath}" + glist[i].gimages + '\',\''+glist[i].gdanwei+'\')"  class="buybutton" style="margin-top:-39px;left:180px;height: 24px;line-height: 12px;text-align: center;font-size: 11px;">购&nbsp;买</button>';
+										if(state==0){
+											button = button = '<button type="button" onclick=""  class="buybutton" style="margin-top:-39px;left:180px;height: 24px;line-height: 12px;text-align: center;font-size: 11px;background:#C0C0C0	">已下架</button>';
+										}
+										goodsli.innerHTML = '<div class="mui-slider-handle collection_product"><a href="javascript:void(0)" _onclick="goodsdetail(\'' + glist[i].jianjie + '\',\'' + glist[i].gname + '\',\'' + glist[i].gprice + '\',\'' + glist[i].gvipprice + '\',\'' + "${pageContext.request.contextPath}" + glist[i].gimages + '\',\'' + 1+ '\',\'' + glist[i].gdanwei + '\',\'' + glist[i].youfei + '\',\'' + glist[i].buyCount + '\')"><div class="collection_detail" style="border-bottom: 0px solid #C8C7CC;"><div class="collection_detail1" style="margin-top:1px;"><span class=""  style="color:#333333; font-size:13px">' + glist[i].gname + '</span><p class="miaosu">' + glist[i].jianjie+ '</p></div>' +
+										'<div class="collection_detail2"></div><div class="collection_detail3" style="margin-top:-12px"><span class="" style="color:#FF4500; font-size:18px">￥' + glist[i].price + '</span><span class=""  style="color:#999999; font-size:12px"> ' + glist[i].buyCount + '人付款</span></div><div>'+button+'</div></div>' +
+										'<div class="collection_img" style="margin-top:-1px;"><img border=0 src="' + "${pageContext.request.contextPath}" + glist[i].gimages + '" /></div></a></div>';
+									}
+									
+									if(state !=2){
+										goodsfragment.appendChild(goodsli);
+									}
+									
+								}
+//								var list = document.getElementById("goodslist");
+//								list.appendChild(goodsfragment);
+
+								mui("#pullrefresh").pullRefresh().endPullupToRefresh(page > count);
+
+							/*	mui(document).imageLazyload({
+									placeholder: '${pageContext.request.contextPath}/weixin/images/timg.gif'
+								});*/
+							}
+
+						);
+					}, 1500);
+				//});
+
+			}
+			if(mui.os.plus) {
+				mui.plusReady(function() {
+					setTimeout(function() {
+						mui("#pullrefresh").pullRefresh().pullupLoading();
+					}, 1000)
+				});
+			} else {
+				mui.plusReady(function() {
+					mui("#pullrefresh").pullRefresh().pullupLoading();
+				});
+			}
+			/*
+			//进入详情页面
+			function goodsdetail(gid,gname,gprice,gvipprice,gimages,gdetail,gdanwei)
+			{
+				mui.openWindow({
+					url:'/goodsdetail/detail.html',
+					id:'detail',
+					extras:{
+						gid:gid,
+						gname:gname,
+						gprice:gprice,
+						gvipprice:gvipprice,
+						gimages:gimages,
+						gdetail:gdetail,
+						gdanwei:gdanwei
+					}
+				});
+			}*/
+			mui('.mui-content').on('tap', 'li', function(e) {
+				if(e.target.tagName=="BUTTON"){
+					$(e.target).trigger("click");
+					return false;
+				}
+				var gid = this.getAttribute("id");
+				var state = this.getAttribute("state");
+				/*mui.openWindow({
+					url: '/goodsdetail/detail.html',
+					id: '/goodsdetail/detail.html',
+					extras: {
+						gid: gid,
+						state:state
+					}
+				});*/
+				window.top.location = "${pageContext.request.contextPath}/weixin/goodsdetail/detail.jsp?gid="+gid+"&state="+state;
+			});
+			
+			function goumai(gprice,userid,gid,gname,gimages,gdanwei) {
+				if(${not empty userinfo}) {
+				//var gname = $(".goods-name").html();
+				//var gprice = $("#add-p").html();
+				//var gcount = document.getElementById("catnum").value;
+				/*
+				if (e.target.tagName=="BUTTON")
+				 {
+				 	$(e.target).trigger("click");
+				 	return false;
+				 }  */ 
+				//var gid = this.getAttribute("id");
+				/*mui.openWindow({
+					url: '${pageContext.request.contextPath}/weixin/goodsdetail/ljgm-order.html',
+					id: 'ljgm-order.html',
+					extras: {
+						userid: userid,
+						gprice: gprice,
+						gname: gname,
+						gimages: gimages.substring(gimages.indexOf("/admin")+1),
+						gid: gid,
+						gdanwei: gdanwei
+					},
+					show:
+					{
+						autoShow:true
+					}
+				});*/
+				window.top.location = "${pageContext.request.contextPath}/weixin/goodsdetail/ljgm-order.jsp?userid="+userid+"&gprice="+gprice+"&gname="+gname+"&gimages="+gimages+"&gid="+gid+"&gdanwei="+gdanwei;
+			} else {
+				location = "${pageContext.request.contextPath}/weixin/home/login.jsp";
+			}
+			}
+			
+
+			
+			
+		</script>
+	</body>
+
+</html>

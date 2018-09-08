@@ -1,0 +1,11 @@
+#goodslist{
+	margin-top: 86px;
+	
+}
+#goodslist li{
+	border-top: 1px solid #EFEFF4;
+}
+.goods-title{
+	margin-top: 15px;
+	width: 100%;
+}

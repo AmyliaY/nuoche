@@ -1,0 +1,143 @@
+/*
+添加人：王影
+时间：2016-04-21
+版本：1.0
+版权：量硕宏程投资管理（北京）有限公司
+*/
+
+@import "reset.css";
+@import "iconfont/iconfont.css";
+
+
+body{ background: #fff; line-height: 1.8; color: #323232; font-size: 0.18rem;}
+a{color: #646464; text-decoration: none;}
+i{ font-style: normal; }
+
+.clear{ clear:both; height:0px; overflow:hidden;}
+.clearfix{zoom:1;}
+.clearfix:after{clear:both; content:"."; display:block ;height:0; line-height:0; visibility:hidden; overflow:hidden;}
+.fl{ float:left;}
+.fr{ float:right;}
+
+.table_collapse{border-collapse:collapse;}
+
+.txt-nowrap{display:block; width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; /* word-break:keep-all; */}
+.txt-left{ text-align: left; }
+.txt-right{ text-align: right; }
+.txt-center{ text-align: center; }
+
+.over-hidden{ overflow: hidden; }
+.over-scroll-y{ overflow-y:scroll; }
+.over-scroll-x{ overflow-x:scroll; }
+
+.bold{ font-weight: bold; }
+.normal{ font-weight: normal; }
+.white{ color: #fff; }
+.gray{ color: #333; }
+.gray_light{ color: #646464; }
+.gray_90{ color: #909090; }
+.red{ color: #fd0000; }
+.black{ color: #000; }
+
+.pos_abs{ position: absolute; }
+.pos_rel{ position: relative; }
+.pos_fix{ position: fixed; }
+
+.bgc-opacity{ filter:Alpha(Opacity=70); Opacity:0.7; background-color:#000;}
+.bg-white{ background-color: #ffffff; }
+.bg-gray-fa{ background-color: #fafafa; }
+.bg-gray-f0{ background-color: #f0f0f0; }
+.bg-gray-f6{ background-color: #f6f6f6; }
+.bg-red{ background-color: #fe0100; }
+
+.dis_none{ display: none; }
+.dis_block{ display: block; }
+
+.vertical_top{ vertical-align: top; }
+.vertical_middle{ vertical-align: middle !important;}
+.vertical_bottom{ vertical-align: bottom; }
+
+.full_img img{ width: 100%; display: block;}
+
+.f48{ font-size: 0.48rem; }
+.f36{ font-size: 0.36rem; }
+.f34{ font-size: 0.34rem; }
+.f32{ font-size: 0.32rem; }
+.f30{ font-size: 0.30rem; }
+.f28{ font-size: 0.28rem; }
+.f26{ font-size: 0.26rem; }
+.f24{ font-size: 0.24rem; }
+.f22{ font-size: 0.22rem; }
+.f20{ font-size: 0.20rem; }
+.f18{ font-size: 0.18rem; }
+
+.mb45{ margin-bottom: 0.45rem; }
+.mb30{ margin-bottom: 0.3rem; }
+.mr40{ margin-right: 0.4rem; }
+.mr100{ margin-right: 1rem; }
+.mt5{ margin-top: 0.05rem; }
+.mt9{ margin-top: 0.09rem; }
+
+.m20{ margin: 0.2rem; }
+.mt20{ margin-top: 0.2rem; }
+.mlr20{ margin-left:0.2rem; margin-right:0.2rem;}
+
+.m10{ margin: 0.1rem; }
+.mr10{ margin-right: 0.1rem; }
+.mt10{ margin-top: 0.1rem; }
+.ml10{ margin-left: 0.1rem; }
+.mb10{ margin-bottom: 0.1rem; }
+
+.pt35{ padding-top: 0.35rem; }
+.pt25{ padding-top: 0.25rem; }
+.pt18{ padding-top: 0.18rem; }
+.pt15{ padding-top: 0.15rem; }
+.pb25{ padding-bottom: 0.25rem; }
+.pb100{padding-bottom: 1rem;}
+
+.pb5{ padding-bottom: 0.05rem; }
+.pt5{ padding-top: 0.05rem; }
+
+
+.p10{ padding: 0.1rem }
+.pt10{ padding-top: 0.1rem; }
+.pb10{ padding-bottom: 0.1rem; }
+.pl10{ padding-left: 0.1rem; }
+.pr10{ padding-right: 0.1rem; }
+
+.p20{ padding: 0.2rem; }
+.pt20{ padding-top: 0.2rem; }
+.pl20{ padding-left: 0.2rem; }
+.pr20{ padding-right: 0.2rem; }
+.pb20{ padding-bottom: 0.2rem; }
+
+.pt14{ padding-top: 0.14rem; }
+.pb14{ padding-bottom: 0.14rem; }
+
+.p0{ padding:0 !important; }
+
+
+.line_gray{ border-top: 1px solid #d5d7dc; }
+.border_bot_light{ border-bottom: 1px solid #d7d7da; }
+.border_bot_e1{ border-bottom: 1px solid #e1e1e1; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

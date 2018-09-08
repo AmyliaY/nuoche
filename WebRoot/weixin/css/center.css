@@ -1,0 +1,36 @@
+header{
+	height: 140px;
+	background: #6CCCCA;
+	opacity: 0.9;
+}
+.right{
+	position: absolute;
+	right: 5px;
+	top: 8px;
+}
+.left{
+	position: absolute;
+	left: 5px;
+	top: 8px;
+}
+.tab button{
+	color: #FFFFFF;
+	background: inherit;
+	border: none;
+	padding: 5px 15px;
+}
+.userinfo img{
+	position: absolute;
+	top: 40px;
+	left: 50%;
+	margin-left: -2em;
+	width: 4em;
+	height: 4em;
+}
+.userName{
+	width: 100%;
+	position: absolute;
+	top: 105px;
+	margin-top: 15px;
+	text-align: center; 
+}

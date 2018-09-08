@@ -1,0 +1,114 @@
+/*
+添加人：王影
+时间：2016-04-21
+版本：1.0
+版权：量硕宏程投资管理（北京）有限公司
+*/
+body {
+    display: block;
+    margin: 0px;
+    background: #EFEFF4;
+}
+.search_box {
+    padding: 7px 15px;
+    background: #6CCCCA;
+    overflow: hidden;
+    height: 44px;
+}
+.navbar {
+    text-align: center;
+    background: #FFFFFF;
+    overflow: hidden;
+}
+.navbar a {
+    display: block;
+    color: #747474;
+    float: left;
+    width: 25%;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: none;
+}
+.navbar a.active {
+    color: #6CCCCA;
+    border-bottom: 3px solid #6CCCCA;
+}
+.sort .sort_up {
+    border-bottom-color: #A0A0A0;
+}
+.search {
+    display: block;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    color: #ffffff;
+	background: none;
+    background-size: 18px;
+    text-align: center;
+}
+.variety{
+	color: #FFFFFF;
+	font-size: 15px;
+	margin-top: 8px;
+}
+.bgf1 {
+    background: #f1f1f1;
+}
+.clearPadding {
+    padding: 0;
+}
+.hot-content div.col-xs-6:nth-child(2n+1), .sale-content div.col-xs-6:nth-child(2n+1) {
+    padding-right: 5px;
+}
+.hot-content div.col-xs-6:nth-child(2n), .sale-content div.col-xs-6:nth-child(2n) {
+    padding-left: 5px;
+}
+.col-xs-6 {
+    padding-right: 0px;
+    padding-left: 0px;
+    width: 50%;
+    float: left;
+}
+.mb10 {
+    margin-bottom: 10px;
+}
+a {
+    color: #323232;
+}
+.w100 {
+    width: 100%;
+    border: 0;
+}
+.pro_detail {
+	margin-top: -7px;
+    padding: 0 5px 5px 5px;
+    background: #fff;
+}
+.pt10b3 {
+    padding-top: 10px;
+    padding-bottom: 3px;
+}
+
+.texthidden {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pro_price {
+	color: #da0505;
+	float: left;
+}
+.h20{
+	height: 20px;
+}
+b, strong {
+    font-weight: 700;
+}
+.pro_oriprice {
+    color: #828282;
+    font-size: 12px;
+    text-decoration: line-through;
+    float: right;
+}

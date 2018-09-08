@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+<!--<base href="/static_files/"/>-->
+
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<!--<meta content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;" name="viewport">-->
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="telephone=no" name="format-detection">
+<meta charset="utf-8">
+<meta name="description" content="" /><!--网站描述-->
+<meta name="keywords" content="" /><!--网站关键字-->
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0,maximum-scale=1.0"/>
+<!--width - viewport的宽度 height - viewport的高度
+initial-scale - 初始的缩放比例
+minimum-scale - 允许用户缩放到的最小比例
+maximum-scale - 允许用户缩放到的最大比例
+user-scalable - 用户是否可以手动缩放-->
+<link href="css/css.css" rel="stylesheet" type="text/css">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src = "js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src = "js/jquery.form.js"></script>
+<script type="text/javascript" src = "js/popwin.js"></script>
+
+<!--页面滚动插件-->
+<script src="js/iscroll.js"></script>
+         
+<title>卡卡挪车</title>
+
+</head>
+<body>
+
+
+
+<div id="wrapper" style="top: 0;bottom:0">
+	<ul>
+		<!--<li><img src="images/pay_banner.jpg" style="width: 100%; display: block;"></li>-->
+		
+		<li>
+			<ul class="fillList lineHeightA" style="margin-top: 0; border-top: none;">
+				<li>
+					<span class="fill_inA">购买数量：</span>
+					<span class="fill_inBs" id="totalPrice" >1  张</span>
+				</li>	
+					
+						<li><!-- 20171116 新增 -->
+							<span class="fill_inA">申领价格：</span>
+							<span class="fill_inBs" style="color: #999">51.0元</span>
+						</li>
+					
+				
+		
+				<li>
+					<span class="fill_inA">合计金额：</span>
+					<span class="fill_inBs" id="totalPrice" >51.0元</span>
+				</li>
+				<li>
+					<span class="fill_inA">获取方式：</span>
+					<span class="fill_inB">
+							<select name="getway" id="getway">
+								<option value="1">快递发货</option>	
+								<!--  
+								<option value="2">线下取货</option>	
+								-->						
+							</select>
+						</span>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<div class="con_a">
+				<a onclick="subOrder()" class="butA butRed" style="margin-top: 0;">购买</a>
+			</div>
+		</li>
+	</ul>
+</div>
+<input type="hidden" name="account" id="account" value="1"/>
+<input type="hidden" id="price" value="51.0"/>
+
+
+
+
+
+
+
+
+
+
+<!-- 确认 弹窗 -->
+<div class="pop" id="checkWin" style="display: none;">
+	<div class="popC">
+		<div class="pop_tit">操作确认</div>
+		<div class="popCC"><strong id="checkMsgTip"></strong></div>
+		<div class="popBut">
+			<a onclick="hidePopWin()">取 消</a>
+			<a id="btnCheck" class="butRed">确 认</a>
+		</div>
+	</div>
+</div>
+
+<!-- 提示 弹窗 -->
+<div class="pop" id="msgWin" style="display: none;">
+	<div class="popC">
+		<div class="pop_tit">操作提示</div>
+		<div class="popCC"><strong id="msgTip">提示语</strong></div>
+		<div class="popBut">
+			<a onclick="hidePopWin()" class="butRed">确 定</a>
+		</div>
+	</div>
+</div>
+
+<!-- loading 弹窗 -->
+<div class="pop" id="loadingWin" style="display: none;">
+	<div class="popC">
+		<div class="popCC"><strong id="loadingMsg"></strong></div>	
+	</div>
+</div>
+
+
+<div>
+	<input type="hidden" id="noncestr" value="27ba7343a1af4234be607af6fbe46502"/>
+	<input type="hidden" id="timestamp" value="1523104384"/>
+	<input type="hidden" id="sign" value="490b032a9a55f27f498ad7d3696bbbf2ffb2b632"/>
+	<input type="hidden" id="appId" value="wxfe8112ded32a6e1a"/>	
+	<input type="hidden" id="host"  value=""/>
+</div>
+
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<script type="text/javascript">
+var host = "http://kknc.wang";
+var link = host+"/attend.jsp";
+var title="51扫码隐号挪车贴";
+var desc = "保护隐私远离骚扰，千万车主都在用，速抢！";
+var sharepic =host+"/static_files/images/logo.jpg";
+var shareParams={
+	title:title,
+	desc:desc,
+	link:link,
+	sharepic:sharepic
+};
+</script>
+<script type="text/javascript" src="js/wxshare.js"></script>
+
+<script type="text/javascript">	
+
+function addAmount(){
+	var account = parseInt($("#account").val());
+	account++;
+	$("#account").val(account);
+	$("#amount_show").html(account);
+	calPrice();	
+}
+
+function minusAmount(){
+	var account = parseInt($("#account").val());
+	if(account>0){
+		account--;
+		$("#account").val(account);
+		$("#amount_show").html(account);
+		calPrice();
+	}		
+}
+
+function calPrice(){
+	var account = parseInt($("#account").val());
+	var price = parseFloat($("#price").val());
+	if(price>0){
+		//$("#price").val((price*account));
+		var tp = price*account;
+		tp = tp.toFixed(2);
+		$("#totalPrice").html(tp+"元");		
+	}
+}
+
+function subOrder(){
+	var getway = $("#getway").val();
+	if(getway=="2"){
+		showPopWin(2,"该方式只适用于线下场景，您当前是否在取货现场？");
+		$("#btnCheck").click(function(){
+			next();
+		});
+	}else{
+		next();
+	}
+}
+
+function next(){	
+	var account = parseInt($("#account").val());
+	var getway = $("#getway").val();
+	if(account<1){
+		showPopWin(1,"请确定购买数量...");
+		return;
+	}
+	showPopWin(0,"正在处理，请稍候...");
+	$.ajax({
+		url:'/pay/saveOrder.do',
+		type:'post',
+		dataType:'json',
+		data:'account='+account+"&getway="+getway,
+		success:function(jd){
+			if(jd.retcode==0){
+				showPopWin(0,"订单已生成，正前往支付页面，请稍候...");
+				if(getway=="1"){
+					window.location.replace("/pay/bindAddr.do?orderNo="+jd.retdata);
+				}else{
+					window.location.replace("/pay/chooseChannel.do");
+				}
+				
+			}else{
+				showPopWin(1,jd.retmsg);
+			}				
+		},
+		error:function(){
+			showPopWin(1,"请求提交失败，请稍后重试！");
+		}
+	});
+}
+
+</script>
+
+
+</body>
+
+</html>

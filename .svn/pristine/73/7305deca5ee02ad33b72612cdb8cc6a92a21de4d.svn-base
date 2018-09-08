@@ -1,0 +1,250 @@
+html {
+	font-size: 125%; /* 20姊�16=125% min-font-size:12px bug*/
+}
+@media only screen and (min-width: 481px) {
+html {
+	font-size: 188%!important; /* 30.08姊�16=188% */
+}
+}
+@media only screen and (min-width: 561px) {
+html {
+	font-size: 218%!important; /* 38.88姊�16=218% */
+}
+}
+@media only screen and (min-width: 641px) {
+html {
+	font-size: 250%!important; /* 40姊�16=250% */
+}
+}
+body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 1em;
+	font: inherit;
+	vertical-align: baseline;
+	font-family: "Microsoft YaHei"
+}
+body {
+	font-family: "Microsoft YaHei";
+	font-size: 0.7rem;
+	color: #333;
+	line-height: 0.7rem;
+	width: 100%;
+}
+em {
+	font-style: normal
+}
+li {
+	list-style: none
+}
+a {
+	text-decoration: none;
+	outline: 0;
+	color: #333;
+}
+img {
+	border: none;
+	vertical-align: top;
+}
+table {
+	border-collapse: collapse;
+}
+input, textarea {
+	font-family: "Microsoft YaHei";
+	padding: 0;
+}
+textarea {
+	resize: none;
+	overflow: auto;
+}
+textarea:focus {
+	outline: none;
+}
+input:focus {
+	outline: none;
+}
+.clear {
+	zoom: 1
+}
+.clear:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+.fl {
+	float: left
+}
+.fr {
+	float: right
+}
+/**鍏呭��**/
+header{
+	background: #19b5ff;
+    width: 100%;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 97;
+}
+header a{
+	color: #FFFFFF;
+}
+header ._left {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+header ._left img {
+    height: 1rem;
+    margin: 0.75rem 0 0 0.6rem;
+}
+.banner{
+	width: 100%;
+	margin-top: 2.5rem;
+	margin-bottom: 0.5rem;
+}
+.person_wallet_recharge{
+	width: 95%;
+	height: auto;
+	margin: 0 auto;
+}
+.person_wallet_recharge .ul li{
+	float: left;
+    width: 27%;
+    height: 2.2rem;
+    text-align: center;
+    border: 1px solid #CCCCCC;
+    border-radius: 0.2rem;
+    line-height: 2.2rem;
+    margin: 0px 1% 0.4rem 4%;
+    box-sizing: border-box;
+    color: #525252;
+    position: relative;
+}
+.person_wallet_recharge .sel{
+	background: url(../images/iconfont-dagouxuanzhong.png);
+	background-size: cover;
+	height: 1rem;
+    width: 1rem;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: none;
+}
+.person_wallet_recharge .ul li.current{
+	color: #ff4c4c;
+    border: #ff4c4c 1px solid;
+}
+.person_wallet_recharge .ul li:nth-child(1) .sel{
+	display: none;
+}
+.person_wallet_recharge .botton{
+	text-align: center;
+    background: #19b5ff;
+    color: #fff;
+    border-radius: 0.2rem;
+    line-height: 2.4rem;
+    height: 2.4rem;
+    width: 91%;
+    margin: 0 auto;
+    font-size: 0.85rem;
+}
+.person_wallet_recharge .pic{
+	background: #FFFFFF;
+	padding-left: 3%;
+	line-height: 2.2rem;
+	height: 2.2rem;
+	color: #333333;
+    font-size:0.75rem;
+    margin-bottom: 0.5rem;
+}
+.person_wallet_recharge .pic input{
+	border: none;
+	padding-left: 1%;
+	color: #CCCCCC;
+	font-size: 0.75rem;
+}
+.person_wallet_recharge .agreement{
+	height: 2rem;
+	padding-left: 3%;
+	line-height: 2rem;
+}
+.person_wallet_recharge .agreement p{
+	color: #CCCCCC;
+}
+.nav{
+	width:95%;
+	height: 1rem;
+	margin: 0 auto;
+	text-align: center;
+}
+.nav ul li{
+	float: left;
+	line-height: 1rem;
+	padding: 0px 4%;
+	margin: 0px 2% 0px 4%;
+	border-right:1px solid #CCCCCC;
+}
+.f-overlay{
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.5);
+	width: 100%;
+	height: 100%;
+	z-index: 99;
+	display: none;
+}
+.addvideo{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	z-index: 100;
+	background: #FFFFFF;
+}
+.addvideo h3{
+	text-align: center;
+	height: 2.2rem;
+	line-height: 2.2rem;
+	font-size: 1rem;
+	margin-bottom: 0.8rem;
+}
+.addvideo h3 span{
+	color: red;
+}
+.addvideo ul li{
+	background: #fff;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    font-size: 0.75rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 0.8rem;
+}
+.addvideo ul li a{
+	width: 90%;
+	border: 1px solid red;
+	display: block;
+	margin: 0 auto;
+	border-radius: 0.5rem;
+	color: red;
+}
+.addvideo ul li.cal{
+	background: #cccccc;
+	width: 90%;
+	margin: 0 auto 0.8rem auto;
+	color: #FFFFFF;
+}
+.layui-m-layer0 .layui-m-layerchild{
+	width: 30% !important;
+}
+.layui-m-layercont{
+	padding: 10px 20px !important;
+}

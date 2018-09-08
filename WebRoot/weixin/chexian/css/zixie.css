@@ -1,0 +1,58 @@
+.center{
+	width: 90%;
+	margin-left: 5%;
+	
+}
+
+.mui-table-view{
+	margin-top: 10px;
+}
+	
+	.ordertop span{
+		margin-left: 10px;
+	}
+	
+	#icon-email label{
+		margin-left: 110px;
+	}
+	
+	.orderbtm label{
+		margin-left: 30px;
+	}
+	.mui-btn{
+		width: 100px;
+	}
+
+#picktime{
+	border: 0px solid white;
+	margin-left: 20%;
+	margin-top: -6px;
+}
+#shangye{
+	border: 0px solid white;
+	margin-left: 20%;
+	margin-top: -5px;
+}
+#jiaoqiang{
+	border: 0px solid white;
+	margin-left: 20%;
+	margin-top: -5px;
+}
+
+.min_input select{
+	width: 70%;
+	height: 38px;
+	padding-left: 10px;
+	margin-top: 10px;
+	margin-left: 2%;
+	font-size: 12px;
+	line-height: 34px;
+	padding-top: 1px;
+}
+.append_btu{
+	margin-top: -46px;
+	margin-left: 78%;
+}
+#tab{
+	margin-left: 5%;
+}

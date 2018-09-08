@@ -1,0 +1,497 @@
+.mui-control-content {
+	background-color: white;
+	min-height: auto;
+}
+
+.mui-control-content .mui-loading {
+	margin-top: 50px;
+}
+
+#toubu {
+	background-color: #6CCCCA;
+}
+
+#toubu span {
+	color: black;
+	font-family: "微软雅黑";
+	color: #FFFFFF;
+}
+
+.fanhui {
+	width: 40px;
+	height: 35px;
+	margin-top: 5px;
+}
+
+#shopname {
+	color: black;
+}
+
+.kefu {
+	float: left;
+	width: 35px;
+	height: 35px;
+	margin-left: 300px;
+	margin-top: -33px;
+}
+
+.dingbu {
+	width: 100px;
+	height: 55px;
+}
+
+.waikuangjia {
+	width: 360px;
+	height: auto;
+	background-color: #FFFFFF;
+	margin: 0 auto;
+	border-radius: 10px 10px 0px 0px;
+	margin-top: 45px;
+	border-bottom: 1px solid #eeeff3;
+}
+
+.shoploga {
+	width: auto;
+	height: 30px;
+}
+
+.shoplogaimg {
+	width: 200px;
+	height: 200px;
+}
+
+.mingzhi {
+	color: white;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	float: left;
+	margin-left: 137px;
+	margin-top: 5px;
+}
+
+.dianpuimg {
+	width: 360px;
+	height: 150px;
+}
+
+.shoptouxiang {
+	width: 65px;
+	height: 65px;
+	background-color: darkred;
+	border-radius: 10px;
+	position: absolute;
+	margin-top: 110px;
+	margin-left: -340px;
+}
+
+.shopxinxi {
+	width: 180px;
+	height: 35px;
+	margin-left: 105px;
+	margin-top: -5px;
+}
+
+.jieshao {
+	float: left;
+	color: black;
+	font-size: 12px;
+	font-family: "微软雅黑";
+	margin-top: 15px;
+}
+
+.fenge {
+	width: 1px;
+	height: 34px;
+	background-color: #DDDDDD;
+	margin-top: -33px;
+	margin-left: 280px;
+	border-radius: 500px;
+}
+
+.dianjieshuo {
+	width: auto;
+	height: 40px;
+	background-color: #FFFFFF;
+}
+
+.divkefu {
+	width: 60px;
+	height: 30px;
+	background-color: red;
+	float: right;
+	margin-top: -32px;
+}
+
+.divkefu img {
+	margin-left: -10px;
+}
+
+.dianpukefu {
+	color: black;
+	font-size: 12px;
+	float: left;
+	font-family: "微软雅黑";
+	margin-left: 286px;
+	margin-top: -16px;
+}
+
+.daohang {
+	width: 27px;
+	height: 27px;
+	margin-left: 280px;
+	margin-top: 10px;
+}
+
+.shangdianming {
+	width: 100px;
+	height: 25px;
+	opacity: 0.7;
+	background-color: white;
+	border-radius: 5px;
+	position: absolute;
+	margin-top: -35px;
+	margin-left: 95px;
+}
+
+.shangdianming span {
+	float: left;
+	color: black;
+	font-size: 13px;
+	font-family: "微软雅黑";
+	margin: 2px 2px 2px 11px;
+}
+
+.xuanxiangka {
+	width: 360px;
+	height: 40px;
+	margin: 0 auto;
+}
+
+.chaojixuan {}
+
+.xinji {
+	float: left;
+	width: 18px;
+	height: 18px;
+	margin-top: 12px;
+}
+
+.pingfen {
+	color: black;
+	font-size: 12px;
+	font-family: "微软雅黑";
+	float: left;
+	margin-top: 15px;
+	margin-left: 5px;
+}
+
+.goodsping {
+	width: 350px;
+	height: auto;
+	margin: 0 auto;
+}
+
+.goodsyangshi {
+	float: left;
+	width: 160px;
+	height: 205px;
+	background-color: white;
+	margin-top: 10px;
+	box-shadow: 0px 3px 2px #7C7B77;
+	margin-left: 14px;
+}
+
+.goodslogos {
+	width: 160px;
+	height: 160px;
+}
+
+.goodsname {
+	color: black;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	float: left;
+	margin-left: 5px;
+}
+
+.goodsjiage {
+	color: black;
+	font-size: 15px;
+	font-family: "微软雅黑";
+	font-weight: bold;
+	color: red;
+}
+
+.goodsshichang {
+	color: #828282;
+	font-size: 13px;
+	font-family: "微软雅黑";
+	font-weight: bold;
+	margin-top: 2px;
+	margin-left: 70px;
+	text-decoration: line-through;
+}
+
+.xuanxiangkasx {
+	width: auto;
+	height: auto;
+	box-shadow: 0px 3px 2px #7C7B77;
+}
+
+.goodsnamehaha {
+	color: black;
+	font-size: 15px;
+	font-family: "微软雅黑";
+	float: left;
+	margin-left: 5px;
+}
+
+.fuwugoodsjiage {
+	color: black;
+	font-size: 15px;
+	font-family: "微软雅黑";
+	font-weight: bold;
+	color: red;
+}
+
+.fuwugoodsshichang {
+	color: #828282;
+	font-size: 13px;
+	font-family: "微软雅黑";
+	margin-left: 20px;
+}
+
+.fuwugoodsping {
+	width: 350px;
+	height: auto;
+	background-color: white;
+}
+
+.shangjiajies {
+	width: 335px;
+	height: 200px;
+	margin: 0 auto;
+}
+
+.ulyangshi {
+	list-style: none;
+	width: 300px;
+	margin-left: 30px;
+}
+
+.ulyangshi li {
+	float: left;
+	margin-left: -30px;
+	margin-top: 10px;
+}
+
+.dianhualogos {
+	float: left;
+	max-width: 30px;
+	height: 30px;
+}
+
+.shangjiaerxian {
+	float: left;
+	color: black;
+	font-family: "微软雅黑";
+	font-size: 17px;
+	margin-top: 9px;
+	margin-left: 5px;
+}
+
+.hengxian {
+	width: 322px;
+	height: 1px;
+	background-color: #828282;
+	float: left;
+	margin-top: 10px;
+}
+
+.dianhua {
+	color: black;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	float: right;
+	margin-top: -30px;
+}
+
+.text-iox {
+	width: 335px;
+	height: auto;
+	margin-top: 40px;
+	background-color: white;
+}
+
+.tuanduijianjie {
+	width: 355px;
+	height: auto;
+	margin: 0 auto;
+}
+
+.mingpian {
+	width: 335px;
+	height: 155px;
+	background-color: #FFFFFF;
+	margin-top: 10px;
+}
+
+.tuoxiangs {
+	width: 355px;
+	height: 100px;
+}
+
+.xingname {
+	color: black;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	margin-left: 25px;
+}
+
+.zhuangtai {
+	color: black;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	margin-left: 25px;
+}
+
+.jishudianhua {
+	color: black;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	margin-left: 33px;
+}
+
+.renname {
+	color: black;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	margin-left: 10px;
+}
+
+.fuwulei {
+	margin-top: 10px;
+	margin-left: -15px;
+	width: 200px;
+}
+
+.fuwulei li {
+	margin-top: 2px;
+}
+
+.fwuxijiao {
+	width: 190px;
+	margin-left: 170px;
+	margin-top: -35px;
+}
+
+.fwuxijiao li {
+	margin-top: 2px;
+	margin-left: -13px;
+}
+
+.fwuxijiao span {
+	color: black;
+	font-family: "微软雅黑";
+	font-size: 14px;
+}
+
+.goodspice {
+	width: auto;
+	height: 20px;
+	margin-top: 20px;
+}
+
+.fuwuxianq {
+	width: auto;
+	height: 20px;
+	margin-top: 20px;
+}
+
+.mui-segmented-control .mui-control-item.mui-active {
+	background-color: #6CCCCA;
+}
+
+.mui-segmented-control {
+	border: 1px solid #6CCCCA;
+}
+
+.mui-segmented-control .mui-control-item {
+	border-left: 1px solid #6CCCCA;
+	color: #6CCCCA;
+}
+
+.mui-popover {
+	width: 30%;
+	height: 20%;
+}
+
+.fenquimg {
+	width: 110px;
+	height: 100px;
+	border-radius: 10px;
+}
+
+.fenqujies {
+	position: relative;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: rgba(22, 22, 22, 0.4);
+	border-radius: 5px;
+	margin-top: -22px;
+	z-index: 99;
+	height: 18px;
+}
+
+.fuwujies {
+	color: white;
+	font-family: "微软雅黑";
+	font-size: 0.875rem;
+	font-weight: 400;
+	height: 1.225rem;
+	overflow: hidden;
+	padding-top: 0.4rem;
+	padding-left: .5rem;
+	color: rgba(255, 255, 255, 1);
+	width: 100;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.goodsfenqu {
+	width: 110px;
+	height: 100px;
+	float: left;
+	margin-left: 5px;
+	margin-top: 8px;
+}
+
+.zhanwushuju {
+	width: auto;
+	height: 50px;
+	margin: 0 auto;
+	background-color: #EFEFF4;
+}
+
+.tishis {
+	font-family: "微软雅黑";
+	font-size: 17px;
+	margin-left: 120px;
+	margin-top: 30px;
+	float: left;
+}
+
+.zhanwuimg {
+	float: left;
+	width: 130xp;
+	height: 130px;
+	margin-left: 110px;
+	margin-top: 50px;
+}
+
+.body {
+	background-color: white;
+}

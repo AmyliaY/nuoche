@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+<!--<base href="/static_files/"/>-->
+
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<!--<meta content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;" name="viewport">-->
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="telephone=no" name="format-detection">
+<meta charset="utf-8">
+<meta name="description" content="" /><!--网站描述-->
+<meta name="keywords" content="" /><!--网站关键字-->
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0,maximum-scale=1.0"/>
+<!--width - viewport的宽度 height - viewport的高度
+initial-scale - 初始的缩放比例
+minimum-scale - 允许用户缩放到的最小比例
+maximum-scale - 允许用户缩放到的最大比例
+user-scalable - 用户是否可以手动缩放-->
+<link href="css/css.css" rel="stylesheet" type="text/css">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+
+<!--页面滚动插件-->
+<script type="text/javascript" src = "js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src = "js/jquery.form.js"></script>
+<script type="text/javascript" src = "js/popwin.js"></script>
+
+<!-- 
+<script type="text/javascript" src = "js/iscroll.js"></script>
+   -->       
+<title>卡卡挪车</title>
+
+<style>
+	body{ padding:0 0 10px 0; height: 100%; box-sizing: border-box; overflow: visible;}
+	.topA{
+		position:fixed;
+		border-bottom:1px solid #eee;
+		z-index:100;
+	}
+</style>
+
+<style type="text/css">
+
+/*
+#pullUp {
+	background:#fff;
+	height:40px;
+	line-height:40px;
+	padding:5px 10px;
+	border-bottom:1px solid #ccc;
+	font-weight:bold;
+	font-size:14px;
+	color:#888;
+}
+#pullUp .pullUpIcon  {
+	display:block; float:left;
+	width:40px; height:40px;
+	background:url(pull-icon@2x.png) 0 0 no-repeat;
+	-webkit-background-size:40px 80px; background-size:40px 80px;
+	-webkit-transition-property:-webkit-transform;
+	-webkit-transition-duration:250ms;	
+}
+
+#pullUp .pullUpIcon  {
+	-webkit-transform:rotate(-180deg) translateZ(0);
+}
+
+#pullUp.flip .pullUpIcon {
+	-webkit-transform:rotate(0deg) translateZ(0);
+}
+
+#pullUp.loading .pullUpIcon {
+	background-position:0 100%;
+	-webkit-transform:rotate(0deg) translateZ(0);
+	-webkit-transition-duration:0ms;
+	-webkit-animation-name:loading;
+	-webkit-animation-duration:2s;
+	-webkit-animation-iteration-count:infinite;
+	-webkit-animation-timing-function:linear;
+}
+
+@-webkit-keyframes loading {
+	from { -webkit-transform:rotate(0deg) translateZ(0); }
+	to { -webkit-transform:rotate(360deg) translateZ(0); }
+}
+*/
+</style>
+
+</head>
+<body>
+
+<div class="EvaCT" style="position:fixed; top:0; left: 0; z-index: 100;">
+	<a onclick="list(this,-1)" class="EvaCTa">全 部</a>
+	<a onclick="list(this,1)" class="EvaCTb">挪车成功</a>
+	<a onclick="list(this,3)" class="EvaCTb">挪车结束</a>
+	<a onclick="list(this,2)" class="EvaCTb">挪车中</a>
+	<a onclick="list(this,0)" class="EvaCTb">准备挪车</a>
+</div>
+
+<div id="wrapperX" style="padding-top: 50px;">
+	<div id="scroller">
+		<ul>
+			<li>				
+				<div class="con_a">
+					<ul class="CallNub" id="moveList">
+						
+							
+								<li>
+									<img src="images/NoData.png" style="width: 100px; display: block; margin: 0 auto; padding: 20px 0;"/>			
+								</li>	
+							
+							
+						
+					</ul>			
+				</div>
+			</li>
+		</ul>
+		
+	</div>
+</div>
+
+<input type="hidden" id="pageAt" value="1"/>
+<input type="hidden" id="status" value=""/>
+
+
+
+
+
+
+
+
+
+
+<!-- 确认 弹窗 -->
+<div class="pop" id="checkWin" style="display: none;">
+	<div class="popC">
+		<div class="pop_tit">操作确认</div>
+		<div class="popCC"><strong id="checkMsgTip"></strong></div>
+		<div class="popBut">
+			<a onclick="hidePopWin()">取 消</a>
+			<a id="btnCheck" class="butRed">确 认</a>
+		</div>
+	</div>
+</div>
+
+<!-- 提示 弹窗 -->
+<div class="pop" id="msgWin" style="display: none;">
+	<div class="popC">
+		<div class="pop_tit">操作提示</div>
+		<div class="popCC"><strong id="msgTip">提示语</strong></div>
+		<div class="popBut">
+			<a onclick="hidePopWin()" class="butRed">确 定</a>
+		</div>
+	</div>
+</div>
+
+<!-- loading 弹窗 -->
+<div class="pop" id="loadingWin" style="display: none;">
+	<div class="popC">
+		<div class="popCC"><strong id="loadingMsg"></strong></div>	
+	</div>
+</div>
+
+<div>
+	<input type="hidden" id="noncestr" value="0558d6f28ef8457ea4a021130937e17f"/>
+	<input type="hidden" id="timestamp" value="1523102923"/>
+	<input type="hidden" id="sign" value="641354b64060004be9cfcff9e4291b3aa528f832"/>
+	<input type="hidden" id="appId" value="wxfe8112ded32a6e1a"/>	
+	<input type="hidden" id="host"  value=""/>
+</div>
+
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<script type="text/javascript">
+var host = "http://kknc.wang";
+var link = host+"/attend.jsp";
+var title="51扫码隐号挪车贴";
+var desc = "保护隐私远离骚扰，千万车主都在用，速抢！";
+var sharepic =host+"/static_files/images/logo.jpg";
+var shareParams={
+	title:title,
+	desc:desc,
+	link:link,
+	sharepic:sharepic
+};
+</script>
+<script type="text/javascript" src="js/wxshare.js"></script>
+
+<script type="text/javascript">
+	
+var scrollEnd = false;	
+var isready = true;
+var isAppend = 0;
+
+window.onscroll = function () {	
+	var scrollLen = getScrollTop() + getClientHeight();
+	var scrollH = getScrollHeight();
+	if (scrollLen>=scrollH) {	
+		if(!scrollEnd && isready){
+			isready = false;
+			isAppend = 1;
+			initMove();
+		}
+	}
+};
+	
+//获取滚动条当前的位置 
+function getScrollTop() { 
+	var scrollTop = 0; 
+	if (document.documentElement && document.documentElement.scrollTop) { 
+		scrollTop = document.documentElement.scrollTop; 
+	}else if (document.body) { 
+		scrollTop = document.body.scrollTop; 
+	} 
+	return scrollTop; 
+} 
+
+//获取当前可是范围的高度 
+function getClientHeight() { 
+	var clientHeight = 0; 
+	if (document.body.clientHeight && document.documentElement.clientHeight) { 
+		clientHeight = Math.min(document.body.clientHeight, document.documentElement.clientHeight); 
+	} else { 
+		clientHeight = Math.max(document.body.clientHeight, document.documentElement.clientHeight); 
+	} 
+	return clientHeight; 
+} 
+
+//获取文档完整的高度 
+function getScrollHeight() { 
+	return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight); 
+} 
+	
+</script>
+
+
+<script type="text/javascript">
+	
+	function initMove(){
+		var pageAt = $("#pageAt").val();
+		if(pageAt==""){
+			pageAt=1;
+		}else{
+			pageAt = parseInt(pageAt)+1;
+		}
+		$("#pageAt").val(pageAt);
+		//showPopWin(0,"正在加载订单数据，请稍候...");
+		var p="status="+$("#status").val()+"&pageAt="+pageAt;
+		$.ajax({
+			url:'/ucenter/mycalls/movemore.do',
+			type:'post',
+			data:p,
+			success:function(jd){
+				/*
+				if(jd!=""){
+					var size = jd.size;
+					if(size>0){
+						if(isAppend){
+							$("#moveList").append(jd.retdata);
+						}else{
+							$("#moveList").html(jd.retdata);
+						}
+						myScroll.refresh();
+						if(size>=5){
+							$("#pullUp").show();
+							loadMore = true;
+						}else{
+							$("#pullUp").hide();
+							loadMore = false;
+						}							
+					}else{
+						$("#pullUp").hide();
+						loadMore = false;
+						if(!isAppend){
+							$("#moveList").html('<li><span style=" font-size: 16px;">暂无数据</span></li>');
+						}
+					}
+				}else{
+					$("#pullUp").hide();
+					loadMore = false;
+					if(!isAppend){
+						$("#moveList").html('<li><span style=" font-size: 16px;">暂无数据</span></li>');
+					}
+				}	
+				hidePopWin();
+				*/
+				
+				if(jd.retcode=="0"){
+					var size = jd.size;
+					if(isAppend){
+						$("#moveList").append(jd.retdata);
+					}else{
+						$("#moveLi
+a7b
+st").html(jd.retdata);
+					}
+					if(size>0){
+						isready = true;	
+						scrollEnd = false;
+					}else{
+						if(isAppend==0 && pageAt==1){
+							$("#moveList").html('<li><img src="images/NoData.png" style="width: 100px; display: block; margin: 0 auto; padding: 20px 0;"/></li>');
+						}
+						scrollEnd = true;
+					}
+				}
+			},
+			error:function(){
+				showPopWin(1,"请求提交失败，请稍后重试！");
+			}
+		});
+				
+	}
+	
+	function list(alink,status){
+		alink.className="EvaCTa";
+		$(alink).siblings().removeClass("EvaCTa").addClass("EvaCTb");
+		if(status==-1){
+			$("#status").val("");
+		}else{
+			$("#status").val(status);			
+		}		
+		$("#pageAt").val("");
+		isAppend=0;
+		initMove();
+		
+	}
+	
+	function moveResp(ms,mid){
+		if(ms==0 || ms==2 || ms==3){
+			window.location.href="/ucenter/mycalls/moveDetail.do?moveId="+mid;
+		}		
+	}
+
+</script>
+
+<script type="text/javascript">
+
+/*
+var myScroll,
+	pullDownEl, pullDownOffset,
+	pullUpEl, pullUpOffset,
+	generatedCount = 0;
+
+function pullUpAction () {
+	setTimeout(function () {
+		initMove(1);			// Remember to refresh when contents are loaded (ie: on ajax completion)
+	},1000);
+}
+
+function loaded(){ 
+	pullUpEl = document.getElementById('pullUp');	
+	pullUpOffset = pullUpEl.offsetHeight;	
+	myScroll = new iScroll('wrapper', {
+		hScrollbar:false, 
+		vScrollbar:false,
+		useTransition: true,
+		topOffset: pullDownOffset,
+		onRefresh: function () {
+			pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多数据...';
+		},
+		onScrollMove: function () {
+			if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+				pullUpEl.className = 'flip';
+				pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多数据...';
+				this.maxScrollY = this.maxScrollY;
+			} else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+				pullUpEl.className = '';
+				pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多数据...';
+				this.maxScrollY = pullUpOffset;
+			}
+		},
+		onScrollEnd: function () {
+			if(pullUpEl.className.match('flip')) {
+				pullUpEl.className = 'loading';
+				pullUpEl.querySelector('.pullUpLabel').innerHTML = '数据加载中...';				
+				pullUpAction();	// Execute custom function (ajax call?)
+			}
+		}
+	});
+	
+	//setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
+}
+
+	document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+	document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
+	*/
+</script>
+
+
+
+</body>
+
+</html>
+
+0

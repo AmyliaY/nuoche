@@ -1,0 +1,236 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="${pageContext.request.contextPath}/weixin/css/mui.min.css" rel="stylesheet" />
+		<script src="${pageContext.request.contextPath}/weixin/js/mui.min.js"></script>
+		<script src="${pageContext.request.contextPath}/weixin/js/jquery-1.9.0.min.js"></script>
+		
+
+	</head>
+	<style>
+		.nav-header {
+			background-color: #000000;
+			color: white; 
+		}  
+		
+		.nav-header h1 {
+			text-align: left;
+		}
+		
+		.nav-header a {
+			color: white;
+		}
+		
+		.box-a {
+			height: 85px;
+			background-color: white;
+			padding: 20px 15px;
+			border-bottom: 1px solid #E6E6E6;
+		}
+		
+		.images1 {
+			height: 40px;
+			width: 40px;
+			float: left;
+			background-size: contain;
+		}
+		
+		#zhifubao {
+			background-image: url(${pageContext.request.contextPath}/weixin/img/center/zhifubao.png);
+		}
+		
+		#weixin {
+			background-image: url(${pageContext.request.contextPath}/weixin/img/center/weixinpay.png);
+		}
+		
+		#houtai {
+			background-image: url(${pageContext.request.contextPath}/weixin/img/center/dianpu.png);
+		}
+		
+		.info {
+			float: left;
+			width: 160px;
+			margin-left: 20px;
+		}
+		
+		.number {
+			font-size: 20px;
+			color: #FF6700;
+			margin-bottom: 5px;
+		}
+		
+		.time {
+			font-size: 14px;
+		}
+		
+		.ways {
+			float: left;
+			margin-left: 20px;
+		}
+		
+		.not-records {
+			margin-top: 180px;
+		}
+	</style>
+
+	<body>
+		<header class="mui-bar mui-bar-nav"style="background-color:#FF7900">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+			<h1 class="mui-title"style="color: white;">充值记录</h1>
+		</header>
+		
+		<div class="mui-content" id='records-div'>
+
+		</div>
+		<div style="height: 40px; padding-top: 5px;" id="cc"></div>
+		<script type="text/javascript">
+						mui.init({
+							//上拉加载
+							pullRefresh: {
+			
+								container: "#cc", //待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+								up: {
+									height: 50, // 触发上拉加载拖动距离
+									auto: false, // 自动上拉加载一次
+									contentrefresh: "加载中", // 正在加载状态时，上拉加载控件上显示的标题内容
+									contentnomore: '没有更多数据了', // 请求完毕若没有更多数据时显示的提醒内容；
+									callback: function() {
+										var self = this; // 这里的this == mui('#refreshCo${userinfo.usersId}					loadMore(this);
+									}
+								}
+							}
+						});
+			var userid = '${userinfo.usersId}';
+			//当前页数
+			var page = 1;
+			//得到充值记录
+			//mui.plusReady(function() {
+				//var user = plus.webview.currentWebview();
+				mui.ajax("${pageContext.request.contextPath}/" + 'apprecharge.do?p=fenye&id=' + userid + '&page=' + page, {
+					type: 'post',
+					timeout: 30000,
+					success: function(data) {
+						var recordsList = eval("(" + data + ")");
+						if(recordsList == 0) {
+							var div = document.createElement("div");
+							div.className = "not-records";
+							var str = '<div style="width: 120px; margin: auto;"><img src="${pageContext.request.contextPath}/weixin/img/center/not-records.png" style="width: 100%;"/></div><p style="text-align: center;line-height: 38px;">您还没有相关的充值记录</p>';
+							div.innerHTML = str;
+							$("#records-div").append(div);
+						} else {
+							//初始化上拉加载
+							mui.init({
+								//上拉加载
+								pullRefresh: {
+
+									container: "#cc", //待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+									up: {
+										height: 50, // 触发上拉加载拖动距离
+										auto: false, // 自动上拉加载一次
+										contentrefresh: "加载中", // 正在加载状态时，上拉加载控件上显示的标题内容
+										contentnomore: '没有更多数据了', // 请求完毕若没有更多数据时显示的提醒内容；
+										callback: function() {
+											var self = this; // 这里的this == mui('#refreshContainer').pullRefresh()
+											loadMore(this);
+										}
+									}
+								}
+							});
+							getRecords(recordsList);
+						}
+					}
+				})
+			//})
+			//添加数据到页面
+			function getRecords(recordsList) {
+				var flagment = document.createDocumentFragment();
+				if(recordsList.length > 0) {
+					for(var i = 0; i < recordsList.length; i++) {
+						var div = document.createElement("div");
+						div.className = "box-a";
+						if(recordsList[i].prType == 1) {
+							var str = '<div class="images1" id="zhifubao"></div> <div class = "info" ><p class="number">' + recordsList[i].prMoney + '+' + recordsList[i].prPresent + '积分</p> <p class = "time" > ' + recordsList[i].prTime +
+								' </p> </div> <div class = "ways " ><p style="margin-bottom:5px;">来源</p> <p > 支付宝充值 </p> </div>';
+						} else if(recordsList[i].prType == 2) {
+							var str = '<div class="images1" id="weixin"></div> <div class = "info" ><p class="number">' + recordsList[i].prMoney + '+' + recordsList[i].prPresent + '积分</p> <p class = "time" > ' + recordsList[i].prTime +
+								' </p> </div> <div class = "ways " ><p style="margin-bottom:5px;">来源</p> <p > 微信充值 </p> </div>';
+						} else if(recordsList[i].prType == 3) {
+							var str = '<div class="images1" id="houtai"></div> <div class = "info" ><p class="number">' + recordsList[i].prMoney + '+' + recordsList[i].prPresent + '积分</p> <p class = "time" > ' + recordsList[i].prTime +
+								' </p> </div> <div class = "ways " ><p style="margin-bottom:5px;">来源</p> <p > 后台充值 </p> </div>';
+						}
+
+						div.innerHTML = str;
+						flagment.appendChild(div);
+					}
+
+				}
+
+				$("#records-div").append(flagment);
+			}
+
+			// 加载更多的内容到列表中
+			var loadMore = function(pullRefresh) {
+				page = page + 1;
+				mui.ajax("${pageContext.request.contextPath}/" + 'apprecharge.do?p=fenye&id=' + userid + '&page=' + page, {
+					type: 'post',
+					timeout: 30000,
+					success: function(data) {
+						var recordsList = eval("(" + data + ")");
+						//查出数据,显示可继续刷新
+						if(recordsList.length > 0) {
+							getRecords(recordsList);
+							pullRefresh.endPullupToRefresh(false);
+						}
+						//无更多数据，显示没有更多数据了
+						else {
+							pullRefresh.endPullupToRefresh(true);
+						}
+					}
+				})
+			};
+			//下拉刷新
+			var _self;
+			if(window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener("plusready", function() {
+					plusReady();
+				}, false);
+			}
+
+			function plusReady() {
+				_self = plus.webview.currentWebview();
+				_self.setPullToRefresh({
+					support: true,
+					height: '45px',
+					range: '100px',
+					style: 'circle',
+					offset: '50px'
+				}, pulldownRefresh);
+			}
+
+			//下拉刷新具体业务实现
+
+			function pulldownRefresh() {
+				setTimeout(function() {
+					location.reload();
+					_self.endPullToRefresh();
+				}, 500);
+			}
+		</script>
+	</body>
+
+	</script>
+	</body>
+
+</html>

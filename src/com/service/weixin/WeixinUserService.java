@@ -1,0 +1,203 @@
+package com.service.weixin;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import weixin.popular.bean.User;
+
+import com.dao.HqlDAO;
+import com.dao.UserinfoDAO;
+import com.dao.WeixinUserDAO;
+import com.pojo.Userinfo;
+import com.pojo.WeixinUser;
+
+@Service
+public class WeixinUserService {
+	
+	@Autowired
+	private WeixinUserDAO  weixinUserDAO;
+	
+	@Autowired
+	private HqlDAO hqlDAO;
+	
+	@Autowired
+	private UserinfoDAO  userinfoDAO;
+	
+	public void quxiaoSubscribe(User user)
+	{
+		if(user==null || user.getOpenid()==null){
+			return ;
+		}
+		
+		String hql = "from WeixinUser where openid=?";
+		List<WeixinUser> list  =hqlDAO.pageQuery(hql, 1,1, user.getOpenid());
+		WeixinUser weixinuser = null;
+		if (list.size()>0)
+		{ 
+			weixinuser = list.get(0);
+		}
+		//判断
+		if(weixinuser==null)
+			return ;
+		
+		weixinuser.setStatus((short)0);
+		weixinUserDAO.merge(weixinuser);
+	}
+	
+	/**
+	 * 更新用户信息
+	 * @param user
+	 * @throws UnsupportedEncodingException 
+	 */
+	public void addUser(User user) throws UnsupportedEncodingException{
+		if(user==null || user.getOpenid()==null){
+			return ;
+		}
+		
+		String hql = "from WeixinUser where openid=?";
+		List<WeixinUser> list  =hqlDAO.pageQuery(hql, 1,1, user.getOpenid());
+		WeixinUser weixinuser = null;
+		if (list.size()>0)
+		{
+			weixinuser = list.get(0);
+		}
+		//判断
+		if(weixinuser==null){
+			//新建
+			weixinuser = new WeixinUser();
+			weixinuser.setOpenid(user.getOpenid());
+			weixinuser.setHeadimage(user.getHeadimgurl());
+			weixinuser.setNickname(URLEncoder.encode(user.getNickname(), "utf-8"));
+			weixinuser.setStatus((short)(int) user.getSubscribe());
+			//设置id，此id用来标识openid
+			String hqlsum="select max(tjr) from WeixinUser";
+			List maxtjr= hqlDAO.query(hqlsum);
+			if(maxtjr.size()>0){
+				Integer maxtjr2 = (Integer)maxtjr.get(0);
+				if(maxtjr2==null){
+					weixinuser.setTjr(1);
+				}else{
+					weixinuser.setTjr(maxtjr2+1);
+				}
+			}
+			weixinUserDAO.merge(weixinuser);
+			return;
+		}
+		else if (weixinuser.getTjr()==null)
+		{
+			//设置id，此id用来标识openid
+			String hqlsum="select max(tjr) from WeixinUser";
+			List maxtjr= hqlDAO.query(hqlsum);
+			if(maxtjr.size()>0){
+				Integer maxtjr2 = (Integer)maxtjr.get(0);
+				if(maxtjr2==null){
+					weixinuser.setTjr(1);
+				}else{
+					weixinuser.setTjr(maxtjr2+1);
+				}
+			}
+		}
+		//更新用户信息
+		weixinuser.setHeadimage(user.getHeadimgurl());
+		weixinuser.setNickname(user.getNickname());
+		weixinuser.setOpenid(user.getOpenid());
+		weixinuser.setStatus((short)(int) user.getSubscribe());
+		weixinUserDAO.merge(weixinuser);
+	}
+
+	public void setTuijianren(String tjr, User user) {
+		if(user==null || user.getOpenid()==null){
+			return ;
+		}
+		String hql = "from WeixinUser where openid=?";
+		List<WeixinUser> list  =hqlDAO.pageQuery(hql, 1,1, user.getOpenid());
+		WeixinUser weixinuser = null;
+		if (list.size()>0)
+		{
+			//得到当前用户
+			weixinuser = list.get(0);
+			//tjr 推荐人id，int类型，唯一标识openid
+			//查出推荐人
+			List listtjr = weixinUserDAO.findByTjr(Integer.parseInt(tjr));
+			WeixinUser tuijianren = null;
+			if(listtjr.size() > 0){
+				tuijianren = (WeixinUser)listtjr.get(0);
+				//设置当前用户的推荐人
+				weixinuser.setTuijianren(tuijianren.getOpenid());
+			}
+		}
+		
+		
+	}
+
+	/**
+	 * 根据open查用户
+	 * @param openid
+	 * @return
+	 */
+	public WeixinUser findbyOpenId(String openid) {
+		// TODO Auto-generated method stub
+		try {
+			return weixinUserDAO.findById(openid);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 添加微信用户
+	 * @param weixinuser
+	 */
+	public void addWeixinUser(WeixinUser weixinuser) {
+		
+		weixinUserDAO.save(weixinuser);
+	}
+
+	/**
+	 * 添加用户
+	 * @param weixinuser
+	 * @return
+	 */
+	public Userinfo addUserinfo(WeixinUser weixinuser) {
+		Userinfo user = new Userinfo();
+		//user.setUsersPhone(mobile);
+		//user.setUsersPassword(password);
+		// 设置默认设定值
+		user.setUsersName(weixinuser.getNickname());// 用户名
+		user.setUsersArea("");// 设置区县
+		user.setUsersStatus(1);// 设置状态为启用
+		//user.setUsersGender(1);// 设置用户性别为男
+
+		Date date = new Date();
+		Timestamp time = new Timestamp(date.getTime());
+		user.setUsersCreatetime(time);// 用户注册时间
+		user.setUsersIntegral(0.0);// 设置用户默认积分为0
+		user.setUsersType(0);// 设置用户为普通会员
+		user.setUsersPaypwd("111111");
+		
+
+		if (weixinuser != null) {
+			weixinuser.setUserinfo(user);
+		}
+		
+		userinfoDAO.save(user);
+		return user;
+	}
+
+	public Userinfo getUserInfoByWeixin(WeixinUser weixinuser) {
+		String hql = "from Userinfo u join fetch u.weixinusers w where w.openid=?";
+		List list = hqlDAO.pageQuery(hql, 1, 1, weixinuser.getOpenid());
+		if (list.size()>0)
+			return (Userinfo) list.get(0);
+		return null;
+	}
+
+}

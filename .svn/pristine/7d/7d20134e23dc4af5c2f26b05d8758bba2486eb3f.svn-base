@@ -1,0 +1,41 @@
+.duanduirenyuan {
+	width: auto;
+	height: auto;
+}
+
+.zhuanjia {
+	width: auto;
+	height: 25px;
+	margin-top: 45px;
+}
+
+.zhuanjia span {
+	color: black;
+	font-family: "微软雅黑";
+	font-size: 17px;
+	margin-left: 153px;
+}
+
+.tanduitupian {
+	width: auto;
+	height: 300px;
+}
+
+#shopname {
+	. font-size: 25px;
+	float: left;
+	margin-left: 120px;
+	margin-top: 13px;
+}
+
+.tanduitupian img {
+	width: 360px;
+	height: 280px;
+}
+
+.jieshouo {
+	width: 360px;
+	height: auto;
+	margin: 0 auto;
+	font-family: "微软雅黑";
+}

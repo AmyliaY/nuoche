@@ -1,0 +1,203 @@
+body {
+	font-family: "微软雅黑";
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #000;
+	background-color: #efeff4;
+	-webkit-overflow-scrolling: touch;
+}
+
+.mui-bar {
+	padding-left: initial;
+	padding-right: initial;
+	box-shadow: none;
+}
+
+.mui-bar-nav {
+	box-shadow: none;
+}
+
+.image_back {
+	width: 28px;
+	height: 28;
+	margin-top: 8px;
+	margin-right: 15px;
+	margin-left: 5px;
+}
+
+header a {
+	text-decoration: none;
+}
+
+header h1 span img {
+	width: 20px;
+	height: 25px;
+	margin-left: -5px;
+}
+
+
+/*去掉header中的下边的框的虚影*/
+
+.mui-content {
+	background-color: #F0F0F0;
+}
+
+.warp {
+	padding-top: 1.5rem;
+	padding-bottom: 1.9rem;
+}
+
+.warptwo {
+	padding-bottom: 3.7rem;
+}
+
+.warpthree {
+	padding-bottom: 0;
+}
+
+.clearfloat:after {
+	display: block;
+	clear: both;
+	content: "";
+	visibility: hidden;
+	height: 0
+}
+
+.clearfloat {
+	zoom: 1
+}
+
+.h-topone {
+	width: 100%;
+	text-align: center;
+	padding: 3% 5% 5%;
+}
+
+.h-top {
+	width: 100%;
+	background-color: #6CCCCA;
+	padding: 10% 5%;
+}
+
+.h-topone p {
+	font-size: 3rem;
+	color: #fff;
+}
+
+p {
+	margin-top: 0;
+	color: #8f8f94;
+}
+
+.h-topone p samp {
+	font-size: 0.45rem;
+	font-family: 微软雅黑;
+}
+
+.h-topone span {
+	font-size: 1.00rem;
+	/*  .45   */
+	color: #fff;
+}
+
+.clearfloat:after {
+	display: block;
+	clear: both;
+	content: "";
+	visibility: hidden;
+	height: 0;
+}
+
+.recharge {
+	width: 100%;
+}
+
+.recharge .guize {
+	width: 96%;
+	margin: 3% auto;
+	background-color: #fff;
+	border: 1px solid #e1e1e1;
+	padding: 0 3%;
+}
+
+.ra3 {
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.recharge .guize .content {
+	padding: 5% 0;
+	color: #666666;
+	font-size: 0.8rem;
+	line-height: 1.3rem;
+	text-indent: 2em;
+}
+
+.recharge .bottom {
+	width: 100%;
+	`
+}
+
+.ra3 {
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.db {
+	display: block;
+}
+
+.fl {
+	float: left;
+	display: inline;
+}
+
+a {
+	text-decoration: none;
+	color: #007aff;
+}
+
+a {
+	background: 0 0;
+}
+
+a,
+button,
+textarea,
+select {
+	-webkit-appearance: none;
+	-webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+}
+
+a {
+	text-decoration: none;
+	outline: none;
+}
+
+.recharge .bottom .btn:last-child {
+	color: #000000;
+	font-family: "楷体";
+}
+
+.recharge .bottom .btn {
+	width: 48%;
+	text-align: center;
+	height: 2.5rem;
+	line-height: 2.5rem;
+	background-color: #FFFFFF;
+	font-size: 1.2rem;
+	color: #000000;
+	font-family: "楷体";
+	border-bottom: 1px solid #CCCCCC;
+	text-align: left;
+}
+
+.ra3 {
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.fr {
+	float: right;
+	display: inline;
+}

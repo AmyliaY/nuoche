@@ -1,0 +1,79 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的推荐人</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script src="../url.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-1.9.0.min.js"></script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background: #ff7900;">
+			<span class="mui-icon mui-icon-arrowleft mui-action-back" id="back" style="color: white;"></span>
+			<span class="mui-title" style="color: white;">我的推荐人</span>
+		</header>
+		<form class="mui-input-group" style="margin-top: 45px; color: #8F8F94;">
+			<div class="mui-input-row">
+				<label>昵称</label>
+				<div class="mui-media-body" style="margin-top: 7px;">
+					<p class='mui-ellipsis' style="padding-top: 5px;" id="name"></p>
+				</div>
+			</div>
+			<div class="mui-input-row">
+				<label>手机号</label>
+				<div class="mui-media-body" style="margin-top: 7px;">
+					<p class='mui-ellipsis' style="padding-top: 5px;" id="phone"></p>
+				</div>
+			</div>
+
+		</form>
+		<div class="mui-button-row">
+			<button type="button" class="mui-btn" style="margin-top:15px;background-color: #ff7900; color: white;" id="updateButton" >修改推荐人</button>
+		</div>
+	</body>
+	
+	<script>
+		
+		mui.init();
+		var userid='${userinfo.usersId}';
+		mui.plusReady(function(){
+			mui.ajax(SERVER_URL+'appuserinfo.do?p=getMytuijianren&userid='+userid,{
+				type:'post',
+				timeout:30000,
+				success:function(data){
+					var map=eval("("+data+")");
+					if(map.list.length==0){
+						mui.openWindow({
+							url: 'addtuijianren.html',
+							extras: {
+							}
+						});
+					}
+					
+					document.getElementById('name').innerText=map.list[0].usersName;
+					document.getElementById('phone').innerText=map.list[0].usersPhone;
+				}
+			});
+		});
+		$("#updateButton").click(function(){
+			var usersPhone=document.getElementById('phone').innerText;
+			mui.openWindow({
+				id: 'updtuijianren.html',
+				url: 'updtuijianren.html',
+				extras: {
+					userid:userid,
+					usersPhone:usersPhone
+				}
+			});
+		});
+	</script>
+</html>

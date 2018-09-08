@@ -1,0 +1,141 @@
+<%@page import="com.util.URLManager"%>
+<%@page import="weixin.popular.util.JSSDKUtil"%>
+<%@page import="weixin.popular.api.QrcodeAPI"%>
+<%@page import="weixin.popular.bean.QrcodeTicket"%>
+<%@page import="com.listener.WeixinGetAccessTokenListen"%>
+<%@page import="com.pojo.WeixinUser"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE HTML>
+
+<html lang="zh-CN">
+<head>
+<link href="${pageContext.request.contextPath }/weixin/css/css.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/weixin/css/style.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/weixin/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/weixin/css/font-awesome.css" rel="stylesheet" type="text/css">
+<!--<base href="/static_files/"/>-->
+
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<!--<meta content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;" name="viewport">--><!--禁用其缩放（zooming）功能-->
+
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="telephone=no" name="format-detection">
+<meta charset="utf-8">
+<meta name="description" content="" /><!--网站描述-->
+<meta name="keywords" content="" /><!--网站关键字-->
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0,maximum-scale=1.0"/>
+<!--width - viewport的宽度 height - viewport的高度
+initial-scale - 初始的缩放比例
+minimum-scale - 允许用户缩放到的最小比例
+maximum-scale - 允许用户缩放到的最大比例
+user-scalable - 用户是否可以手动缩放-->
+
+
+<script type="text/javascript" src = "js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src = "js/jquery.form.js"></script>
+<script type="text/javascript" src = "js/popwin.js"></script>
+
+
+
+
+
+<!--页面滚动插件-->
+
+         
+<title>卡卡挪车</title>
+
+</head>
+
+
+<body style="background-color: #d0f4fa; height: 100%; position: relative; background-position: bottom center; background-size: 100% auto; background-repeat: no-repeat;">
+	<ul>
+	
+		<%
+		    WeixinUser weixinUser = (WeixinUser)session.getAttribute("weixinUser");
+		    if (weixinUser==null)
+		    {
+		       out.println("请登录");
+		       return;
+		    }
+		    
+		    JSSDKUtil.setJsSdkParam(request);
+		
+		    QrcodeAPI qrcodeAPI = new QrcodeAPI();
+		    QrcodeTicket qrcodeTicket = qrcodeAPI.qrcodeCreateTemp(WeixinGetAccessTokenListen.access_token,1800, weixinUser.getTjr().intValue());
+		    String ticket = qrcodeTicket.getTicket();
+		    String url = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket="+ticket;
+		    
+		%>
+	
+		<li>
+			<img src="<%=url%>" style="width: 300px; display: block; margin: 80px auto 20px; box-shadow: 0 0 6px #94E6F3;">
+		</li>
+		<li> 个人邀请二维码</li>
+		<li> 将此二维码分享给他人可以赚取佣金哦！</li>
+	</ul>
+	
+	<script src="${pageContext.request.contextPath}/weixin/js/mui.min.js"></script>
+	<script src="${pageContext.request.contextPath}/weixin/js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/weixin/js/jquery.qrcode.min.js"></script>
+	<script type="text/javascript"
+			src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+		
+	<script>
+	
+		
+		wx.config({
+			    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+			    appId: '${appId}', // 必填，公众号的唯一标识
+			    timestamp:'${timestamp}' , // 必填，生成签名的时间戳
+			    nonceStr: '${nonceStr}', // 必填，生成签名的随机串
+			    signature: '${signature}',// 必填，签名，见附录1
+			    jsApiList: ["chooseImage","onMenuShareTimeline","onMenuShareAppMessage","onMenuShareQQ","onMenuShareWeibo","onMenuShareQZone"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+             });
+             
+              wx.ready(
+              function(){
+	             var memid='${memid}';
+	             var dd='<%=URLManager.getServerURL(request)%>/weixin/myExtention2.jsp?tuiguangren=<%= weixinUser.getTjr().intValue() %>';
+	             var tubiao='<%=URLManager.getServerURL(request)%>/weixin/weixinImage/weixin.jpg';
+	             var ds=' 个人邀请二维码';
+	             var tit= '将此二维码分享给他人可以赚取佣金哦！'
+	             wx.onMenuShareAppMessage({
+				    title:tit, // 分享标题
+				    desc:ds, // 分享描述
+				    link: dd, // 分享链接
+				    imgUrl: tubiao, // 分享图标
+				    type: '', // 分享类型,music、video或link，不填默认为link
+				    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+				    success: function () { 
+				        // 用户确认分享后执行的回调函数
+				    },
+				    cancel: function () { 
+				        // 用户取消分享后执行的回调函数
+				    }
+	             }); 
+
+				wx.onMenuShareTimeline({
+			    title:tit, // 分享标题
+			    link:dd, // 分享链接
+			    imgUrl:tubiao, // 分享图标
+			    success: function () { 
+			        // 用户确认分享后执行的回调函数
+			    },
+			    cancel: function () { 
+			        // 用户取消分享后执行的回调函数
+			    }
+                  });
+           
+
+                 // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+              }
+              );
+		
+		
+	</script>
+	
+</body>
+
+</html>

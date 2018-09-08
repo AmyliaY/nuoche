@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+<!--<base href="/static_files/"/>-->
+
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<!--<meta content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;" name="viewport">-->
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="telephone=no" name="format-detection">
+<meta charset="utf-8">
+<meta name="description" content="" /><!--网站描述-->
+<meta name="keywords" content="" /><!--网站关键字-->
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0,maximum-scale=1.0"/>
+<!--width - viewport的宽度 height - viewport的高度
+initial-scale - 初始的缩放比例
+minimum-scale - 允许用户缩放到的最小比例
+maximum-scale - 允许用户缩放到的最大比例
+user-scalable - 用户是否可以手动缩放-->
+<link href="css/css.css" rel="stylesheet" type="text/css">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+
+<!--页面滚动插件-->
+<script src="js/iscroll.js"></script>
+
+<script type="text/javascript" src = "js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src = "js/jquery.form.js"></script>
+<script type="text/javascript" src = "js/popwin.js"></script>
+         
+<title>卡卡挪车</title>
+
+</head>
+<body>
+
+<div id="wrapper" style="top: 0;bottom:0">
+	<ul>
+		<li class="paymentIngT"><i class="fa fa-shopping-cart" aria-hidden="true"></i> 等待买家付款</li>
+		<li class="paymentA">
+			<span>
+				<strong style="width: 50%;">ashangsb</strong>
+				<strong style="width: 50%;">18299887654</strong>
+				<strong style="width: 100%;">北京 北京 北京 dsfsdfsdsdf</strong>
+			</span>
+		</li>
+		<li class="paymentB">
+			<img src="images/main_20.jpg">
+		    <div class="paymentBT">
+		    	<div class="paymentBTa">卡卡挪车二维码车贴，保护亿万车主隐私</div>
+		    	<div class="paymentBTb">
+		    	    <span>¥ 51.0</span>
+		    	    <strong>×1</strong>
+		    	</div>
+		    </div>
+		</li>
+		<li>			
+			<ul class="pay_txt">
+				<!--  <li>运费<span>¥ 0.00</span></li>-->
+						<!--  <li>购物优惠<span>－¥ 0.00</span></li>-->
+				<li style="font-size: 16px;">实付款<span><strong>¥ 51.0</strong></span></li>
+			</ul>
+			<div class="pay_txt" style="color: #999;">
+				车贴编号： <br />
+			</div>
+			<div class="pay_txt" style="color: #999;">
+				订单编号：  512018040720402168428<br />创建时间： 2018-04-07  20:40:21
+			</div>
+			<div class="pay_txt" style="color: #999;">
+				支付方式： 
+						
+						微信支付
+						 
+			</div>
+		</li>
+		<li class="butB">
+			<a onclick="cancelOrder('512018040720402168428')" class="butGray">取消订单</a>
+			<a id="btnPay" class="butBlue" style="float: right;">付 款</a>
+		</li>
+
+	</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- 确认 弹窗 -->
+<div class="pop" id="checkWin" style="display: none;">
+	<div class="popC">
+		<div class="pop_tit">操作确认</div>
+		<div class="popCC"><strong id="checkMsgTip"></strong></div>
+		<div class="popBut">
+			<a onclick="hidePopWin()">取 消</a>
+			<a id="btnCheck" class="butRed">确 认</a>
+		</div>
+	</div>
+</div>
+
+<!-- 提示 弹窗 -->
+<div class="pop" id="msgWin" style="display: none;">
+	<div class="popC">
+		<div class="pop_tit">操作提示</div>
+		<div class="popCC"><strong id="msgTip">提示语</strong></div>
+		<div class="popBut">
+			<a onclick="hidePopWin()" class="butRed">确 定</a>
+		</div>
+	</div>
+</div>
+
+<!-- loading 弹窗 -->
+<div class="pop" id="loadingWin" style="display: none;">
+	<div class="popC">
+		<div class="popCC"><strong id="loadingMsg"></strong></div>	
+	</div>
+</div>
+
+
+<div>
+	<input type="hidden" id="noncestr" value="ba6f567f73b84c39a3ca00530a83cdc5"/>
+	<input type="hidden" id="timestamp" value="1523105217"/>
+	<input type="hidden" id="sign" value="9f1e37f32aa7355c75363738dd9adc110941be4f"/>
+	<input type="hidden" id="appId" value="wxfe8112ded32a6e1a"/>	
+	<input type="hidden" id="host"  value=""/>
+</div>
+
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<script type="text/javascript">
+var host = "http://kknc.wang";
+var link = host+"/attend.jsp";
+var title="51扫码隐号挪车贴";
+var desc = "保护隐私远离骚扰，千万车主都在用，速抢！";
+var sharepic =host+"/static_files/images/logo.jpg";
+var shareParams={
+	title:title,
+	desc:desc,
+	link:link,
+	sharepic:sharepic
+};
+</script>
+<script type="text/javascript" src="js/wxshare.js"></script>
+
+ <input type="hidden" value="5100" id="orderPrice" />
+ <input type="hidden" value="2" id="payway" />
+    
+ <input type="hidden" value="01c0e2c26fae46e3adaa56d379e754b6" id="pay_noncestr" />
+ <input type="hidden" value="1f9b5b3da8e472de18e7c39ae68f8268" id="pay_sign" />
+ <input type="hidden" value="1523105217" id="pay_timestamp" />
+ <input type="hidden" value="prepay_id=wx072046570607250a5e6b52411787268562" id="pay_package" />
+ 
+ <script type="text/javascript">
+      	
+ 	    var payBtn = document.getElementById("btnPay");
+		var noncestr = document.getElementById("noncestr").value;
+   		var signature = document.getElementById("sign").value;
+   		var timestamp = document.getElementById("timestamp").value;
+   		var appId = document.getElementById("appId").value;
+   		var payway =  document.getElementById("payway").value;
+	   	wx.config({
+	   		debug:false,
+	   		appId:appId,
+	   		timestamp:timestamp,
+	   		nonceStr:noncestr,
+	   		signature:signature,
+	   		jsApiList:['chooseWXPay']
+	   	});   
+
+		payBtn.onclick=function(){	
+			if(orderPrice=="" || orderPrice=="0"){
+				//无需支付
+				window.location.replace("/pay/freePay.do");
+			}else{
+				if(payway=="2"){
+					var orderPrice = $("#orderPrice").val();
+					showPopWin(0,"正在处理，请稍候...");
+					if(orderPrice=="" || orderPrice=="0"){
+						//无需支付
+						window.location.replace("/pay/freePay.do");
+					}else{
+						var pay_noncestr = document.getElementById("pay_noncestr").value;
+						var pay_signature = document.getElementById("pay_sign").value;
+						var pay_timestamp = document.getElementById("pay_timestamp").value;		
+						var packageValue = document.getElementById("pay_package").value;  				
+						window.setTimeout("hidePopWin()",1000); 
+						wx.chooseWXPay({
+						    timestamp: pay_timestamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+						    nonceStr: pay_noncestr, // 支付签名随机串，不长于 32 位
+						    package: packageValue, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+						    signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+						    paySign: pay_signature, // 支付签名
+						    success: function (res) {
+						        if(res.errMsg=="chooseWXPay:ok"){
+						        	window.location.replace("/pay/success.do");
+						        }else{
+						        	showPopWin(1,"非常抱歉，支付功能暂时不能使用！");				        	
+									return;
+						        }
+						    }
+						});  
+					}
+				}else{
+					showPopWin(0,"正在处理，请稍候...");
+					$.ajax({
+						url:'/pay/pointPay.do',
+						type:'post',
+						dataType:'json',
+						data:'',
+						success:function(jd){
+							showPopWin(0,"支付成功！");
+							window.location.replace('/pay/success.do');
+						},
+						error:function(){
+							showPopWin(1,"请求提交失败，请稍后重试！");
+						}
+					});
+				}
+			}
+	   	}
+   	
+	  	wx.error(function(res){       	
+	  		//alert(res.errMsg);
+	  	});
+   
+	  	function cancelOrder(ono){		
+			showPopWin(0,"正在处理，请稍候...");
+			var p="oid="+ono;
+			$.ajax({
+				url:'/ucenter/myorder/cancel.do',
+				type:'post',
+				dataType:'json',
+				data:'oid='+ono,
+				success:function(jd){
+					showPopWin(0,"订单已取消，正在刷新订单数据...");
+					window.location.replace('/ucenter/myorder/list.do');
+				},
+				error:function(){
+					showPopWin(1,"请求提交失败，请稍后重试！");
+				}
+			});
+		}
+ </script>
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+</html>
+

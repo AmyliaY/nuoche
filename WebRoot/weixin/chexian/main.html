@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>卡卡挪车</title>
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0"> 
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		
+		<script src="js/mui.min.js"></script>
+		<script src="../js/jquery-1.9.0.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			mui.init();
+			$(function(){
+			
+			    var order = getUrlParam('order');
+				if (order==1)
+				{
+				   $("#segmentedControl>a:first").removeClass("mui-active");
+				   $("#segmentedControl>a:last").addClass("mui-active");
+				   $("#item1").removeClass("mui-active");
+				   $("#item2").addClass("mui-active");
+				}
+				else
+				{
+				   $("#segmentedControl>a:last").removeClass("mui-active");
+				   $("#segmentedControl>a:first").addClass("mui-active");
+				   $("#item2").removeClass("mui-active");
+				   $("#item1").addClass("mui-active");
+				}
+			});
+			
+			// 获取url中的参数
+			function getUrlParam (name) {
+			     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+			     var r = window.location.search.substr(1).match(reg);
+			     if (r!= null) {
+			        return unescape(r[2]);
+			     }else{
+			        return null;
+			     }
+			}  
+
+		</script>
+	
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color: #ff7900;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+			<h1 class="mui-title" style="color: white;">卡卡车险</h1>
+		</header>
+		
+		<div class="mui-content">
+	   <div style="padding: 10px 10px;">
+			<div id="segmentedControl" class="mui-segmented-control">
+				<a class="mui-control-item mui-active" href="#item1">车辆投保</a>
+				<a class="mui-control-item" href="#item2" >我的订单</a>
+			</div>
+		</div>
+		<div id="item1" class="mui-control-content mui-active">
+			<iframe width="100%" height="500px" style="border: 0px;" src="toubao.html"></iframe>
+		</div>
+		<div id="item2" class="mui-control-content">
+			<iframe width="100%" height="500px" style="border: 0px;" src="dingdan.html"></iframe>
+		</div>
+	</div>
+		
+	</body>
+
+</html>

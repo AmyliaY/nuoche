@@ -1,0 +1,186 @@
+#order_dizhi{
+	margin-bottom: 10px;
+	background-color: white;
+	height: 90px;
+	padding: 0px 10px 85px;
+	line-height: 90px;
+	font-size: 14px;
+}#order_dizhi li{
+	float: left;
+}
+.box-b {
+	margin-top: 10px;
+}
+.box-b p {
+	height: 35px;
+	line-height: 35px;
+	padding-right: 5px;
+	font-size: 12px;
+	color: #000000;
+	background: #fff;
+	margin: 0;
+}
+
+.box-b-1 {
+	overflow: hidden;
+	background: white;
+	margin-top: 2%;
+	border-bottom: 2px solid whitesmoke;
+}
+
+.box-b-1-l {
+	float: left;
+	width: 26%;
+	padding: 0 2%;
+}
+
+.box-b-1-l img {
+	width: 100%;
+	height: 70px;
+}
+
+.box-b-1-r {
+	width: 74%;
+	height: 20px;
+	float: left;
+	
+}
+
+.box-b-1-r p {
+	text-align: left;
+	width: 75%;
+	line-height: 18px;
+	float: left;
+	color: #020202;
+	background: none;
+}
+.order_extra{
+	background-color: white;
+	border-bottom: 1px solid #f6f6f6;
+	font-size: 15px;
+	height: 50px;
+	padding:0px 10px;
+	line-height: 50px;
+}
+.order_extra span{
+	float: right;
+}
+.settlement {
+	width: 100%;
+	height: 1rem;
+	border-top: 1px solid white;
+}
+.clearfloat::after {
+	display: block;
+	clear: both;
+	content: "";
+	visibility: hidden;
+	height: 0;
+}
+.settlement .zuo {
+    width: 60%;
+    height: 1.0rem;
+    line-height: 1.0rem;
+    padding: 0 .5rem;
+    font-size: .25rem;
+    color: #666666;
+}
+.box-s {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.clearfloat {
+    zoom: 1;
+}
+.fl {
+    float: left;
+    display: inline;
+}
+.settlement a {
+    width: 40%;
+    height: 1.0rem;
+    line-height: 1.0rem;
+    background-color: #FF7900;
+    font-size: .28rem;
+    color: #fff;
+    text-align: center;
+}
+.db {
+    display: block;
+}
+.fl {
+    float: left;
+    display: inline;
+}
+a {
+    text-decoration: none;
+}
+.move_box{
+	width:100%;
+	overflow:hidden;
+}
+.move{ 
+	width:200%; 
+	position:relative;
+}
+.coupon_box{
+	width:50%; 
+	float:left;
+}
+.coupon{ 
+	width:92%; 
+	margin-left:4%; 
+	margin-top:14px; 
+	height:74px;
+}
+.coupon_num{ 
+	width:33%; 
+	height:74px; 
+	line-height:74px; 
+	text-align:center; 
+	background-color:#ff7f00; 
+	float:left; 
+	color:white; 
+	font-size:33px;
+}
+.coupon_text{ 
+	float:left; 
+	position:relative; 
+	width:67%; 
+	height:74px; 
+	background-color:#fff; 
+	padding-left:5%; 
+	padding-top:14px; 
+	box-sizing:border-box;
+}
+.coupon_text h1{ 
+	line-height:26px; 
+	font-size:18px; 
+	color:#65646b;
+}
+.coupon_text span{ 
+	line-height:26px; 
+	font-size:18px; 
+	color:#c40000;
+}
+.coupon_text h2{ 
+	line-height:21px; 
+	font-size:12px; 
+	color:#65646b;
+}
+.coupon_text p{ 
+	line-height:24px; 
+	font-size:12px; 
+	color:#ff7f00; 
+	position:absolute;
+	top:0;right:10px;
+}
+.overdue .coupon_num{
+	background-color:#b2bab8;
+}
+.overdue .coupon_text span,.overdue .coupon_text h1,.overdue .coupon_text h2,.overdue .coupon_text p{
+	color:#b2bab8;
+}
+.move_box{
+	margin-top: 50px;
+}

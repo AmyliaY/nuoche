@@ -1,0 +1,196 @@
+body{background: #EEEEEE}
+.top{
+    width:100%;
+    height:44px;
+    line-height: 44px;
+    background: #6cccca;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    overflow: hidden;
+    padding: 0 15px;
+    position:fixed;
+    top:0;
+    z-index: 10;
+}
+.top .back{
+    display: block;
+    float: left;
+    width:15px;
+    height:44px;
+    background: url(../images/back.png) no-repeat  center;
+    background-size: 15px 20px;
+}
+.top span{
+    position: relative;
+    left: 5px;
+}
+.top .edit{
+    float: right;
+    display: block;
+    color: #fff;
+}
+
+.main{
+    margin:44px 0 95px;
+}
+.product {
+    margin-bottom: 10px;
+}
+.title{
+    height:40px;
+    line-height: 40px;
+    border-top: 1px solid #EEEEEE;
+    background: #fff url("../images/kongbai.png") no-repeat 10px center;
+    background-size: 20px 20px;
+    padding-left: 38px;
+}
+.title.select{
+    background: #fff url("../images/xuan1.png") no-repeat 10px center;
+    background-size: 20px 20px;
+}
+.commodity_box{
+    width:100%;
+    position: relative;
+}
+.commodity{
+    /*width:100%;*/
+    border-top: 1px solid #EEEEEE;
+    font-size: 12px;
+    padding: 10px 0 15px 38px;
+    overflow: hidden;
+    background: #fff url("../images/kongbai.png") no-repeat 10px center;
+    background-size: 20px 20px;
+    position: relative;
+    right:0;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+}
+.commodity.select{
+    background: #fff url("../images/xuan1.png") no-repeat 10px center;
+    background-size: 20px 20px;
+}
+.commodity .img{
+    width:30%;
+}
+.commodity .img img{
+    display: block;
+    width:100%;
+    height:90px;
+}
+.commodity .detail{
+    width:70%;
+    padding: 0 7px;
+}
+.jieshao{
+    width:100%;
+    height:48px;
+    overflow: hidden;
+}
+.size{
+    width:100%;
+    height:18px;
+    line-height: 18px;
+    overflow: hidden;
+    color: #CCCCCC;
+}
+.price_num{
+    overflow: hidden;
+    margin-right: 5px;
+}
+.price{
+    height: 24px;
+    line-height: 35px;
+    color: #DD0707;
+    font:14px "Microsoft yahei",Arial;
+}
+.num{
+    overflow: hidden;
+}
+.num span{
+    text-align: center;
+    line-height: 22px;
+}
+.num button,.num span{
+    float: left;
+    width:24px;
+    height:24px;
+    border: 1px solid #DFDFDF;
+    background: #fff;
+}
+.del{
+    width: 60px;
+    height: 115px;
+    color: #fff;
+    background: #FF3B30;
+    line-height: 90px;
+    text-align: center;
+    position: absolute;
+    right: -60px;
+    top: 1px;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+}
+.pay{
+    display: none;
+    overflow: hidden;
+    position: fixed;
+    z-index: 1;
+    bottom: 55px;
+    width:100%;
+    height: 40px;
+    line-height: 40px;
+}
+.pay p,.pay a{
+    display: block;
+    float: left;
+}
+.pay p{
+    background: #fff;
+    padding-left: 10px;
+    border-top: 1px solid #EEEEEE;
+    font:14px "Microsoft yahei",Arial;
+    height:40px;
+    line-height: 40px;
+}
+.pay p span{
+    color: #DD0707;
+}
+.pay a{
+    width:80px;
+    background: #FF3B30;
+    color: #fff;
+    text-align: center;
+}
+.empty{
+    display: none;
+    margin-top: 55px;
+
+}
+.empty img{
+    display: block;
+    width:120px;
+    height:120px;
+    margin: 20px auto;
+}
+.empty p{
+    text-align: center;
+}
+.sle{
+    height:30px;
+    line-height: 30px;
+    font-size: 12px;
+    color: #969696;
+}
+.empty a{
+    display: block;
+    width:115px;
+    height:30px;
+    line-height: 28px;
+    background: #FDE3E3;
+    color: #ED3036;
+    border:1px solid #ED3036;
+    text-align: center;
+    margin:10px auto;
+    border-radius: 5px;
+}

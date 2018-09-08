@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+ 
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0"> 
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/zixie.css" />
+		<link rel="stylesheet" type="text/css" href="css/app.css"/>
+	     <script src="../js/jquery-1.9.0.min.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		
+	</head>
+		<style>
+			.xinxi{
+				font-size: 11px;
+			}
+		</style>
+	<body>
+		
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" style="">
+					<a class="mui-navigate-right" href="index.html" target="_top">
+						<label class="xinxi">姓名：<span id='xm'>程先生</span></label>
+						<label class="xinxi">身份证号:<span id='sfz'>430223199702121517</span></label>
+						<label class="xinxi">车牌号：<span id='cph'>湘A123456</span></label>
+					</a>
+				</li>
+			</ul>
+			
+			<ul id="dingdan" class="mui-table-view">
+			</ul>
+			
+		</div>
+		<script>
+		      $(function(){
+		     var url = getRootPath()+"/weixinChexian.do?p=getCheInfo";
+		     var data={};
+		     var callback = function(data)
+		     {
+		         if (data=="请登录")
+		         {
+		            mui.toast("请登录先");
+		            return false;
+		         }
+		         else
+		         {
+		            var json = eval(data);
+		            if (json.length>0)
+		            {
+		              var o = json[0];
+		              $("#xm").html(o.name);
+		              $("#cph").html(o.cepai);
+		              $("#sfz").html(o.sfz);
+		              
+		            }
+		         }
+		     };
+		     
+		     $.post(url,data,callback);
+		  
+		  });
+		
+			 /*$( function() {
+				for (var i=1;i<2;i++) {
+					var testdiv = document.getElementById("dingdan");
+  					testdiv.innerHTML +='<li class="mui-table-view-cell">'
+									+'<a class="ordertop" href="###">'
+									+'<img src="img/logo-pa.png" style="width: 50px;height: 20px;" />'
+									+'<label>中国平安</label>'
+									+'</a>'
+									//+'</li>'
+									//+'<li class="mui-table-view-cell">'
+									+'<a id="icon-email" href="###" style="height: 40px;" >'
+									+'<span>合计：</span>'
+									+'<span style="color: red;">2269.36元</span>'
+									+'<button type="button" class="mui-btn mui-btn-danger mui-btn-block">确认核保</button>'
+									+'</a>'
+									+'<li style="background-color: lavender;height:10px;"></li>'
+								+'</li>';
+				}
+			} );*/
+			
+			
+			$(function(){
+		     var url = getRootPath()+"/weixinChexian.do?p=getBaoxianBaodanGonshi";
+		     var data={};
+		     var callback = function(data)
+		     {
+		         
+		         if (data=="请登录")
+		         {
+		            mui.toast("请登录先");
+		         }
+		         else
+		         {
+		            var json = eval(data);
+		            if (json.length>0)
+		            {
+		                   var testdiv = document.getElementById("dingdan");
+		                   var str = '';
+		                 for (var i=0;i<json.length;i++)
+		                 {
+		                    var id =    json[i].id;
+		                    var name = json[i].baoxianGonshi.name;
+		                    var logo = json[i].baoxianGonshi.logo;
+		                     var str1 = json[i].status==0 ?'等待报价' : json[i].money;
+		                     var str2 = json[i].status==1 ? '<button onclick="go('+id+')" type="button" style="margin-top:-5px;height:40px;line-height:20px;" class="mui-btn mui-btn-danger mui-btn-block">确认核保</button>' : '';
+  					         str = str +'<li class="mui-table-view-cell">'
+									+'<a class="ordertop" href="###">'
+									+'<img src="'+(getRootPath()+'/'+logo)+'" style="width: 50px;height: 20px;" />'
+									+'<label>'+name+'</label>'
+									+'</a>'
+									//+'</li>'
+									//+'<li class="mui-table-view-cell">'
+									+'<a id="icon-email" href="###" style="height: 40px;" >'
+									+'<span>合计：</span>'
+									+'<span style="color: red;">'+str1+'</span>'
+									+ str2
+									+'</a>'
+									+'<li style="background-color: lavender;height:10px;"></li>'
+								+'</li>';
+		                    
+		                 }
+		                 testdiv.innerHTML = str;
+		            }
+		         }
+		     };
+		     
+		     $.post(url,data,callback);
+		  
+		  });
+			
+			
+			
+			function getRootPath() {
+			//http://localhost:8083/uimcardprj/share/meun.jsp
+			var curWwwPath = window.document.location.href;
+			//uimcardprj/share/meun.jsp
+			var pathName = window.document.location.pathname;
+			var pos = curWwwPath.indexOf(pathName);
+			//http://localhost:8083
+			var localhostPaht = curWwwPath.substring(0, pos);
+			// uimcardprj
+			var projectName = pathName.substring(0, pathName.substr(1).indexOf(
+					'/') + 1);
+			if (projectName == "/admin" || projectName == "/daili"
+					|| projectName == "/weixin" || projectName == "/wap")
+				projectName = "";
+
+			return (localhostPaht + projectName);
+		  }	
+		  
+		  function go(id)
+		  {
+		     top.location = getRootPath()+'/weixinChexian.do?p=toPay&id='+id;
+		  }
+		</script>
+	</body>
+
+</html>

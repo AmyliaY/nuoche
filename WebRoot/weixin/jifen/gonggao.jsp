@@ -1,0 +1,214 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!doctype html>
+<html>
+	
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="${pageContext.request.contextPath}/weixin/css/mui.min.css" rel="stylesheet" />
+		<script src="${pageContext.request.contextPath}/weixin/js/mui.min.js"></script>
+		<script src="${pageContext.request.contextPath}/weixin/js/jquery-1.9.0.min.jrl.js"></script>
+	</head>
+	<style>
+		.system_notice {
+			width: 100%;
+			height: 140px;
+			margin: 0px auto;
+			margin-top: 10px;
+			background: white;
+		}
+		.title{
+			color: #696969;
+			height: 18px;
+			margin-top: 3px;
+			line-height: 18px;
+			font-size: 16px;
+		}
+		.notice_info {
+			width: 100%;
+			height: 60px;
+			border-bottom: 1px solid #F8F8F8;
+			padding: 5px 15px 0px 15px;
+			background-color: white;
+			margin-top: 4px;
+		}
+		.notice_info h2 {
+			   font-size: 18px;
+		/*		 padding-bottom: 3%;*/
+				 font-family: 幼圆;
+				 font-weight: 700;
+				 color: #696969;
+		}
+		.notice_author,.notice_date {
+			font-size: 13px;
+			padding-right: 5px;
+			color: silver;
+			font-family: "黑体";
+		}
+		.notice_content {
+			text-indent: 2em;
+			background-color: white;
+			padding: 5px 15px 0px 15px;
+			width: 100%;
+			height: 75px;
+			margin-bottom: 10px;
+			letter-spacing:2px;
+		    line-height: 2;
+			color: #484234;
+		}
+		.notice_content_info {
+			width: 100%;
+			height: 100%;
+			display: block;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			line-height: 24px;
+			background-color: white;
+		    font-size: 16px;
+		    font-family: "微软雅黑";
+		    letter-spacing:1px;
+		    color: #484234;
+			
+		}
+		.nav-header {
+			background-color: #000000;
+			color: white;
+		}
+		.nav-header h1 {
+			text-align: left;
+		}
+		.nav-header a {
+			color: white;
+		}
+		.box-a {
+			overflow: hidden;
+			background-color: #fff;
+			position: fixed;
+			z-index: 10;
+			right: 0;
+			left: 0;
+		}
+		.box-a-1 {
+			width: 21%;
+			display: inline-block;
+			float: left;
+			text-align: center;
+			height: 40px;
+			line-height: 40px;
+			color: #666;
+			font-size: 14px;
+			margin: auto 2%;
+		}
+		#box-a-1 {
+			color: #ff6700;
+			border-bottom: 2px solid #FF6700;
+		}
+		.kong {
+			height: 38px;
+		}
+		#noGonggao{
+			text-align: center;
+			margin-top: 150px;
+			display: none;
+		}
+	</style>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background: #ff7900;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+			<span class="mui-title" style="color: white;">系统公告</span>
+		</header>
+
+		<div class="mui-content">
+			<div class="box-a">
+				<a class="box-a-1" id='box-a-1' onclick="notice(1)">公司政策</a>
+				<a class="box-a-1" id='box-a-2' onclick="notice(2)">新品通知</a>
+				<a class="box-a-1" id='box-a-3' onclick="notice(3)">促销通知</a>
+				<a class="box-a-1" id='box-a-4' onclick="notice(4)">特价通知</a>
+			</div>
+			<div class="kong"></div>
+			<div id="notice">
+						<!--<div class="notice_info">
+							<h2>公告标题</h2>
+							<span class="notice_author">大耳朵</span>
+							<span class="notice_date" style="float:right;">2017年5月6日</span>
+						</div>
+					
+						<div class="notice_content">
+							<span class="notice_content_info">我是BOSS大魔王,叱咤六界 ,风靡全宇宙,号称妇女杀手的无敌万人迷</span>
+						</div>						-->
+			</div>
+		</div>
+		<div id="noGonggao">
+				<img width="200px" height="200px" src="../images/fenxiao_none.png" />
+				<p  style="font-size: 30px; ">暂无公告</p>
+		</div>
+		<script>
+			mui.init();
+			/*mui.plusReady(function(){
+				notice(1);
+			});*/
+			window.onload = function (){
+				notice(1);				
+			}
+			function notice(notype){
+				document.getElementById("notice").innerHTML="";
+				var chebox=document.getElementById("box-a-"+notype);
+				var box=document.getElementsByClassName("box-a-1");
+				for(var i=0;i<box.length;i++){
+					box[i].style.borderBottom="hidden";
+					box[i].style.color="#000000";
+				}
+				chebox.style.color="#ff6700";
+				chebox.style.borderBottom="2px solid #FF6700";
+				
+				mui.ajax("${pageContext.request.contextPath}/"+'apptnotice.do?p=getByNotype&notype='+notype,{
+					type:"post",
+					timeout:30000,
+					success:function(data){
+						var map=eval("("+data+")");
+						if(map.list.length>0){
+						for(var i=0;i<map.list.length;i++){
+							var str='<div onclick="detail('+map.list[i].noId+')">'+
+							        '<div class="notice_info" >'+
+										'<h2>'+map.list[i].noTitle+'</h2>'+
+										'<span class="notice_author">'+map.list[i].admin.adminName+'</span>'+
+										'<span class="notice_date" style="float:right;">'+map.list[i].noTime+'</span>'+
+									'</div>'+
+									'<div class="notice_content">'+
+										'<span class="notice_content_info">'+map.list[i].noContent+'</span>'+
+									'</div>'+
+									'</div>';
+							
+							document.getElementById("notice").innerHTML+=str;
+							$("#noGonggao").css('display','none');
+						}
+						}else{
+							$("#noGonggao").css('display','block');
+						}
+					}
+				});
+			}
+			function detail(noId){
+				
+			  window.top.location="${pageContext.request.contextPath}/weixin/center/messagedetail.jsp?mid="+1+"&noid="+noId;	
+			  
+				/*mui.openWindow({
+					url:'/center/messagedetail.html',
+					id:'messagedetail.html',
+					extras:{
+						mid:1,
+						noid:noId
+					}
+				});*/
+			}
+		</script>
+	</body>
+
+</html>

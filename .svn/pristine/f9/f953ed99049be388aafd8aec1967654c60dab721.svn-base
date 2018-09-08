@@ -1,0 +1,83 @@
+body{
+	height: 100%;
+	overflow: hidden;
+}
+.mui-bar {
+	padding-left: initial;
+	padding-right: initial;
+	background-color: #FFFFFF;
+}
+/*去掉header中的下边的框的虚影*/
+.mui-bar-nav{
+	color: #FF4683;
+}
+.mui-bar-nav {
+	box-shadow: none;
+}
+#remind{
+	padding: 0 !important;
+	height: 50px;
+	margin-top: 30px; 
+	color: #AEAEAE;
+	text-align: left;
+}
+#remind label{
+	width: 140px !important;
+	float: left;
+	text-align: left;
+}
+#remind .mynum{
+	float: left;
+	margin-right: 10px;
+	padding: auto;
+}
+#remind .container{
+	margin-top: 2px;
+	float: left;
+}
+#code{
+	height: 40px;
+	border:0.5px solid gainsboro;
+	border-bottom: 1px solid #D7D7DC ;
+	
+}
+#code1{
+	height: 40px;
+	border:0.5px solid gainsboro;
+	border-bottom: 1px solid #D7D7DC ;
+	
+}
+#code label{
+	height: 40px !important;
+	width: 40px !important;
+	font-size: 20px;
+}
+#code1 label{
+	height: 40px !important;
+	width: 40px !important;
+	font-size: 20px;
+}
+#phone{
+	height: 40px;
+	float: left;
+	font-size: 15px;
+}
+#yzm{
+	height: 40px;
+	float: left;
+	font-size: 15px;
+}
+#btn_next{
+	font-size: 16px;
+	color: white; 
+	height: 40px;
+	width: 100%;
+	background-color: #FF6826;
+}
+#reSend{
+	font-size: 16px;
+	color: white; 
+	height: 40px;
+	width: 100%;
+	background-color: #FF6826;
+}

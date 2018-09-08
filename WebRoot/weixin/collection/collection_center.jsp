@@ -1,0 +1,386 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+//session.setAttribute("page", 2);
+%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="collection.css">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/css/mui.min.css">
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/weixin/css/app.css" />
+		<script src="${pageContext.request.contextPath}/weixin/js/jquery-1.9.0.min.js"></script>
+		
+		<script src="${pageContext.request.contextPath}/weixin/shuaxin.js"></script>
+		<script src="${pageContext.request.contextPath}/weixin/layer/layer.js"></script>
+		<title>收藏</title>
+	</head> 
+	<style type="text/css">
+		.jianjieha{
+			 color:#999999;
+			 font-size:11px;
+			 line-height:15px;
+			 display: -webkit-box;
+			 -webkit-box-orient: vertical;
+			 -webkit-line-clamp: 2;
+			 overflow: hidden;
+		}
+	</style>
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background: #FF7900;">
+			<span class="mui-title" style="color: white;">我的收藏</span>
+		</header>
+		
+		<div id="pullrefresh" class="mui-scroll-wrapper mui-content">
+			<div class="mui-scroll">
+			<ul id="OA_task_1" class="mui-table-view" style="margin-top: 15px;padding: 5px;">
+		
+			</ul>
+		</div>  
+		</div>  
+		<script src="${pageContext.request.contextPath}/weixin/js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				keyEventBind: {
+				backbutton: false
+			},
+				pullRefresh: {
+					container: '#pullrefresh', //待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+					up: {
+						contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+						contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						callback: pullupRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					}
+				}
+			});
+			
+			 window.addEventListener("showMsg",function(e){
+			
+			     layer.open({
+							content: '<div style="height:100%;width:100%"><div><img src="${pageContext.request.contextPath}/weixin/images/jnweb-kulian.png" width="30px" height="30px" style="margin-top:-10px"/></div>再按一次退出！</div>',
+							time: 1
+						});
+		  })
+			var page=1;
+			window.addEventListener('userinfo',function(e){
+				shuaxin();
+			});
+			
+			var userid='${userinfo.usersId}';
+			//mui.plusReady(function(){
+			window.onload = function (){
+				if(userid==null || userid=="")
+				{
+					document.getElementById("OA_task_1").innerHTML=img;
+				}else{
+					mui.post("${pageContext.request.contextPath}/"+'appgoods.do?p=getAllCollection',{
+						userid:userid,
+						page:1
+					},
+					function(data)
+					{
+						if(data=="请先登录")
+						{
+							document.getElementById("OA_task_1").innerHTML=img;
+							return;
+						}
+						getAllCollection(data);
+					}
+					);
+				}
+			}
+			//});
+			var img = '<div style="text-align: center; line-height: 200px; height: 100px; margin-top: 120px;">' +
+			'<span style="text-align: center; margin-top: 25px;color: darkslategrey;">暂未登录</span>' +
+			'</div>' +
+			'<div class="mui-content" style="text-align:center;background-color: white;">' +
+			'<div class="mui-content-padded" >' +
+			'<a href="#">' +
+			'<input type="button" class="mui-btn mui-btn-primary mui-icon" style="width:160px;height:40px;margin-top:60px;background-color: #FF7900;color:white" value="请&nbsp;先&nbsp;登&nbsp;录" onclick="goLogin()"></input>' +
+			'</a>' +
+			'</div>' + 
+			'</div>';
+			img.id="noCollection"; 
+			//显示会员收藏的商品
+			var gid=null;
+			var gname=null;
+			var gprice=null;
+			var gvipprice=null;
+			var gkucun=null;
+			var gimages=null;
+			var coid=null;
+			
+			function pullupRefresh(){
+					page+=1;
+				mui.get("${pageContext.request.contextPath}/" + "appgoods.do?p=getAllCollection&page="+page+"&userid="+userid,function (data){
+					var coll = eval("( " + data + ")");
+					//如果没有数据就返回
+					if(coll.length==0){
+						page-=1;
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh((true));
+						return;
+					}
+					var collfragment=document.createDocumentFragment();
+					for (var i=0;i<coll.length;i++) {
+						var li=document.createElement("li");
+						li.className="mui-table-view-cell";
+						li.id=coll[i].coId;
+						//li.style.padding="0px";
+						li.style.paddingLeft='0px';
+						li.style.paddingTop='0px';
+						li.style.paddingRight='0px';
+						li.style.paddingBottom='1px';
+						li.innerHTML=
+							'<div id="del'+coll[i].coId+'"  class="mui-slider-right mui-disabled " ><a class="mui-btn mui-btn-red ">取消收藏</a></div>'+
+							'<div id="url'+coll[i].coId+'" class="mui-slider-handle mui-table collection_product clickme" >'+
+							'<div class="collection_detail" ><div class="collection_detail1"><span style="color:#333333; font-size:13px">'+coll[i].goods.gname+'</span><p   class="jianjieha">'+coll[i].goods.jianjie+'</p></div><div class="collection_detail2"></div><div  class="collection_detail3"><span style="color:#FF4500; font-size:18px">￥'+coll[i].goods.price+'</span><span style="color:#999999; font-size:12px"> ' + coll[i].goods.buyCount + '人付款</span></div><button type="button" onclick="goumai(\'' + coll[i].goods.price + '\',\'' + coll[i].goods.userid + '\',\'' + coll[i].goods.gid + '\',\'' + coll[i].goods.gname + '\',\'' + "${pageContext.request.contextPath}/" + coll[i].goods.gimages + '\',\''+coll[i].goods.gdanwei+'\')"  class="buybutton" style="margin-top:-39px;left:180px;">购买</button></div>'+
+							'<div class="collection_img "><img src="'+"${pageContext.request.contextPath}"+coll[i].goods.gimages+'" /></div></div>';
+						collfragment.appendChild(li);
+						$("#OA_task_1").append(collfragment); 
+						coid=coll[i].coId
+						gid=coll[i].goods.gid;
+						gname=coll[i].goods.gname;
+						gprice=coll[i].goods.gprice;
+						gvipprice=coll[i].goods.gvipprice;
+						gkucun=coll[i].goods.gkucun;
+						gimages="${pageContext.request.contextPath}"+coll[i].goods.gimages;
+						var a=document.getElementById("url"+coid);
+						var b=document.getElementById("del"+coid);
+						//解决闭包问题
+						bd1(a,gid,gname,gprice,gvipprice,gkucun,gimages);
+						bd2(b,coid);
+					}
+					if(coll.length<8){
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh((true));
+						return;
+					}
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((false));
+				})
+			}
+			
+			function getAllCollection(data)
+			{
+				var coll=eval("("+data+")");
+				var collfragment=document.createDocumentFragment();
+				if(coll.length>0){
+				for (var i=0;i<coll.length;i++) {
+					var li=document.createElement("li");
+					li.className="mui-table-view-cell";
+					li.id=coll[i].coId;
+					//li.style.padding="0px";
+					li.style.paddingLeft='0px';
+					li.style.paddingTop='0px';
+					li.style.paddingRight='0px';
+					li.style.paddingBottom='1px';
+					li.innerHTML=
+							'<div id="del'+coll[i].coId+'"  class="mui-slider-right mui-disabled " ><a class="mui-btn mui-btn-red ">取消收藏</a></div>'+
+							'<div id="url'+coll[i].coId+'" class="mui-slider-handle mui-table collection_product clickme" >'+
+							'<div class="collection_detail" ><div class="collection_detail1"><span style="color:#333333; font-size:13px">'+coll[i].goods.gname+'</span><p class="jianjieha">'+coll[i].goods.jianjie+'</p></div><div class="collection_detail2"></div><div  class="collection_detail3"><span style="color:#FF4500; font-size:18px">￥'+coll[i].goods.price+'</span><span style="color:#999999; font-size:12px"> ' + coll[i].goods.buyCount + '人付款</span></div><button type="button" onclick="goumai(\'' + coll[i].goods.price + '\',\'' + coll[i].goods.userid + '\',\'' + coll[i].goods.gid + '\',\'' + coll[i].goods.gname + '\',\''  + coll[i].goods.gimages + '\',\''+coll[i].goods.gdanwei+'\')"  class="buybutton" style="margin-top:-39px;left:180px;">购买</button></div>'+
+							'<div class="collection_img "><img src="'+"${pageContext.request.contextPath}"+coll[i].goods.gimages+'" /></div></div>';
+				
+					collfragment.appendChild(li);
+					$("#OA_task_1").append(collfragment); 
+					coid=coll[i].coId
+					gid=coll[i].goods.gid;
+					gname=coll[i].goods.gname;
+					gprice=coll[i].goods.gprice;
+					gvipprice=coll[i].goods.gvipprice;
+					gkucun=coll[i].goods.gkucun;
+					gimages="${pageContext.request.contextPath}"+coll[i].goods.gimages;
+					var a=document.getElementById("url"+coid);
+					var b=document.getElementById("del"+coid);
+					//解决闭包问题
+					bd1(a,gid,gname,gprice,gvipprice,gkucun,gimages);
+					bd2(b,coid);
+				}
+				}else{ 
+					document.getElementById("OA_task_1").innerHTML=goimg;
+				}
+			}
+			var goimg = '<div style="text-align: center; line-height: 200px; height: 100px; margin-top: 120px;">' +
+			'<span style="text-align: center; margin-top: 25px;color: darkslategrey;">暂无收藏</span>' +
+			'</div>' +
+			'<div class="mui-content" style="text-align:center;background-color: white;">' +
+			'<div class="mui-content-padded" >' +
+			'<a href="javascript:void(0)">' +
+			'<input type="button" class="mui-btn mui-btn-primary mui-icon" style="width:160px;height:40px;margin-top:60px;background-color: #FF7900;color:white" value="去&nbsp;&nbsp;&nbsp;逛&nbsp;&nbsp;&nbsp;逛" onclick="goHome()"></input>' +
+			'</a>' +
+			'</div>' + 
+			'</div>';
+			goimg.id="noCollection"; 
+			function bd1(x,gid,gname,gprice,gvipprice,gkucun,gimages){
+				x.addEventListener('tap',function(e){
+					e = e || window.e;
+					var obj = e.target || e.srcElement;
+					if (obj.tagName=="BUTTON")
+					   $(obj).trigger("click");
+					else
+					   goodsdetail(gid,gname,gprice,gvipprice,gkucun,gimages);
+				});
+			}
+			function bd2(x,coid){
+				x.addEventListener('tap',function(){
+					deletecollgoods(coid);
+				});
+			}
+			/**
+			 * 点击屏幕其他地方，取消收藏消失
+			 * */
+			var activeLi=null;
+			var tip=0;
+			$('#OA_task_1').on('slideleft', '.mui-table-view-cell', function() {
+				activeLi=this.id;
+				if(tip==1){
+					return;
+				}
+				tip+=1;
+//					(function($) {
+//							$.swipeoutClose(document.getElementById(activeLi));
+//					})(mui);
+			}); 
+	        document.addEventListener("tap", function(e){
+	        	if(e.target.nodeName=="HTML"){
+	        		if(activeLi!=null){
+	        			tip-=1;
+						(function($) {
+							$.swipeoutClose(document.getElementById(activeLi));
+						})(mui);
+						activeLi=null;
+					}
+	        	}
+	        });
+	        document.addEventListener("swipe", function(e){
+	        	if(e.target.nodeName=="HTML"){
+	        		if(activeLi!=null){
+	        			tip-=1;
+						(function($) {
+							$.swipeoutClose(document.getElementById(activeLi));
+						})(mui);
+						activeLi=null;
+					}
+	        	}
+	        });
+			//进入详情页面（当有滑动显示取消收藏时，点击隐藏取消收藏，而不是进入详情界面）
+			function goodsdetail(gid,gname,gprice,gvipprice,gkucun,gimages)
+			{	
+				
+				
+				if(tip==0){
+					
+					/*mui.openWindow({ 
+						url:'/goodsdetail/detail.html',
+						id:'detail',
+						extras:{
+							gid:gid,
+							gname:gname,
+							gprice:gprice,
+							gvipprice:gvipprice,
+							gkucun:gkucun,
+							gimages:gimages
+						}
+					});*/
+					window.top.location = "${pageContext.request.contextPath}/weixin/goodsdetail/detail.jsp?gid="+gid+"&gname="+gname+"&gprice="+gprice+"&gvipprice="+gvipprice+"&gkucun="+gkucun+"&gimages="+gimages+"&state=1";
+				}else if(tip==1){
+					(function($) {
+							$.swipeoutClose(document.getElementById(activeLi));
+					})(mui);
+					tip-=1;
+				}
+			}
+			
+			function goumai(gprice,userid,gid,gname,gimages,gdanwei) {
+				
+				if(userid != null) {
+				//var gname = $(".goods-name").html();
+				//var gprice = $("#add-p").html();
+				//var gcount = document.getElementById("catnum").value;
+				/*mui.openWindow({
+					url: '${pageContext.request.contextPath}/weixin/goodsdetail/ljgm-order.html',
+					id: 'ljgm-order.html',
+					extras: {
+						userid: userid,
+						gprice: gprice,
+						gname: gname,
+						gimages: gimages,
+						gid: gid,
+						gdanwei: gdanwei
+					},
+
+					show:
+					{
+						autoShow:true
+					}
+				});*/
+				
+				
+				window.top.location = "${pageContext.request.contextPath}/weixin/goodsdetail/ljgm-order.jsp?userid="+userid+"&gprice="+gprice+"&gname="+gname+"&gid="+gid+"&gdanwei="+gdanwei+"&gimages="+gimages;
+				return;
+				} else {
+				goLogin();
+			}
+			}
+			
+			//登录
+			function goLogin()
+			{
+				/*mui.openWindow({
+					url:'/home/login.html',
+					id:'login'
+				});*/
+				window.top.location = "${pageContext.request.contextPath}/weixin/home/login.jsp";
+			}
+			//去逛逛
+			function goHome()
+			{
+				/*mui.plusReady(function(){
+					 var win = plus.webview.getLaunchWebview();
+					 win.show();
+					 mui.fire(win,"home",{});
+				});*/
+			}
+			//取消收藏商品
+			function deletecollgoods(coid)
+			{ 
+				mui.confirm('取消收藏该商品吗？',function(e){
+					if(e.index==0)
+					{
+						mui.ajax("${pageContext.request.contextPath}/"+'appgoods.do?p=deleteCollGoods',{
+							data:{
+								coid:coid
+							},
+							type:'post',
+							timeout:30000,
+							success:function(data)
+							{ 
+								if(data=="true")
+								{
+									mui.toast("取消成功！");
+									$("#"+coid).remove(); 
+									if(document.getElementsByClassName("mui-slider-right").length==0){ 
+										document.getElementById("OA_task_1").innerHTML=goimg; 
+									}   
+								}
+							},
+					error: function(xhr, type, errerThrown) {
+						mui.toast('网络异常,请稍候再试'); 
+					}
+						});
+					}
+				});
+			}
+			
+			
+			
+		</script>
+
+	</body>
+
+</html>

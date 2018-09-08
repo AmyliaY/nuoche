@@ -1,0 +1,83 @@
+package com.service.wap;
+
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.dao.ProvinceDAO;
+import com.pojo.Area;
+import com.pojo.Business;
+import com.pojo.City;
+import com.pojo.Province;
+import com.pojo.Proxy;
+import com.util.MapUtil;
+
+public class WapApplyBusinessService {
+
+	@Autowired
+	private ProvinceDAO provinceDAO;
+	
+	public List<Province> FindProvinceAll() {
+		List<Province> plist = provinceDAO.findAll();
+		return plist;
+	}
+
+	public void addApply(String shopname, String realname, String shoptel, String shopemail, Short gender, Integer arid,
+			String gpinpai, String describe, String cimages) {
+		
+	/*	Business goods = new Business();
+		String hql = "from Area where arid = ?";
+		Area area = areaDAO.findById(Integer.parseInt(arid));
+		String areaname = area.getArName();
+		City city = area.getCity();
+		String ctname = city.getCtName();
+		Province p = city.getProvince();
+		String pname = p.getPrName();
+		goods.setArea(area);
+		goods.setProxy(proxy);
+		goods.setShopname(gname);
+		goods.setRealname(gchandi);
+		goods.setShopaddr(gpinpai);
+		goods.setTel(jianjie);
+		// goods.setGimages("/admin/images/goods/" + gimages);
+		Double j = 0.0;
+		Double w = 0.0;
+		Double j_t=0.0;
+		Double w_t=0.0;
+		try {
+			System.out.println( "拼地址："+pname+ctname+areaname+gpinpai);
+			Map<String, Double> baidu_map=MapUtil.getLngAndLatByBaidu(pname+ctname+areaname+gpinpai);
+			j = baidu_map.get("j");
+			w = baidu_map.get("w");
+			 
+			Map<String, Double> tencen_map=MapUtil.getLngAndLatByTencent(j,w);
+			j_t=tencen_map.get("j");
+			w_t=tencen_map.get("w");
+			goods.setLatitude(w);
+			goods.setLongitude(j);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		goods.setEmail(gprice);
+		goods.setShoptype(gvipprice);
+		goods.setGender((short)Integer.parseInt(gstatus));
+		goods.setStatus((short)Integer.parseInt(gzhongchou));
+		goods.setShoplogo("daili/images/lunboimg/"+gimages);
+		Date date = new Date();       
+		Timestamp registtime = new Timestamp(date.getTime());
+		goods.setRegisttime(registtime);
+		System.out.println("daili/images/lunboimg/"+gimages);
+		goods.setShopDesc(gdelia);
+		System.out.println("新增service");
+		businessDAO.save(goods);*/
+	}
+
+		 
+
+
+}

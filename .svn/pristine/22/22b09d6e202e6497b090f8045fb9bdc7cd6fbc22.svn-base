@@ -1,0 +1,309 @@
+html,
+body {
+	background-color: #efeff4;
+	font-family: "Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti, MingLiu, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+.wrap {
+	margin-top: 0px;
+}
+#slider {
+	top: 88px;
+	height: auto;
+}
+
+.mui-bar .mui-title {
+	right: 15px;
+	left: 40px;
+	display: inline-block;
+	overflow: hidden;
+	width: auto;
+	margin: 0;
+	text-overflow: ellipsis;
+	color: #666666;
+	margin-top: -2px;
+}
+
+.search {
+	display: block;
+	width: 100%;
+	padding: 0px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	color: #B5B5B5;
+	border-radius: 0px;
+	background: none;
+	background-size: 0px;
+}
+
+.sortRole {
+	width: 33%;
+	background: white;
+	display: block;
+	float: left;
+	text-align: center;
+	color: #666666;
+	font-size: 14px;
+	padding: 11px;
+}
+
+.sortRole:last-child {
+	width: 34%;
+}
+
+.zdy-active {
+	color: #FF7900;
+}
+
+#searchPopover {
+	height: auto;
+	width: 120px;
+	top: 44px;
+	border-radius: none;
+}
+
+#type {
+	position: absolute;
+	margin-left: 8px;
+	font-size: 16px;
+	color: #666666;
+	margin-top: 0.5px;
+}
+
+#search_content {
+	display: inline-block;
+	width: 100%;
+	font-size: 15px;
+	color: #666666;
+	background-color: #fff;
+	height: 34px;
+	line-height: 34px;
+	padding: 3px 0px 3px 50px;
+}
+
+#hide_bar {
+	left: 15px;
+	right: 40px;
+}
+
+#searchPopover span {
+	color: #666666;
+}
+
+.bgf1 {
+	background: #f1f1f1;
+}
+
+.clearPadding {
+	padding: 0;
+}
+
+.hot-content div.col-xs-6:nth-child(2n+1),
+.sale-content div.col-xs-6:nth-child(2n+1) {
+	padding-right: 5px;
+}
+
+.hot-content div.col-xs-6:nth-child(2n),
+.sale-content div.col-xs-6:nth-child(2n) {
+	padding-left: 5px;
+}
+
+.col-xs-6 {
+	padding-right: 0px;
+	padding-left: 0px;
+	width: 50%;
+	float: left;
+}
+
+.mb10 {
+	margin-bottom: 10px;
+}
+
+a {
+	color: #323232;
+}
+
+.w100 {
+	width: 100%;
+	border: 0;
+}
+
+.pro_detail {
+	margin-top: -7px;
+	padding: 0 5px 5px 5px;
+	background: #fff;
+}
+
+.pt10b3 {
+	padding-top: 10px;
+	padding-bottom: 3px;
+}
+
+.texthidden {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.pro_price {
+	color: #da0505;
+	float: left;
+}
+.h20{
+	height: 20px;
+}
+b, strong {
+    font-weight: 700;
+}
+.pro_oriprice {
+    color: #828282;
+    font-size: 12px;
+    float: right;
+}
+
+.search_box {
+	padding: 7px 15px;
+	background: #6CCCCA;
+	overflow: hidden;
+	height: 44px;
+}
+
+.search {
+	display: block;
+	width: 90%;
+	height: 30px;
+	line-height: 30px;
+	font-size: 16px;
+	color: #ffffff;
+	background: none;
+	background-size: 18px;
+	text-align: center;
+	margin-left: 10%;
+}
+
+.list_show {
+	background: #EFEFF4;
+	overflow: hidden;
+	padding: 0px;
+	overflow-y: scroll;
+}
+
+.controller {
+	position: fixed;
+	top: 44px;
+	width: 100%;
+	z-index: 400;
+}
+
+/*店铺样式*/
+
+
+.wrapper ul {
+	background: #EFEFF4;
+}
+
+.wrapper .mui-table-view-cell {
+	list-style: none;
+	padding: 0;
+	margin: 0px;
+	margin-bottom: 10px;
+	background: #FFFFFF;
+}
+
+.wrapper .mui-table-view-cell:last-child {
+	margin-bottom: 0px;
+}
+
+.zdy-shop {
+	padding: 10px 15px;
+}
+
+.inner_ul section {
+	float: left;
+	height: 0;
+	margin-left: 1.66667%;
+	overflow: visible;
+	padding-bottom: 30.8333%;
+	position: relative;
+	width: 31%;
+	background: #FFFFFF;
+}
+
+.destination-image {
+	background-size: 2.34375rem auto;
+	height: 100%;
+	width: 100%;
+}
+
+.destination-image span {
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	bottom: auto;
+	height: 100%;
+	left: 0;
+	position: absolute;
+	right: auto;
+	top: 0;
+	width: 100%;
+	border-radius: .2rem;
+}
+
+.destination-title {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: rgba(22, 22, 22, 0.4);
+	border-radius: 0 0 .2rem .2rem;
+}
+
+.destination-title h3 {
+	font-size: 0.875rem;
+	font-weight: 400;
+	height: 1.225rem;
+	overflow: hidden;
+	padding-top: 0.4rem;
+	padding-left: .5rem;
+	color: rgba(255, 255, 255, 1);
+	width: 100;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.arrow {
+	color: rgba(32, 35, 37, 0.6);
+	font-size: 16px;
+	position: absolute;
+	top: 2em;
+	right: 15px;
+}
+
+.mui-table-view-cell.mui-active {
+	background-color: #FFFFFF;
+}
+
+.shop-pic img {
+	width: 3.5em;
+	height: 3.5em;
+}
+
+.shop_details {
+	display: inline-block;
+}
+
+.shop_name {
+	position: relative;
+	top: -20px;
+	left: 10px;
+	font-size: 1rem;
+	color: #555555;
+	font-family: 微软雅黑;
+}
+
+.shop_describe span {
+	color: #666666;
+	font-size: .8rem;
+}

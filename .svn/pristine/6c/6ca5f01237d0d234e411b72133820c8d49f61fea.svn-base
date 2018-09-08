@@ -1,0 +1,47 @@
+/*当浏览器宽度大于961px*/
+@media screen and (min-width:961px){
+	.main_center{width:100%;}
+	.main_top{width:100%;background-color: #0F8FCB;}
+	.main_bottom{width:100%;height: 70px;background-color: #fff;text-align: center;}
+}
+/*当浏览器宽度小于960px的时候   设置属性 960px*/
+@media screen and (max-width:960px){
+	.main_center{width:960px;}
+	.main_top{width:960px;background-color: #0F8FCB;}
+	.main_bottom{width:960px;height: 70px;background-color: #fff;text-align: center;}
+}
+*{margin: 0px;padding: 0px;}
+input{outline: none;}
+
+/*当浏览器高度大于961px*/
+@media screen and (min-height:886px){
+.main_center{height: 752px;}
+.main_top{height: 682px;}
+.main_logo{width:960px;height: 100px;margin: auto;}
+.main_logo img{margin-top: 25px;width:150px;height: 60px;}
+.main_wenzi{width:960px;height: 150px;margin: auto;text-align: center;line-height: 150px;color:#fff;font-size: 30px;font-family: 微软雅黑;font-weight: bold;}
+.main_xuanze{width:960px;height: 240px;margin:  auto;}
+.main_changshang{width:263px;height: 62px;background-color: #016AA9;border:1px solid #02649E;text-align: center;line-height: 62px;color:#fff;font-size: 18px;margin:auto;cursor: pointer;margin-top:60px;}
+.main_img{width:960px;height:202px;margin: auto; }
+.main_img img{width:960px;height:80px;top: 577px;position: absolute;}
+.main_lianjie{margin: auto;width: 360px;height: 30px;}
+.main_bottom ul li{list-style: none;padding: 0px 3px;float: left;padding-top: 10px;color:#666;}
+.main_bottom ul li a{text-decoration: none;color:#666;font-size: 13px;font-family: 微软雅黑;}
+.main_gongsixinxi{color:#666;padding-top: 10px;display: block;font-size: 13px;font-family: 微软雅黑;}
+}
+/*当浏览器高度小于1080px的时候   设置属性 960px*/
+@media screen and (max-height:885px){
+.main_center{height: 574px;}
+.main_top{height: 504px;}
+.main_logo{width:960px;height: 100px;margin: auto;}
+.main_logo img{margin-top: 25px;width:150px;height: 60px;}
+.main_wenzi{width:960px;height: 130px;margin: auto;text-align: center;line-height: 150px;color:#fff;font-size: 30px;font-family: 微软雅黑;font-weight: bold;}
+.main_xuanze{width:960px;height: 147px;margin:  auto;}
+.main_changshang{width:263px;height: 62px;background-color: #016AA9;border:1px solid #02649E;text-align: center;line-height: 62px;color:#fff;font-size: 18px;margin:auto;cursor: pointer;margin-bottom:20px;}
+.main_img{width:960px;height:150px;margin: auto;}
+.main_img img{width:960px;height:80px;top: 399px;position: absolute;}
+.main_lianjie{margin: auto;width: 360px;height: 30px;}
+.main_bottom ul li{list-style: none;padding: 0px 3px;float: left;padding-top: 10px;color:#666;}
+.main_bottom ul li a{text-decoration: none;color:#666;font-size: 13px;font-family: 微软雅黑;}
+.main_gongsixinxi{color:#666;padding-top: 10px;display: block;font-size: 13px;font-family: 微软雅黑;}	
+}

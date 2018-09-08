@@ -1,0 +1,26 @@
+.team{
+	margin-top: 55px;
+}
+.picture{
+	margin-left: -15px;
+}
+.image{
+	height: 130px;
+	width: 130px;
+}
+.content{
+	margin-top: -95px;
+	margin-left: 135px;
+}
+ul{
+	
+	list-style-type: none;
+	margin-top: 25px;
+}
+li{
+	height: 150px;
+}
+.noneteam{
+	font-stretch: wider;
+	
+}

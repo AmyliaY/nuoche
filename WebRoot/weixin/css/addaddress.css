@@ -1,0 +1,105 @@
+.baocun{
+	color: #D84C29;
+	position: fixed;
+	width: 100%;
+	text-align: center;
+	font-size: 16px;
+	top: 12px;
+	left: 40%;
+}
+.tishi{
+	
+	background-color: #FDF5DE;
+	width: 100%;
+	height: 30px;
+	color: #FFAA24; 
+	font-size: 13px;
+	border: 1px solid #FFAA24 ;
+	text-indent: 20px;
+	line-height: 27px;
+	margin-top: 1px;
+	
+}
+.tishi_img{
+	width: 20px;
+}
+.add_div{
+	width: 100%;
+	background-color: white;
+	height: auto;
+}
+.mui-content table{
+	
+	width: 100%;
+	
+	height: 100%;
+}
+ .td_right{
+ 	
+ 	
+ }
+.add_div .ss{
+	font-size:13px;
+	width: 90%;  
+	margin-top: 14px;
+	border: none;
+	height: 25px;
+	font: arial;
+}
+
+.tishi_img{
+	float: right;
+	margin-top: 15px; 
+}
+/*地区*/
+.diqu{
+	width: 100%;
+	
+	border-bottom: 1px solid #DDDDDD;
+}
+.mui-btn-block{
+	border: none;
+	border-bottom: 1px solid #DDDDDD;
+}
+
+.moren{
+	
+	width: 100%;
+	height: 50px;
+	background-color: white;
+	margin-top: 10px;
+	line-height: 45px; 
+	padding-left: 15px;
+}
+.g_moren{
+	width: 20px;
+	border: 1px solid #DDDDDD;
+	float: right;
+	height: 20px;
+	margin-top: 10px;
+	margin-right: 25px;
+	border-radius: 4px;
+}
+.address_img{
+	width: 17px;
+	margin-top: 5px;  
+	 z-index: 88;
+	 position: absolute;
+}
+table td{
+	font: "微软雅黑";
+	font-size: 15px;
+	height: 30px;
+	
+	text-align: center;
+}
+#address{
+	height: 40px;
+	width: 90%;
+	float: left;
+	margin-top: 12px;
+	text-align: right;
+	color: #999999;
+	font: "微软雅黑";
+	font-size: 13px;
+}

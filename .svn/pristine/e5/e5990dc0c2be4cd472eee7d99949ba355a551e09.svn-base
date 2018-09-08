@@ -1,0 +1,792 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta content="telephone=no,email=no" name="format-detection">
+
+		<!--标准mui.css-->
+	    <link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/css/mui.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/css/gg.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/css/detail.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/goodsdetail/goodsdetail.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/css/swiper.min.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/css/icons-extra.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/css/iconfont.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/weixin/crowdfunding/crowdfunding.css" />
+
+		<script src="${pageContext.request.contextPath}/weixin/js/jquery-1.9.0.min.js"></script>
+		<script src="${pageContext.request.contextPath}/weixin/js/layzr.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/weixin/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/weixin/js/swiper.min.js"></script>
+		<script src="${pageContext.request.contextPath}/weixin/js/detail.js"></script>
+		<script src="${pageContext.request.contextPath}/weixin/url.js"></script>
+		<script src="${pageContext.request.contextPath}/weixin/layer/layer.js"></script>
+		<title>商品详情页</title>
+	</head>
+	<body>
+		<style>
+			.mui-control-content {
+				background-color: #efeff4;
+				min-height: 215px;
+			}
+			
+			.mui-control-content .mui-loading {
+				margin-top: 50px;
+			}
+			
+			#detail li {
+				background-color: white;
+				padding: 5px 10px;
+			}
+			
+			.goods-detail {
+				width: 100%;
+				overflow: hidden;
+				background: white;
+			}
+			
+			.goods-name {
+				margin: 0px 10px;
+				line-height: 22px;
+				width: 80%;
+				margin-top: 5%;
+				font-size: 16px;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 2;
+				overflow: hidden;
+			}
+			
+			.goods-jianjie {
+				margin: 0px 10px;
+				line-height: 22px;
+				width: 70%;
+				margin-top: 3%;
+				font-size: 13px;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 2;
+				overflow: hidden;
+				/*background: red;*/
+			}
+			
+			.pic-price {
+				width: 100%;
+				min-height: 124px;
+				overflow: hidden;
+			}
+			
+			.goods-pic {
+				float: left;
+				width: 25%;
+				height: 80px;
+				margin-top: 10px;
+				margin-left: 10px;
+			}
+			
+			.goods-pic img {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.goods-price {
+				float: right;
+				height: auto;
+				margin: auto;
+				width: 67%;
+				margin-top: -4px;
+			}
+			
+			.goods-price p {
+				padding: 1px 0px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				font-size: 12px;
+			}
+			
+			.goods-extra {
+				margin: 10px 10px;
+				margin-bottom: 40px;
+				font-size: 14px;
+			}
+			
+			.dimg ul,
+			img {
+				width: 100%;
+			}
+			
+			.goods-sharing {
+				position: absolute;
+				width: 20%;
+				margin-left: 80%;
+				margin-top: -17%;
+			}
+			
+			.goods-sharing img {
+				width: 28%;
+				margin-left: 14%;
+			}
+		</style>
+		<header class="mui-bar mui-bar-nav" id="toubu" style="background: #FF7900;">
+			<a class="mui-icon mui-icon-back mui-action-back mui-pull-left" id="fuwupagexx" index="1" style="color: white;">
+				<a><span class="mui-icon-extra mui-icon-extra-cart" id="gouwuche" style="float: right;margin-top: 10px;color: white;"></span></a>
+			</a>
+			<span class="mui-title" id="shopname" index="1" style="color: white;">商品详情</span>
+		</header>
+		<div class="mui-content">
+			<!--商品图片-->
+		<div id="slider" class="mui-slider" style="">
+			<div class="mui-slider-group mui-slider-loop" id="goods_img">
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#">
+						<img src="${pageContext.request.contextPath}/weixin/images/detail4.jpg" style="width: 100%;height: 300px;">
+					</a>
+				</div>
+				<!-- 第一张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="${pageContext.request.contextPath}/weixin/images/detail4.jpg" style="width: 100%;height: 300px;">
+					</a>
+				</div>
+				<!-- 第二张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="${pageContext.request.contextPath}/weixin/images/detail2.jpg" style="width: 100%;height: 300px;">
+					</a>
+				</div>
+				<!-- 第三张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="${pageContext.request.contextPath}/weixin/images/detail3.jpg" style="width: 100%;height: 300px;">
+					</a>
+				</div>
+				<!-- 第四张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="${pageContext.request.contextPath}/weixin/images/detail1.jpg" style="width: 100%;height: 300px;">	
+					</a>
+				</div>
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#">
+						<img src="${pageContext.request.contextPath}/weixin/images/detail1.jpg" style="width: 100%;height: 300px;">
+					</a>
+				</div>
+			</div>
+			<div class="mui-slider-indicator" style="" id="goods_img_num">
+				<div class="mui-indicator mui-active"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>
+			</div>
+		</div>
+			<!--商品名称、价格-->
+			<div class="goods-detail">
+				<p class="goods-name" id="goodsnamea">
+				</p>
+				<p class="goods-jianjie" id="goodsjianjie"></p>
+				<p style="height: 5px;"></p>
+				<div id="goodssharinga" class="goods-sharing" onclick="sharing()">
+					<img src="${pageContext.request.contextPath}/weixin/img/sharingGoods.png" />
+					<p style="margin-left: -5%;font-size: 12px;">分享有赏</p>
+				</div>
+
+				<div style="background: #EFEFF4; padding-top:4px;padding-bottom: 3px;">
+
+				</div>
+				<div class="pic-price">
+					<div class="goods-pic">
+						<img src="${pageContext.request.contextPath}/weixin/images/0.jpg" />
+					</div>
+
+					<div class="goods-price">
+						<p id="yuanjia"></p>
+						<p id="lastp" style="text-decoration: line-through;"></p>
+						<p id="lasta" style="text-decoration: line-through;display: none;">12312</p>
+
+						<p style="color: red;"><span id="jj">当前价格：</span>￥<span id="g-price"></span>（<span id='pd'>已有</span><span id="g-g"></span>）</p>
+
+						<p id="nextp" style="color: #333333;"></p>
+						<p id="firstp" style="color: #999999;margin-top: -13px;"></p>
+					</div>
+
+				</div>
+				<!-- <div class="goods-extra">快递   ：0.00</div> -->
+			</div>
+
+			<!--详情-->
+			<div class="detail-img" id="d-img" style="font-size: 18px;margin-top: 8%;">
+
+			</div>
+
+			<div style="height: 40px;background-color: white;text-align: center;line-height: 40px;font-size: 14px;margin-top: -20px;">
+				<a onclick="qiehuan(this,1)" id="tw" style="color: red;margin-right: 190px;" href="#">
+					图文详情
+				</a>
+				<a onclick="qiehuan(this,2)" id="cs" style="color: black;" href="#">
+					产品参数
+				</a>
+			</div>
+			<div class="detail-img" id="detail-img" style="margin-top: 1px;">
+				<ul id="dimg">
+
+				</ul>
+			</div>
+
+			<!--产品参数 -->
+			<div class="detail-img" id="canshu" style="display: none;">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">产地 <span class="" style="margin-left: 40px;" id="chandi"></span>
+					</li>
+					<li class="mui-table-view-cell">品牌 <span class="" style="margin-left: 40px;" id="pinpai"></span>
+					</li>
+
+				</ul>
+			</div>
+
+		</div>
+
+		<!--客服、立即购买-->
+		<div class="mui-content">
+			<div class="mui-content-padded">
+				<nav class="mui-bar mui-bar-tab">
+					<a id="zc-kefu" class="mui-tab-item" style="width: 20%;" index="0">
+						<span class="mui-icon-extra mui-icon-extra-custom mui-icon mui-icon-star"></span>
+						<span class="mui-tab-label">客服</span>
+					</a>
+					<a id="zcljgm" class="mui-tab-item" style="width: 32%;background-color: #F40;" href="center.html" index="5">
+						<span class="mui-tab-label" style="color: #FFFFFF;">立即购买</span>
+					</a>
+				</nav>
+			</div>
+		</div>
+		<script src="${pageContext.request.contextPath}/weixin/js/mui.min.js"></script>
+		<script>
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			//图片轮播
+			var slider = mui("#slider");
+			slider.slider({
+				interval: 1000
+			});
+			var mask = mui.createMask(); //遮罩层
+
+			var userid = '${userinfo.usersId}'; //会员ID
+			var gid = null; //商品ID
+			var gname = null; //商品名称
+			var gdanwei = null; //商品单位
+			var gimages = null; //商品图片
+			var rebateid = null;
+			var rebate = null; //折扣
+			var timestr = null; //众筹是否已结束
+			var goodsinfo = null; //简介
+			var userstype = null;
+			//mui.plusReady(function() {
+
+				//				mask.show();
+				//				mui.showWaiting("加载中,请稍等");
+				//userid = plus.storage.getItem("uid"); //会员ID
+				//userstype = plus.storage.getItem("userstype"); //会员类型 普通 or VIP 判断商品的价格
+				//var goods = plus.webview.currentWebview();
+				//gid = goods.gid; //商品ID
+				//gname = goods.gname; //商品名称
+				//gdanwei = goods.gdanwei; //商品单位
+				//gimages = goods.gimages; //商品图片
+				//rebateid = goods.rebateid;
+				//rebate = goods.rebate; //商品折扣
+				//timestr = goods.timestr;
+			  
+			   // 获取url中的参数
+              function getUrlParam (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                    if (r!= null) {
+        				 return unescape(r[2]);
+     			 	 }else{
+        			 	 return null;
+      				}
+ 		    	} 
+				  userid = 'weixinuser.userinfo.usersId';
+				  usertype= 'weixinuser.userinfo.usersType';
+				
+				gid   = '${param.gid}';
+				gname = '${param.gname}';
+				gdanwei = '${param.gdanwei}';
+				gimages = '${param.gimages}';
+				rebateid = '${param.rebateid}';
+				rebate = '${param.rebate}';
+				timestr = '${param.timestr}';
+				gprice = '${param.gprice}';
+				gvipprice = '${param.gvipprice}';				
+				gdanwei = '${param.gdanwei}';
+				
+				
+				
+				if(userstype == 0) {
+					$("#g-price").html(gprice);
+					$(".sep").html(' <a class="youhui">普通价格</a>');
+					$("#add-price").html('￥' +gprice);
+					$("#yuanjia").html('原价:'+'          ' + '￥'+gprice); 
+				} else {
+					$("#g-price").html(gvipprice);
+					$(".sep").html(' <a class="youhui">VIP价格</a>')
+					$("#add-price").html('￥' +gvipprice);
+					$("#yuanjia").html('原价:'+'          ' + '￥'+gvipprice); 
+				}
+				$("#add-count").html('库存:' + gdanwei); //商品单位
+				$(".goods-pic").html('<img id="" src="' + gimages + '">'); //商品图片
+				mui.post("${pageContext.request.contextPath}/" + 'appzhongchou.do?p=findByIdRebate&gid=' + gid, {
+				}, function(data) {
+					var rebatelist = eval("(" + data + ")");
+					var pd = 0;
+					//判断众筹是否结束
+					var size = rebatelist.length;
+					var dq  = rebatelist[0].goods.gsellnum;
+					var zh  = rebatelist[rebatelist.length-1].gcfrEndkg;//结束数量
+					var start = rebatelist[rebatelist.length-1].gcfrBeginkg;//最后价格的开始重量
+					//卖完的
+					if(dq>=zh){
+						timestr = "已买完";
+						mui.toast("来晚一步，买光了...");
+						var firstprice = null;
+						if(userstype == 0) {
+							firstprice = (rebatelist[rebatelist.length - 1].goods.gprice * 1) * (rebatelist[rebatelist.length - 1].gcfrRebate * 1); //当前价格
+						} else {
+							firstprice = (rebatelist[rebatelist.length - 1].goods.gvipprice * 1) * (rebatelist[rebatelist.length - 1].gcfrRebate * 1); //当前价格
+						}
+						var firstkg = (rebatelist[rebatelist.length - 1].gcfrEndkg * 1) - (rebatelist[0].goods.gsellnum * 1);
+						$("#g-price").html(firstprice.toFixed(2));
+						$("#pd").html("已卖完");
+						$("#jj").html('最后价格：');
+						
+						$("#lastp").css('display', 'block');
+						$("#lasta").css('display', 'block');
+						if(userstype == 0) {
+							lastpricea = (rebatelist[size-3].goods.gprice * 1) * (rebatelist[size-2].gcfrRebate * 1); //上一个价格
+							lastprice = (rebatelist[size-2].goods.gprice * 1) * (rebatelist[size-2].gcfrRebate * 1); //上一个价格
+						} else {
+							lastpricea = (rebatelist[size-3].goods.gvipprice * 1) * (rebatelist[size-3].gcfrRebate * 1); //上一个价格
+							lastprice = (rebatelist[size-2].goods.gvipprice * 1) * (rebatelist[size-2].gcfrRebate * 1); //上一个价格
+						}
+						//还差多少斤 
+						var lastkg = (rebatelist[size-2].gcfrEndkg * 1) - (rebatelist[size-2].gcfrBeginkg * 1);
+						var lastkga = (rebatelist[size-3].gcfrEndkg * 1) - (rebatelist[size-3].gcfrBeginkg * 1);
+						var str = '上一价格：￥<span id="g-lastprice">' + lastprice.toFixed(2) + '</span>（已购买' + lastkg + '' + gdanwei + '）<br />';
+						var lastphtml = document.getElementById("lasta");
+						lastphtml.innerHTML = str; 
+						lastphtml = document.getElementById("lastp");
+						str = '上一价格：￥<span id="g-lastprice">' + lastpricea.toFixed(2) + '</span>（已购买' + lastkga + '' + gdanwei + '）<br />';
+						lastphtml.innerHTML = str; 
+						return;
+					}
+					//最后价格
+					if(dq>=start && dq <=zh){
+						var nextkg = (rebatelist[size-1].gcfrEndkg * 1) - (rebatelist[size-1].goods.gsellnum * 1);
+						var firstphtml = document.getElementById("firstp");
+						document.getElementById("nextp").innerHTML = "";
+						var jiage = rebatelist[size-1].gcfrRebate*1;
+						if(userstype == 0) {
+							jiage*= rebatelist[size-1].goods.gprice * 1;
+						}else{
+							jiage*= rebatelist[size-1].goods.gvipprice * 1;
+						}
+						$("#g-price").html(jiage.toFixed(2));
+						$("#jj").html('最后价格：');
+						$("#pd").html("还剩");
+						$("#g-g").html( nextkg + '' + gdanwei );
+						
+						$("#lastp").css('display', 'block');
+						//得到上俩个价格
+						$("#lastp").css('display', 'block');
+						$("#lasta").css('display', 'block');
+						if(userstype == 0) {
+							lastpricea = (rebatelist[size-3].goods.gprice * 1) * (rebatelist[size-2].gcfrRebate * 1); //上一个价格
+							lastprice = (rebatelist[size-2].goods.gprice * 1) * (rebatelist[size-2].gcfrRebate * 1); //上一个价格
+						} else {
+							lastpricea = (rebatelist[size-3].goods.gvipprice * 1) * (rebatelist[size-3].gcfrRebate * 1); //上一个价格
+							lastprice = (rebatelist[size-2].goods.gvipprice * 1) * (rebatelist[size-2].gcfrRebate * 1); //上一个价格
+						}
+						//还差多少斤 
+						var lastkg = (rebatelist[size-2].gcfrEndkg * 1) - (rebatelist[size-2].gcfrBeginkg * 1);
+						var lastkga = (rebatelist[size-3].gcfrEndkg * 1) - (rebatelist[size-3].gcfrBeginkg * 1);
+						var str = '上一价格：￥<span id="g-lastprice">' + lastprice.toFixed(2) + '</span>（已购买' + lastkg + '' + gdanwei + '）<br />';
+						var lastphtml = document.getElementById("lasta");
+						lastphtml.innerHTML = str; 
+						lastphtml = document.getElementById("lastp");
+						str = '上一价格：￥<span id="g-lastprice">' + lastpricea.toFixed(2) + '</span>（已购买' + lastkga + '' + gdanwei + '）<br />';
+						lastphtml.innerHTML = str; 
+						
+						return;
+					}
+					
+					//没有上一个价格时
+					if(dq>=rebatelist[0].gcfrBeginkg && dq<rebatelist[0].gcfrEndkg ){
+						$("#lastp").css('display', 'none');
+						var firstprice = null; //当前价格
+						var nextprice = null;
+						if(userstype == 0) {
+							firstprice = (rebatelist[0].goods.gprice * 1) * (rebatelist[0].gcfrRebate * 1); //当前价格
+							nextprice = (rebatelist[1].goods.gprice * 1) * (rebatelist[1].gcfrRebate * 1); //当前价格
+						} else {
+							firstprice = (rebatelist[0].goods.gvipprice * 1) * (rebatelist[0].gcfrRebate * 1); //当前价格
+							nextprice = (rebatelist[1].goods.gvipprice * 1) * (rebatelist[1].gcfrRebate * 1); //当前价格
+						}
+						$("#g-price").html(firstprice.toFixed(2));
+						$("#pd").html("已有"+dq +gdanwei );
+						//下一个价格
+						var firstphtml = document.getElementById("nextp");
+						var str = '下一价格：￥<span id="g-lastprice">' + nextprice.toFixed(2) + '</span>（还差' +(rebatelist[1].gcfrBeginkg - dq) + '' + gdanwei + '）<br /><br />';
+						firstphtml.innerHTML = str;       //第一次将此处注释 则显示正确
+						return;
+					}
+					for(var j = 0; j < rebatelist.length; j++) {
+//							//  上一	价格
+//							if(j > 0) {
+//								var lastprice = null;
+//								
+//								for(var i = 0; i < j-1; i++) {
+//									$("#lastp").css('display', 'block');
+//									if(userstype == 0) {
+//										lastprice = (rebatelist[i].goods.gprice * 1) * (rebatelist[i].gcfrRebate * 1); //上一个价格
+//									} else {
+//										lastprice = (rebatelist[i].goods.gvipprice * 1) * (rebatelist[i].gcfrRebate * 1); //上一个价格
+//									}
+//									//还差多少斤 
+//									var lastkg = (rebatelist[i].gcfrEndkg * 1) - (rebatelist[i].gcfrBeginkg * 1);
+//									var str = '上一价格：￥<span id="g-lastprice">' + lastprice.toFixed(2) + '</span>（已购买' + lastkg + '' + gdanwei + '）<br />';
+//									var lastphtml = document.getElementById("lastp");
+//									lastphtml.innerHTML = str; 
+//								} 
+//							} else {
+//								$("#lastp").css('display', 'none');
+//							}
+							//当前价格
+							var price = null; //当前价格
+							var nextprice = null; //下一个价格
+							//判断商品价格
+							var gellnum = rebatelist[j].goods.gsellnum;
+							if(gellnum >=rebatelist[j].gcfrBeginkg && gellnum <rebatelist[j].gcfrEndkg){
+								if(userstype == 0) {
+									price = (rebatelist[j-1].goods.gprice * 1) * (rebatelist[j-1].gcfrRebate * 1); //当前价格
+									if(j+1<rebatelist.length){
+										nextprice = (rebatelist[j].goods.gprice * 1) * (rebatelist[j+1].gcfrRebate * 1); //当前价格
+									}
+								} else {
+									price = (rebatelist[j].goods.gvipprice * 1) * (rebatelist[j].gcfrRebate * 1); //当前价格
+									if(j+1<rebatelist.length){
+										nextprice = (rebatelist[j].goods.gvipprice * 1) * (rebatelist[j+1].gcfrRebate * 1); //当前价格
+									}								
+								}
+								price = price.toFixed(2);
+								$("#g-price").html(price);
+								//当前价格
+								//已购买多少斤
+								$("#g-g").html((rebatelist[j].goods.gsellnum)-(rebatelist[j].gcfrBeginkg * 1) + gdanwei );
+								
+								
+								//上一个价格
+								$("#lastp").css('display', 'block');
+								if(userstype == 0) {
+									lastprice = (rebatelist[j].goods.gprice * 1) * (rebatelist[j-1].gcfrRebate * 1); //上一个价格
+								} else {
+									lastprice = (rebatelist[j].goods.gvipprice * 1) * (rebatelist[j-1].gcfrRebate * 1); //上一个价格
+								}
+								//还差多少斤 
+								var lastkg = (rebatelist[j-1].gcfrEndkg * 1) - (rebatelist[j-1].gcfrBeginkg * 1);
+								var str = '上一价格：￥<span id="g-lastprice">' + lastprice.toFixed(2) + '</span>（已购买' + lastkg + '' + gdanwei + '）<br />';
+								var lastphtml = document.getElementById("lastp");
+								lastphtml.innerHTML = str; 
+								
+								
+							}
+							
+							
+							
+							//最后价格
+							if(dq>=start && dq <=zh){
+								var nextkg = (rebatelist[j].gcfrEndkg * 1) - (rebatelist[j].goods.gsellnum * 1);
+								var firstphtml = document.getElementById("firstp");
+								document.getElementById("nextp").innerHTML = "";
+								var jiage = rebatelist[j].gcfrRebate*1;
+								if(userstype == 0) {
+									jiage*= rebatelist[j].goods.gprice * 1;
+								}else{
+									jiage*= rebatelist[j].goods.gvipprice * 1;
+								}
+								var str = '最后价格：￥<span id="g-lastprice">' + jiage.toFixed(2) + '</span>（还差' + nextkg + '' + gdanwei + '）<br /><br />';
+								firstphtml.innerHTML = str;       //第一次将此处注释 则显示正确
+							}else{
+								//下一价格
+								if(j==0){
+									continue;
+								}
+								var nextkg = (rebatelist[j-1].gcfrEndkg * 1) - (rebatelist[j].goods.gsellnum * 1);
+								var firstphtml = document.getElementById("nextp");
+								var jiage = rebatelist[j-1].gcfrRebate*1;
+								if(userstype == 0) {
+									jiage*= rebatelist[j-1].goods.gprice * 1;
+								}else{
+									jiage*= rebatelist[j-1].goods.gvipprice * 1;
+								}
+								if(pd == 1){
+									continue;
+								}
+								//判断
+								var str = '下一价格：￥<span id="g-lastprice">' + jiage.toFixed(2) + '</span>（还差' + nextkg + '' + gdanwei + '）<br /><br />';
+								firstphtml.innerHTML = str;       //第一次将此处注释 则显示正确
+							}
+							
+							
+							//最后价格
+							if(rebatelist.length > j + 1 && rebatelist.length > 2) {
+								var firstprice = null;
+								if(userstype == 0) {
+									firstprice = (rebatelist[rebatelist.length - 1].goods.gprice * 1) * (rebatelist[rebatelist.length - 1].gcfrRebate * 1); //当前价格
+								} else {
+									firstprice = (rebatelist[rebatelist.length - 1].goods.gvipprice * 1) * (rebatelist[rebatelist.length - 1].gcfrRebate * 1); //当前价格
+								}
+								var firstkg = (rebatelist[rebatelist.length - 1].gcfrBeginkg * 1) - (rebatelist[j].goods.gsellnum * 1);
+								var str = '最后价格：￥<span id="g-firstprice">' + firstprice.toFixed(2) + '</span>（还差' + firstkg + '' + gdanwei + '）<br />';
+								var firstphtml = document.getElementById("firstp");
+								firstphtml.innerHTML = str;       //第一次将此处注释 则显示正确
+								document.getElementById("nextp").innerHTML = "";
+								pd = 1;
+							}
+					}
+				});
+				//轮播图
+				mui.ajax("${pageContext.request.contextPath}/" + 'appgoods.do?p=goodsdetail&id=${param.gid}' , {
+					type: 'post',
+					timeout: 30000,
+					success: function(data) {
+						var map = eval("(" + data + ")");
+						for(var key in map) {
+							if(key == "list") {
+								gimglist = map[key];
+							}
+							if(key == "goods") {
+								goods = map[key];
+							}
+						}
+
+						$(".goods-name").html(goods.gname);
+						$(".goods-jianjie").html(goods.jianjie);
+						if(goods.jianjie) {
+							goodsinfo = goods.jianjie;
+							var goodsjianjie = document.getElementById("goodsjianjie").innerHTML;
+							if(goodsjianjie.length > 18) {
+								$(".goods-sharing").css({
+									'margin-top': "-21%"
+								});
+							}
+						} else {
+							goodsinfo = goods.gname;
+							$(".goods-name").css({
+								'margin-top': "6%"
+							});
+							$(".goods-sharing").css({
+								'margin-top': "-15%"
+							});
+						}
+						if(gimglist.length > 0) {
+							//图片轮播
+							var imghtml = "";
+							imghtml = imghtml + '<div class="mui-slider-item mui-slider-item-duplicate"><a href="#">' +
+								'<img src="' + "${pageContext.request.contextPath}/" + gimglist[0].gimages + '" style="width: 100%;height: 300px;"></a></div>';
+							var imgnumhtml = "";
+							var len = gimglist.length>4?4:gimglist.length;
+							for(var i = 0; i < len; i++) {
+								imghtml = imghtml + '<div class="mui-slider-item"><a href="#">' +
+									'<img src="' + "${pageContext.request.contextPath}/" + gimglist[i].gimages + '" style="width: 100%;height: 300px;"></a></div>';
+								if(i == 0)
+									imgnumhtml = imgnumhtml + '<div class="mui-indicator mui-active"></div>';
+								else
+									imgnumhtml = imgnumhtml + '<div class="mui-indicator"></div>';
+							}
+							
+							
+							imghtml = imghtml + '<div class="mui-slider-item mui-slider-item-duplicate"><a href="#">' +
+								'<img src="' + "${pageContext.request.contextPath}/" + gimglist[0].gimages + '" style="width: 100%;height: 300px;"></a></div>';
+							var goodsimg = document.getElementById("goods_img");
+							goodsimg.innerHTML = imghtml;
+							var goodsimgnum = document.getElementById("goods_img_num");
+							goodsimgnum.innerHTML = imgnumhtml;
+							$(goodsimgnum).find("div").length;
+						}
+					}
+				});
+			//});
+			//立即购买
+			document.querySelector("#zcljgm").addEventListener("tap", function() {
+				var price = $("#g-price").html();
+				if(userid == null) {
+					goLogin();
+					return;
+				}
+				if(timestr == "已结束!") {
+					mui.toast("众筹已结束");
+					return;
+				}
+				if(timestr == "已买完") {
+					mui.toast("来晚一步，买光了...");
+					return;
+				}
+				
+				window.top.location="${pageContext.request.contextPath}/weixin/crowdfunding/crowdfunding-order.jsp?gid="+gid+"&gname="+gname+"&gprice="+price+"&gdanwei="+gdanwei+"&gimages="+gimages+"&grebate="+rebate;
+				/*mui.openWindow({
+					id: 'crowdfunding.html',
+					url: 'crowdfunding-order.html',
+					extras: {
+						gid: gid,
+						gname: gname,
+						gimages: gimages,
+						gprice: price,
+						grebate: rebate,
+						gdanwei:gdanwei
+					}
+				});*/
+			});
+			//跳转到购物车页面
+			document.querySelector("#gouwuche").addEventListener("tap", function() {
+				if(userid != null) {
+					mui.openWindow({
+						url: '${pageContext.request.contextPath}/weixin/shopingcart/cart.jsp'
+					});
+				} else {
+					goLogin();
+				}
+			});
+			//客服 消息
+			document.querySelector("#zc-kefu").addEventListener('tap', function() {
+				var price = $("#g-price").html();
+				var gynum = $("#g-g").html();
+				if(userid != null) {
+					window.top.location="${pageContext.request.contextPath}/weixin/goodsdetail/kefu.jsp?gid="+gid+"&gname="+gname+"&gprice="+price+"&gimages="+gimages+"&gynum="+gynum;
+					/*mui.openWindow({
+						url: '/goodsdetail/kefu.html',
+						id: 'zcdetail.html',
+						extras: {
+							gid: gid,
+							gname: gname,
+							gimages: gimages,
+							gprice: price,
+							gynum: gynum
+						}
+					});*/
+				} else {
+					goLogin();
+				}
+			})
+			//去登录界面
+			function goLogin() {
+				mui.toast("请先登录！");
+				mui.openWindow({
+					url: '${pageContext.request.contextPath}/weixin/home/login.html',
+					id: 'zcdetail.html'
+				});
+			}
+
+			function qiehuan(a, type) {
+				$(a).css('color', 'red');
+				if(type == 1) {
+					$("#canshu").css('display', 'none');
+					$("#detail-img").css('display', 'block');
+					$("#tw").css('color', 'red');
+					$("#cs").css('color', 'black');
+				} else {
+					$("#canshu").css('display', 'block');
+					$("#detail-img").css('display', 'none');
+					$("#cs").css('color', 'red');
+					$("#tw").css('color', 'black');
+				}
+			}
+
+			/*function copyToClip() {
+				goods = plus.webview.currentWebview();
+				gid = goods.gid; //商品ID
+				gname = goods.gname; //商品名称
+				var Context = plus.android.importClass("android.content.Context");
+				var main = plus.android.runtimeMainActivity();
+				var clip = main.getSystemService(Context.CLIPBOARD_SERVICE);
+				plus.android.invoke(clip, "setText", "【" + goodsinfo + "】" + goods.gimages + " <" + goods.gid + ",2>" + " 点击链接查看商品图片,复制这条信息在归真太极养生打开!");
+				mui.toast("复制链接成功,请分享给好友")
+			}
+
+			//分享
+			function sharing() {
+
+				userid = plus.storage.getItem("uid"); //会员ID
+				userstype = plus.storage.getItem("userstype"); //会员类型 普通 or VIP 判断商品的价格
+				goods = plus.webview.currentWebview();
+				gid = goods.gid; //商品ID
+				gname = goods.gname; //商品名称
+
+				layer.open({
+					className: "layer-sharing",
+					content: '<div class="goods-image">' +
+						'<img id="" src="' + goods.gimages + '">' +
+						'</div>' +
+						'<p class="goods-namea">' + goodsinfo + '</p>' +
+						'<button onclick="copyToClip()" type="button" class="mui-btn mui-btn-block mui-btn-primary">分享</button>'
+				});
+
+			}*/
+		</script>
+
+		<style type="text/css">
+			.layer-sharing {
+				width: 90%;
+				height: 400px;
+				border-radius: 5px 5px 5px 5px;
+			}
+			
+			.goods-image {
+				width: 110%;
+				height: 200px;
+				margin-left: -5%;
+				margin-top: -7%;
+				border-radius: 5px 5px 0px 0px;
+			}
+			
+			.goods-image img {
+				height: 200px;
+				border-radius: 5px 5px 0px 0px;
+			}
+			
+			.goods-namea {
+				width: 100%;
+				margin-top: 10%;
+				line-height: 25px;
+				/*height: 60px;*/
+				font-family: 幼圆;
+				font-size: 14px;
+				color: #484234;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 2;
+				overflow: hidden;
+			}
+			
+			.mui-btn-block {
+				width: 100%;
+				margin-top: 15%;
+				border-radius: 30px 30px 30px 30px;
+				background: #FF7900;
+				border: none;
+			}
+		</style>
+
+	</body>
+
+</html>

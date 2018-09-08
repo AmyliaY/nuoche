@@ -1,0 +1,120 @@
+li span:first-child {
+	font-size: 16px;
+}
+
+li span:last-child {
+	font-size: 16px;
+	color: #666666;
+}
+
+#mui-popover1,#mui-popover2,#mui-popover5{
+	width: 300px;
+	height: 160px;
+	top: 50%;
+	margin-top: -80px;
+	left: 50%;
+	margin-left: -150px;
+}
+#mui-popover3{confire
+
+	width: 300px;
+	height: 160px;
+	top: 50%;
+	margin-top: -80px;
+	left: 50%;
+	margin-left: -150px;
+}
+#mui-popover4{
+	width: 300px;
+	height: 188px;
+	top: 50%;
+	margin-top: -94px;
+	left: 50%;
+	margin-left: -150px;
+}
+.mui-content-padded {
+	padding: 5px;
+	padding-bottom: 5px;
+}
+
+button{
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.42;
+	position: relative;
+	display: inline-block;
+	margin-bottom: 10px;
+	padding: 10px 15px;
+	cursor: pointer;
+	-webkit-transition: all;
+	transition: all;
+	-webkit-transition-timing-function: linear;
+	transition-timing-function: linear;
+	-webkit-transition-duration: .2s;
+	transition-duration: .2s;
+	text-align: left;
+	vertical-align: top;
+	white-space: nowrap;
+	color: #838383;
+	background: inherit;
+	background-clip: padding-box;
+	width: 100%;
+	border: none;
+}
+
+.confirm_title {
+	color: #666666;
+	font-size: 16px;
+	text-align: center;
+	padding: 13px 0px;
+}
+#confirm2 .confirm_title {
+	color: #666666;
+	font-size: 16px;
+	text-align: center;
+	padding: 20px 0px;
+	width: 180px;
+	margin-left: 60px;
+}
+.btn_no,
+.btn_ok {
+	width: 50px;
+	float: left;
+	padding: 8px 0px;
+	color: #838383;
+	text-align: center;
+	font-size: 14px;
+	
+}
+#confirm2 .btn_no,
+.btn_ok {
+	
+	margin-top: 30px;
+}
+.btn_ok{
+	margin-left: 40px;
+}
+.btn_no{
+	float: right;
+	margin-right: 40px;
+}
+
+.mui-radio input[type=radio]:checked:before {
+	color: #f60
+}
+
+#mui-popover4 input{
+	width: 90%;
+	margin-left: 12px; 
+	
+}
+.mui-btn{
+	padding: 10px 0px;
+	width: 90%;
+	margin-left: 12px; 
+	background: #F06015;
+	color: white;
+}
+.mui-btn:enabled:active{
+	background: #FFFFFF;;
+}
