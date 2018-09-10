@@ -27,7 +27,7 @@ import com.pojo.Proxy;
 import com.pojo.User;
 import com.qq.connect.utils.http.Response;
 import com.service.daili.DailiYuyueService;
-import com.service.daili.UserService;
+import com.service.daili.DailiUserService;
 import com.util.StringUtil;
 
 import bsh.ParseException;

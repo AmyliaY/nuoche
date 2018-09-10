@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.action.JccsAction;
 import com.pojo.Admin;
-import com.service.admin.MoneytongjiService;
+import com.service.admin.AdminMoneytongjiService;
 
 @Controller
 @RequestMapping("/admin_moneytongji.do")
 public class MoneytongjiAction {
 	
 	@Autowired
-	private MoneytongjiService tongjiService;
+	private AdminMoneytongjiService tongjiService;
 	
 	/**
 	 * 统计 会员 and 订单 and 短信信息通知总条数	总数    今日    本月

@@ -15,7 +15,7 @@ import com.pojo.Admin;
 import com.pojo.Proxy;
 import com.service.admin.AdminMoneyService;
 import com.service.admin.AdminProxyChongzhiService;
-import com.service.daili.BusinessService;
+import com.service.daili.DailiBusinessService;
 import com.util.StringUtil;
 
 @Controller
@@ -29,7 +29,7 @@ public class AdminMoneyAction {
 	@Autowired
 	private AdminProxyChongzhiService adminproxychongzhiservice;
 	@Autowired
-	private BusinessService businessservice;
+	private DailiBusinessService businessservice;
 
 	@RequestMapping(params = "p=duizhang")
 	public String duizhanglisting() throws UnsupportedEncodingException {

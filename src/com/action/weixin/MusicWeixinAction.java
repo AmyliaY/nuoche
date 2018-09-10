@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.pojo.MLevel;
 import com.pojo.MSongs;
 import com.pojo.Userinfo;
-import com.service.weixin.MusicWeixinService;
+import com.service.weixin.WeixinMusicWeixinService;
 import com.util.JsonFilter;
 import com.util.StringUtil;
 
@@ -28,7 +28,7 @@ import com.util.StringUtil;
 public class MusicWeixinAction {
 
 	 @Autowired
-	 private MusicWeixinService  musicWeixinService;
+	 private WeixinMusicWeixinService  musicWeixinService;
 	 
 	 
 	 

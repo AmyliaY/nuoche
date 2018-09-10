@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pojo.Admin;
 import com.pojo.City;
-import com.service.admin.PeisongcorpService;
+import com.service.admin.AdminPeisongcorpService;
 import com.service.back.YunfeiService;
 import com.util.StringUtil;
 
@@ -24,7 +24,7 @@ public class YunfeiAction {
 	@Autowired
 	private YunfeiService yunfeiService;
 	@Autowired
-	private PeisongcorpService corpService;
+	private AdminPeisongcorpService corpService;
 	/**
 	 * 进入设置运费页面  查出所有省份
 	 * @param request

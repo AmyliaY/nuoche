@@ -407,7 +407,7 @@
 
 
 
-	<bean id="uService" class="com.service.daili.UserService">
+	<bean id="uService" class="com.service.daili.DailiUserService">
 	</bean>
 	<task:scheduled-tasks>
         <!-- 定时 判断会员是否过期 -->

@@ -21,7 +21,7 @@ import com.action.CorpAction;
 import com.pojo.Address;
 import com.pojo.Shoppingcat;
 import com.pojo.Userinfo;
-import com.service.weixin.MusicWeixinService;
+import com.service.weixin.WeixinMusicWeixinService;
 import com.shop.service.app.AppCatService;
 import com.util.JsonFilter;
 
@@ -34,7 +34,7 @@ public class AppCatAction {
 	private HttpServletRequest request;
 	
 	@Autowired
-	private MusicWeixinService  musicWeixinService;
+	private WeixinMusicWeixinService  musicWeixinService;
 	/**
 	 * 得到所有的购物车信息
 	 * @return

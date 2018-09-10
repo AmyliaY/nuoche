@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pojo.Admin;
 import com.pojo.PeisongCorp;
-import com.service.admin.PeisongcorpService;
+import com.service.admin.AdminPeisongcorpService;
 import com.util.StringUtil;
 
 /**
@@ -29,7 +29,7 @@ import com.util.StringUtil;
 public class PeisongcorpAction {
 	
 	@Autowired
-	private PeisongcorpService corpService;
+	private AdminPeisongcorpService corpService;
 	
 	/**
 	 *  配送公司列表

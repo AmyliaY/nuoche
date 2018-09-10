@@ -20,7 +20,7 @@ import com.pojo.ProxyCash;
 import com.pojo.Yuyue;
 import com.service.daili.DailiChongzhiService;
 import com.service.daili.DailiChongzhipayService;
-import com.service.weixin.UserYuyueTopayService;
+import com.service.weixin.WeixinUserYuyueTopayService;
 import com.service.weixin.WeiXinApplyForQrcodeService;
 import com.util.URLManager;
 import com.weixin.util.ParseXmlUtil;

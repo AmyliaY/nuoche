@@ -41,7 +41,7 @@ import com.util.ZipUtil;
  */
 @Controller
 @RequestMapping("/admin_erweima.do")
-public class AdminErWeiMaaction {
+public class AdminErWeiMaAction {
 
 	@Autowired
 	private HttpServletRequest request;

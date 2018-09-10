@@ -16,7 +16,7 @@ import com.pojo.Proxy;
 import com.service.admin.AdminLunboXQService;
 import com.service.admin.AdminMoneyService;
 import com.service.admin.AdminProxyChongzhiService;
-import com.service.daili.BusinessService;
+import com.service.daili.DailiBusinessService;
 import com.util.StringUtil;
 
 @Controller
