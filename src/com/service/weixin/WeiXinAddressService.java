@@ -29,7 +29,6 @@ public class WeiXinAddressService {
 	@Autowired
 	private ProvinceDAO provinceDAO;
 	
-	
 	public String findByidCity(int prid) {
 		String hql="from City c where c.province.prId=?";
 		List list=hqldao.findByHQL(hql,prid);
@@ -50,5 +49,4 @@ public class WeiXinAddressService {
 		List<Province> plist = provinceDAO.findAll();
 		return plist;
 	}
-
 }

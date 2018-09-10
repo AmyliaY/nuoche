@@ -24,8 +24,6 @@ public class WeiXinApplyForQrcodeService {
 	@Autowired
 	private WeixinUserDAO weixinUserDAO;
 	
-	
-	
 	/**
 	 * 生成订单号
 	 * @return

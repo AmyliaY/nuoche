@@ -35,9 +35,7 @@ public class WeiXinBangdingService {
 		List list = hqldao.pageQuery(hql, 1, 1, qrid);
 		if (list.size() == 0)
 			return 0;
-
 		User user = (User) list.get(0);
-
 		Short overdue = user.getOverdue();
 		if (overdue == 1) {
 			return 1;
@@ -51,7 +49,6 @@ public class WeiXinBangdingService {
 			return 2;
 			// 该二维码付款，绑定
 		}
-
 		Date endTime = user.getOverdueTime();
 		if (overdue == 3 || endTime != null
 				&& endTime.getTime() < System.currentTimeMillis()) {
@@ -59,12 +56,10 @@ public class WeiXinBangdingService {
 			// 该二维码已过期
 		}
 		return -1;
-
 	}
 
 	/**
 	 * 绑定
-	 * 
 	 * @param qrid
 	 *            二维码编号
 	 * @param chepaihao
@@ -79,14 +74,12 @@ public class WeiXinBangdingService {
 	 */
 	public User bangding(String qrid, String chepaihao, String name,
 			String tel, String wx) {
-
 		String hql = "from User where qrcode =?";
 		List list = hqldao.pageQuery(hql, 1, 1, qrid);
 		User user = new User();
 		if(list.get(0)!=null){
 		user = (User) list.get(0);
 		}
-
 		user.setName(name);
 		user.setPlateNumber(chepaihao);
 		user.setTel(tel);
@@ -108,7 +101,6 @@ public class WeiXinBangdingService {
 			proxy.setSumActive(sumActive + 1);
 			proxyDAO.save(proxy);
 		}
-
 		return user;
 	}
 

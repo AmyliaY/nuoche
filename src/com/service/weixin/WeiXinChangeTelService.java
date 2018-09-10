@@ -21,7 +21,6 @@ public class WeiXinChangeTelService {
 	@Autowired
 	private SmsDAO smsDAO;
 	
-
 	public User getUser(String openid) {
 		String hql = "from User where weixinUser.openid=?";
 		List<User> list = hqlDAO.pageQuery(hql,1,1,openid);
@@ -30,7 +29,6 @@ public class WeiXinChangeTelService {
 		}
 		return null;
 	}
-
 
 	/**
 	 * 保存验证码到数据库
@@ -54,7 +52,6 @@ public class WeiXinChangeTelService {
 		smsDAO.save(sms);
 	}
 
-
 	/**
 	 * 保存电话号码
 	 * @param newtel
@@ -67,8 +64,5 @@ public class WeiXinChangeTelService {
 		user.setTel(newtel);
 		userDAO.merge(user);
 	}
-
-
-	
 
 }
