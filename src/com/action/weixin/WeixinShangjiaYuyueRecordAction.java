@@ -39,14 +39,11 @@ import weixin.popular.bean.AccessToken;
 /*
  * 查仕龙-商家预约记录
  */
-
-
 @Controller
 @RequestMapping("/sjyuyuerecord.do")
 public class WeixinShangjiaYuyueRecordAction {
 	@Autowired
 	private HttpServletRequest request;
-
 	@Autowired
 	public WeixinShangjiaYuyueRecordService sjyuyueRecordservice;
 
@@ -57,8 +54,6 @@ public class WeixinShangjiaYuyueRecordAction {
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
-	
-	
 	@RequestMapping(params="p=index")
 	public String getDetail(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException
 	{

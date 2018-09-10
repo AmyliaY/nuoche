@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.action.JccsAction;
 import com.action.WeixinConfig;
 import com.pojo.Yuyue;
 import com.service.weixin.WeixinUserYuyueTopayService;
@@ -29,14 +28,12 @@ import weixin.popular.bean.templatemessage.TemplateMessageItem;
 import weixin.popular.util.JSSDKUtil;
 import weixin.popular.util.SignatureUtil;
 import weixin.popular.util.XMLConverUtil;
+
 /**
  * 用户预约服务支付Action-查仕龙
  * @author dell
  *
  */
-
-
-
 @Controller
 @RequestMapping("/useryuyuetopay.do")
 public class WeixinUserYuyueTopayAction {
@@ -54,18 +51,11 @@ public class WeixinUserYuyueTopayAction {
 		Yuyue yuyue = yuyueService.findYuyueByid(yuyueid);
 		String money =yuyue.getPay().toString();
 		String orderid = yuyueService.updateOrderId(yuyue);
-	    
 		openid = yuyue.getUser().getOpenid();
-		
-		
-		
-		
-		
 		request.getSession().setAttribute("openid", openid);
 		String notifyUrl = URLManager.getServerURL(request)+ "/useryuyuetopay.do";
 		String json = JSSDKUtil.setPayParam(request, notifyUrl, money, orderid,
 				openid);
-		
 		// 4.调用微信支付
 		return "/wap/pay/pay_example2.jsp";
 	}
@@ -117,11 +107,6 @@ public class WeixinUserYuyueTopayAction {
 			String shangjiadianhua = yuyue.getService().getBusiness().getTel();
 			String kehudianhua = yuyue.getUser().getWxtel();
 			response.getOutputStream().write("success".getBytes());
-			
-			
-			
-			
-			
 
 			TemplateMessage templateMessage = new TemplateMessage();
 			String jyz_url = "";  //  URLManager.getServerURL(request) + "/move.do?p=xgjl&wxh=" + wxh;
@@ -155,10 +140,6 @@ public class WeixinUserYuyueTopayAction {
 			String access_token = token.getAccess_token();
 			messageAPI.messageTemplateSend(access_token, templateMessage);
 		}
-        
 		return null;
-
 	}
-	
-
 }

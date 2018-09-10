@@ -35,9 +35,6 @@ import weixin.popular.bean.AccessToken;
 /*
  * 查仕龙--用户预约记录Action
  */
-
-
-
 @Controller
 @RequestMapping("/useryuyueRecord.do")
 public class WeixinUserYuyueRecordAtion {

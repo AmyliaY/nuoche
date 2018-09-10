@@ -25,9 +25,8 @@ import weixin.popular.bean.AccessToken;
 /**
  * 全恒
  * @author dell
- *
+ * 微信推广
  */
-
 @Controller
 @RequestMapping("/tuiguang.do")
 public class WeixinTuiguangAction {
@@ -36,7 +35,6 @@ public class WeixinTuiguangAction {
 	private WeixinUserService weixinUserService;
 	@Autowired
 	private WeixinPersonCenterService wxpersonCenterService;
-	
 	
 	@RequestMapping(params="p=tuiguang")
 	public String tuiguang(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -65,38 +63,6 @@ public class WeixinTuiguangAction {
 		UserAPI userAPI = new UserAPI();
 		weixin.popular.bean.User weixin_user = userAPI.userInfo(
 				WeixinGetAccessTokenListen.access_token, weixinhao);
-		//关注，跳转到个人中心
-		/*if (weixin_user!=null && weixin_user.getSubscribe()!=null && weixin_user.getSubscribe()==1 )
-		{
-			weixinUserService.addUser(weixin_user);
-			//根据微信号查询微信用户的基本信息
-			WeixinUser weixinUser = wxpersonCenterService.getWeixinUser(weixinhao);
-			request.getSession().setAttribute("weixinUser", weixinUser);
-			//判断该用户是否是会员，是：显示详细信息
-			User user = wxpersonCenterService.getUser(weixinhao);
-			if(null != user){
-				request.getSession().setAttribute("pcuser", user);
-			}
-			
-			//返回用户基本信息和详细信息
-			
-			// --------------- end 获取客户的微信号----------------//
-			request.getSession().setAttribute("openid", weixinhao);
-			request.getSession().setAttribute("secret", secret);
-			
-			//System.out.println("微信号:" + weixinhao);
-			//  获取该用户下的所有订单信息
-			String url3_3 = URLManager.getServerURL(request)
-					+ "/personCenter.do?method=index";
-			String newUrl3_3 = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="
-					+ WeixinConfig.APPID
-					+ "&redirect_uri="
-					+ URLEncoder.encode(url3_3, "utf-8")
-					+ "&response_type=code&scope=snsapi_base&state=1#wechat_redirect";
-			return "redirect:"+newUrl3_3;
-		}*/
-		
-		//未关注，跳转到guanzhu.jsp
 		return "/weixin/guanzhu.jsp";
 	}
 }

@@ -16,9 +16,7 @@ import com.service.weixin.WeiXinChangeTelService;
 import com.util.SmsUtil;
 
 /**
- * 
  * @author 源码猎人——全恒
- *
  */
 
 @Controller
@@ -83,6 +81,4 @@ public class WeiXinChangeTelAction {
 		wxChangeTelService.saveTel(openid, newtel);
 		return "1";
 	}
-	
-	
 }

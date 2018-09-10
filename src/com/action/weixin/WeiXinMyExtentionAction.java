@@ -31,18 +31,17 @@ import weixin.popular.bean.AccessToken;
 @Controller
 @RequestMapping("/myextention.do")
 public class WeiXinMyExtentionAction {
+	
 	/**
 	 * 返回用户的推广二维码
 	 */
-	
 	@Autowired
 	private HttpServletRequest request;
 	@Autowired
 	private WeiXinMyExtentionService wxExtentionService;
 	
 	@RequestMapping(params="p=myqrcode")
-	public String proxylisting(HttpServletRequest request, HttpServletResponse response) throws Exception
-	{
+	public String proxylisting(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String openid = request.getParameter("openid");
 		
 		//System.out.println("微信号:" + openid);
@@ -61,8 +60,4 @@ public class WeiXinMyExtentionAction {
 		request.setAttribute("returnimg", returnimg);
 		return "/weixin/myExtention.jsp";
 	}
-	
-	
-	
-	
 }

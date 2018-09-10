@@ -39,7 +39,6 @@ public class WeixinpersonCenterAction {
 	private HttpServletRequest request;
 	@Autowired
 	private WeixinPersonCenterService wxpersonCenterService;
-
 	@Autowired
 	private WeixinUserService weixinUserService;
 
@@ -63,7 +62,6 @@ public class WeixinpersonCenterAction {
 			String tgopenid = null;
 			weixinUserService.addUser(weixin_user);
 		}
-
 		// 根据微信号查询微信用户的基本信息
 		WeixinUser weixinUser = wxpersonCenterService.getWeixinUser(weixinhao);
 		request.getSession().setAttribute("weixinUser", weixinUser);
@@ -71,24 +69,19 @@ public class WeixinpersonCenterAction {
 		User user = wxpersonCenterService.getUser(weixinhao);
 		if (null != user) {
 			// 将过期时间格式化
-
 			Timestamp timestamp = user.getOverdueTime();
 			if (timestamp != null) {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				String overdueTime = sdf.format(timestamp);
-
 				// 放到request中
 				request.setAttribute("overdueTime", overdueTime);
 			}
 			request.getSession().setAttribute("pcuser", user);
 		}
-
 		// 返回用户基本信息和详细信息
-
 		// --------------- end 获取客户的微信号----------------//
 		request.getSession().setAttribute("openid", weixinhao);
 		//request.getSession().setAttribute("secret", secret);
-
 		//System.out.println("微信号:" + weixinhao);
 		// 获取该用户下的所有订单信息
 		return "/weixin/personCenter.jsp";
