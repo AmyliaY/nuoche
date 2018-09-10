@@ -30,14 +30,11 @@ public class WeixinFuwuYuyueService {
 	private YuyueDAO yuyueDAO;
 	@Autowired
 	private UserDAO userDAO;
-	
-	
 
 	public com.pojo.Service findServiceByid(int fuwuid) {
 		com.pojo.Service service = serviceDAO.findById(fuwuid);
 		return service;
 	}
-
 
 	public String getOrderid() {
 		String dingdanhao = null;
@@ -46,7 +43,6 @@ public class WeixinFuwuYuyueService {
 		//dingdanhao = idd[0]+idd[4];
 		return dingdanhao;
 	}
-
 
 	public Yuyue createYuyueOrder(int fuwuid, String buyerComment, String openid, String pay, String orderWx) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -67,18 +63,15 @@ public class WeixinFuwuYuyueService {
 		return yuyue;
 	}
 
-
 	public void cancelYuyueOrder(int yuyueid) {
 		String hql = "delete from Yuyue where id=?";
 		hqlDAO.zsg(hql, yuyueid);
 	}
 
-
 	public Yuyue findYuyueByid(int yuyueid) {
 		Yuyue yuyue = yuyueDAO.findById(yuyueid);
 		return yuyue;
 	}
-
 
 	public Yuyue updateStatusByOrderid(String trade_no) {
 		//  付款时间
@@ -90,12 +83,10 @@ public class WeixinFuwuYuyueService {
 		return yuyue;
 	}
 
-
 	public WeixinUser getWeixinUser(String openid) {
 		WeixinUser weixinUser = weixinUserDAO.findById(openid);
 		return weixinUser;
 	}
-
 
 	public void updateWeixinUserTel(WeixinUser weixinUser, String wxtel) {
 		weixinUser.setWxtel(wxtel);
@@ -111,10 +102,5 @@ public class WeixinFuwuYuyueService {
 		}
 		else
 			return null;
-		
 	}
-
-
-	
-	
 }

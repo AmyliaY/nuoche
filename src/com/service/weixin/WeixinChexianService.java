@@ -25,16 +25,12 @@ public class WeixinChexianService {
 
 	@Autowired
 	private HqlDAO hqlDAO;
-
 	@Autowired
 	private BaoxianBaodanDAO baodanDAO;
-
 	@Autowired
 	private BaoxianBaodanGonshiDAO baodanGonshiDAO;
-
 	@Autowired
 	private BaoxianGonshiDAO baoxianGonshiDAO;
-
 	@Autowired
 	private WeixinUserDAO weixinUserDAO;
 	
@@ -51,7 +47,6 @@ public class WeixinChexianService {
 	public String getBaoxianGongshiByUser(String weixinOpenId) {
 		String hql = "from BaoxianGonshi";
 		List<BaoxianGonshi> list = hqlDAO.query(hql);
-
 		String hql2 = "from BaoxianBaodanGonshi where weixinUser.openid=?";
 		List<BaoxianBaodanGonshi> list2 = hqlDAO.query(hql2, weixinOpenId);
 
@@ -63,7 +58,6 @@ public class WeixinChexianService {
                 	  break;
                   }
 			}
-
 		}
 		JsonConfig jsonConfig = new JsonConfig();
 		JsonFilter.ignoredSet(jsonConfig, true); // 短日期
@@ -165,7 +159,6 @@ public class WeixinChexianService {
 		weixinUser.setSfz(sfz);
 		weixinUser.setName(xm);
 		weixinUserDAO.merge(weixinUser);
-
 	}
 
 	/**
@@ -187,7 +180,6 @@ public class WeixinChexianService {
 				baodanDAO.save(baodan);
 			}
 		}
-
 	}
 
 	/**
@@ -196,7 +188,6 @@ public class WeixinChexianService {
 	 * @param names
 	 */
 	public void saveBaoxianBaodanGonshi(String[] names, WeixinUser weixinUser) {
-
 		List paramList = new ArrayList();
 		paramList.add(weixinUser.getOpenid());
 		StringBuffer sb = new StringBuffer(
@@ -221,7 +212,6 @@ public class WeixinChexianService {
 				}
 			}
 		}
-
 	}
 
 	private boolean checkName(WeixinUser weixinUser, String name) {
@@ -292,5 +282,4 @@ public class WeixinChexianService {
 	{
 		
 	}
-
 }

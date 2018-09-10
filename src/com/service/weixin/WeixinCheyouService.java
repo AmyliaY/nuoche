@@ -30,8 +30,4 @@ public class WeixinCheyouService {
 		String json=JSONArray.fromObject(list, config).toString();
 		return json;
 	}
-	
-	
-	
-	
 }
