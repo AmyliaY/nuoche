@@ -20,13 +20,12 @@ import com.util.JsonFilter;
 import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
 
-
 /**
- * 查仕龙=我的钱包Service
+ * 查仕龙
+ * 我的钱包Service
  * @author dell
  *
  */
-
 @Service
 public class WeiXinMymoneyService {
 
@@ -37,18 +36,12 @@ public class WeiXinMymoneyService {
 	@Autowired
 	private UserDAO userDAO;
 	
-	
 	/**
 	 * 我的余额
 	 * @param weixinhao
 	 * @return
 	 */
 	public Map tongjilisting(String weixinhao) {
-	
-		
-		
-		
-		
 		String ketixianhqlsum="select ketixian from User where openid=?";	//会员可提现的余额
 		double ketixiansum=(double) hqlDAO.unique(ketixianhqlsum ,weixinhao);
 		
@@ -57,7 +50,6 @@ public class WeiXinMymoneyService {
 		
 		String yitixianhqlsum="select SUM(yitixian) from User where openid=?";	//会员已提现的金额
 		double yitixiansum=(double) hqlDAO.unique(yitixianhqlsum ,weixinhao);
-	
 	
 		Map map=new HashMap();
 		map.put("ketixiansum", ketixiansum);
@@ -75,18 +67,14 @@ public class WeiXinMymoneyService {
 	 * @param weixinhao
 	 */
 	public void addtixian(double cash,String dingdanhao,Timestamp createtime,String weixinhao) {
-		
 		String idhql="from User where weixinUser.openid=?";	//会员可提现的余额
 		List list =  hqlDAO.query(idhql, weixinhao);
 		if (list.size()>0){
 		User user = (User) list.get(0);
 		int id = user.getId();
-		
 		String hql="insert into vip_cash (user_id,time,cash,order_id,status) value (?,?,?,?,?)";
-		
 		hqlDAO.executeSql(hql, id,createtime,cash,dingdanhao,(short)0);
 		user.setKetixian(user.getKetixian()-cash);
-		
 		if(user.getWeitixian()!=null)
 		{
 			user.setWeitixian(user.getWeitixian()+cash);
@@ -94,11 +82,8 @@ public class WeiXinMymoneyService {
 		else{
 			user.setWeitixian(cash);
 		}
-		
-		
 		userDAO.merge(user);
 		}
-		
 	}
 	
 	/**
@@ -107,15 +92,12 @@ public class WeiXinMymoneyService {
 	 * @return
 	 */
 	public Map txrecord(String weixinhao){
-		
-		
 		String listhql=" from VipCash where user.weixinUser.openid=? order by time desc";
 		List list=hqlDAO.query(listhql, weixinhao);
 		
 		Map map=new HashMap();
 		map.put("list", list);	
 		return map;
-		
 	}
 	
 	/**
@@ -125,25 +107,22 @@ public class WeiXinMymoneyService {
 	 * @param page
 	 * @return
 	 */
-public List tixianrecordListing(String weixinhao, int size, int page) {
-		
+	public List tixianrecordListing(String weixinhao, int size, int page) {
 		String hql="from VipCash  where user.weixinUser.openid=? order by time desc";
 		List list=hqlDAO.pageQuery(hql, size, page, weixinhao);
-		
 		return list;
 	}
 	
-/**
- * 总条数
- * @param size
- * @param page
- * @param weixinhao
- * @return
- */
+	/**
+	 * 总条数
+	 * @param size
+	 * @param page
+	 * @param weixinhao
+	 * @return
+	 */
 	public int getSum(int size, int page, String weixinhao){
 		String hqlsum="select count(*) from VipCash where user.weixinUser.openid=? ";
 		int sum=(int) hqlDAO.unique(hqlsum,weixinhao);
-		
 		return sum;
 	}
 	
@@ -177,6 +156,7 @@ public List tixianrecordListing(String weixinhao, int size, int page) {
 		
 		return list;
 	}
+	
 	/**
 	 * 异步查总条数
 	 * @param size
@@ -188,7 +168,6 @@ public List tixianrecordListing(String weixinhao, int size, int page) {
 	public int getSum2(int size, int page, String weixinhao,short status){
 		String hqlsum="select count(*) from VipCash  where user.weixinUser.openid=? and status= ? ";
 		int sum=(int) hqlDAO.unique(hqlsum,weixinhao,status);
-		
 		return sum;
 	}
 }

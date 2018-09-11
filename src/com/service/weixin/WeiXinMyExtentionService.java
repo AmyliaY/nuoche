@@ -23,12 +23,6 @@ public class WeiXinMyExtentionService {
 		String imgPath = path+File.separator+weixinhao+".png";
 		//该用户的个人推广二维码url
 		String encoderContent1 = encoderContent + weixinhao;
-		/*String newUrl3_3 = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="
-				+ WeixinConfig.APPID
-				+ "&redirect_uri="
-				+ URLEncoder.encode(encoderContent1, "utf-8")
-				+ "&response_type=code&scope=snsapi_base&state=1#wechat_redirect";*/
-		
 		System.out.println(encoderContent1);
 		System.out.println("图片最终路径："+imgPath);
 		ma.encoderQRCode(encoderContent1, imgPath, "png");//二维码对应的网站，图片的路径，图片的格式

@@ -22,27 +22,17 @@ import com.pojo.Userinfo;
  * 微信歌曲管理
  * @auth lgh
  */
-
-
 @Service
 public class WeixinMusicWeixinService {
 	
 	@Autowired
 	private HqlDAO  hqldao;
-	
-	
 	@Autowired
 	private MSongsDAO  mSongsDAO;
-	
-	
 	@Autowired
 	private MGuessDAO mGuessDAO;
-	
-	
 	@Autowired
 	private GoodsDAO  goodsDAO;
-	
-	
 	@Autowired
 	private UserinfoDAO  userinfoDAO;
 	
@@ -62,14 +52,8 @@ public class WeixinMusicWeixinService {
 			MSongs songs = guess.getMSongs();
 			return songs.getMLevel().getZhekou();
 		}
-		
-		
 		return 1;
-		
-		
-		
 	}
-	
 	
 	/**
 	 * 获取用户和商品获取 当前等级
@@ -87,24 +71,18 @@ public class WeixinMusicWeixinService {
 			MSongs songs = guess.getMSongs();
 			return songs.getMLevel();
 		}
-		
 		//找不到，就用最低折扣那个等级
 		hql  = "from MLevel order by zhekou desc where status=1 ";
 		List list2 = hqldao.pageQuery(hql, 1, 1);
 		if (list2.size()>0)
 			return (MLevel) list2.get(0);
-		
 		return null;
-		
-		
-		
 	}
 	
     public Userinfo findUserById(int uid)
     {
     	return userinfoDAO.findById(uid);
     }
-	
 	
 	/**
 	 * 获取下一个等级
@@ -114,7 +92,6 @@ public class WeixinMusicWeixinService {
 	 */
 	public MLevel getNextDenji(int goodsId,int userid)
 	{
-		
 		String hql = "from MGuess g where g.goods.gid = ? and g.userinfo.usersId = ? order by  g.MSongs.MLevel.zhekou asc";
 		List<MGuess> list = hqldao.pageQuery(hql, 1, 1, goodsId,userid);
 		if (list.size()>0)
@@ -127,25 +104,20 @@ public class WeixinMusicWeixinService {
 			List list3 = hqldao.pageQuery(hql, 1, 1,zhenkou-0.001F);
 			if (list3.size()>0)
 			{	
-				
 				MLevel  m = (MLevel) list3.get(0);
 			    float zhenkou2 = m.getZhekou();
 			    System.out.println("newzhekou:"+zhenkou2);
 			    return m;
 			}
-			
 			return null;
 		}
-		
 		//找不到，就用最低折扣那个等级
 		hql  = "from MLevel order by zhekou desc where status=1 ";
 		List list2 = hqldao.pageQuery(hql, 1, 1);
 		if (list2.size()>0)
 			return (MLevel) list2.get(0);
-		
 		return null; //数据库里面没有添加等级 
 	}
-   
 	
 	/**
 	 * 更新用户的商品等级
@@ -161,8 +133,6 @@ public class WeixinMusicWeixinService {
 	    if (list.size()>0)
 	    {
 	    	guess = list.get(0);
-	    	
-	    	
 	    }
 	    else //找不到添加新
 		{
@@ -171,15 +141,11 @@ public class WeixinMusicWeixinService {
 	    	Goods   goods = goodsDAO.findById(goodsid);
 	    	guess.setUserinfo(userinfo);
 	    	guess.setGoods(goods);
-	    	
 		}
 	    guess.setTime(new Timestamp(System.currentTimeMillis()));
 	    MSongs mSongs = mSongsDAO.findById(musicid);
 	    guess.setMSongs(mSongs);
-	    
 	    mGuessDAO.merge(guess);
-	    
-	    
 	}
 	
 	/**
@@ -193,23 +159,11 @@ public class WeixinMusicWeixinService {
 		int sum  = (int) hqldao.unique(hql, denji);
 		if (sum==0)
 			return null;
-		
 		int n = new Random().nextInt(sum);
-		
 		hql  = "from MSongs s where s.MLevel.id = ?";
 		List list = hqldao.pageQuery(hql, 1, n+1, denji);
 		if (list.size()>0)
 			return (MSongs) list.get(0);
-		
 		return null;
-		
 	}
-
 }
-
-
-
-
-
-
-
