@@ -5,8 +5,6 @@ import java.util.Properties;
 
 /**
  * 获取微信制等级金额
- * 
- * 
  */
 public class WeixinZhiduService {
 	public static void main(String[] args) {
@@ -31,5 +29,4 @@ public class WeixinZhiduService {
 		}
 
 	}
-
 }

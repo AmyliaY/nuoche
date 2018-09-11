@@ -16,16 +16,13 @@ import com.pojo.Yuyue;
  * @author dell
  *
  */
-
-
 @Service
 public class WeixinUserYuyueTopayService {
+	
 	@Autowired
 	private HqlDAO hqlDAO;
-	
 	@Autowired
 	private YuyueDAO yuyueDAO;
-	
 	
 	public Yuyue findYuyueByid(int yuyueid) {
 		Yuyue yuyue = yuyueDAO.findById(yuyueid);
@@ -49,5 +46,4 @@ public class WeixinUserYuyueTopayService {
 		yuyueDAO.merge(yuyue);
 		return uuid;
 	}
-
 }

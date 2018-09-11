@@ -18,6 +18,7 @@ import com.pojo.WeixinUser;
 
 @Service
 public class WeiXinUserXufeiService {
+	
 	@Autowired
 	private HqlDAO hqlDAO;
 	@Autowired
@@ -26,8 +27,6 @@ public class WeiXinUserXufeiService {
 	WeixinUserDAO weixinUserDAO;
 	@Autowired
 	UserxufeiDAO userxufeiDAO;
-	
-	
 	
 	public String getOrderId() {
 		String orderid = null;

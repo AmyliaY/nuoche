@@ -21,7 +21,6 @@ import net.sf.json.JsonConfig;
 /*
  * 查仕龙-用户预约记录Service
  */
-
 @Service
 public class WeixinUserYuyueRecordService {
 	@Autowired
@@ -86,14 +85,13 @@ public class WeixinUserYuyueRecordService {
 	public String findAll(String openid) {
 		String hql="from Yuyue where user.openid = ? order by created desc";
 		List<Yuyue> list = hqlDAO.findByHQL(hql, openid);
-	
-		
 		JsonConfig config=new JsonConfig();
 		net.sf.json.JSONObject object = new net.sf.json.JSONObject();
 		JsonFilter.ignoredSet(config);
 		String json=JSONArray.fromObject(list, config).toString();
 		return json;
 	}
+	
 	/**
 	 * 
 	 *根据用户的微信号查询预约记录
@@ -121,9 +119,9 @@ public class WeixinUserYuyueRecordService {
 	public List findByStatus(int size, int page, String openid, short status) {
 		String hql="from Yuyue where user.openid = ? and status= ? order by created desc";
 		List<Yuyue> list=hqlDAO.pageQuery(hql, size, page, openid, status);
-		
 		return list;
 	}
+	
 	/**
 	 * 根据状态查总条数
 	 * @param size
@@ -135,10 +133,6 @@ public class WeixinUserYuyueRecordService {
 	public int getSum2(int size, int page, String weixinhao,short status){
 		String hqlsum="select count(*) from Yuyue where user.openid = ? and status= ? ";
 		int sum=(int) hqlDAO.unique(hqlsum,weixinhao,status);
-		
 		return sum;
 	}
-
-	
-	
 }
