@@ -21,7 +21,6 @@ public class WeixinPersonCenterService {
 	@Autowired
 	private HqlDAO hqlDAO;
 	
-	
 	public WeixinUser getWeixinUser(String weixinhao) {
 		WeixinUser weixinUser = weixinUserDAO.findById(weixinhao);
 		if(weixinUser != null){
@@ -37,7 +36,4 @@ public class WeixinPersonCenterService {
 			return list.get(0);
 		return null;
 	}
-	
-	
-	
 }

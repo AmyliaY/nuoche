@@ -14,6 +14,7 @@ import net.sf.json.JsonConfig;
 
 @Service
 public class WeiXinOrderCenterService {
+	
 	@Autowired
 	private HqlDAO hqlDAO;
 

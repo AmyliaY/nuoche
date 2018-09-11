@@ -22,10 +22,8 @@ public class WeixinUserService {
 	
 	@Autowired
 	private WeixinUserDAO  weixinUserDAO;
-	
 	@Autowired
 	private HqlDAO hqlDAO;
-	
 	@Autowired
 	private UserinfoDAO  userinfoDAO;
 	
@@ -34,7 +32,6 @@ public class WeixinUserService {
 		if(user==null || user.getOpenid()==null){
 			return ;
 		}
-		
 		String hql = "from WeixinUser where openid=?";
 		List<WeixinUser> list  =hqlDAO.pageQuery(hql, 1,1, user.getOpenid());
 		WeixinUser weixinuser = null;
@@ -45,7 +42,6 @@ public class WeixinUserService {
 		//判断
 		if(weixinuser==null)
 			return ;
-		
 		weixinuser.setStatus((short)0);
 		weixinUserDAO.merge(weixinuser);
 	}
@@ -59,7 +55,6 @@ public class WeixinUserService {
 		if(user==null || user.getOpenid()==null){
 			return ;
 		}
-		
 		String hql = "from WeixinUser where openid=?";
 		List<WeixinUser> list  =hqlDAO.pageQuery(hql, 1,1, user.getOpenid());
 		WeixinUser weixinuser = null;
@@ -132,8 +127,6 @@ public class WeixinUserService {
 				weixinuser.setTuijianren(tuijianren.getOpenid());
 			}
 		}
-		
-		
 	}
 
 	/**
@@ -157,7 +150,6 @@ public class WeixinUserService {
 	 * @param weixinuser
 	 */
 	public void addWeixinUser(WeixinUser weixinuser) {
-		
 		weixinUserDAO.save(weixinuser);
 	}
 
@@ -168,26 +160,18 @@ public class WeixinUserService {
 	 */
 	public Userinfo addUserinfo(WeixinUser weixinuser) {
 		Userinfo user = new Userinfo();
-		//user.setUsersPhone(mobile);
-		//user.setUsersPassword(password);
-		// 设置默认设定值
 		user.setUsersName(weixinuser.getNickname());// 用户名
 		user.setUsersArea("");// 设置区县
 		user.setUsersStatus(1);// 设置状态为启用
-		//user.setUsersGender(1);// 设置用户性别为男
-
 		Date date = new Date();
 		Timestamp time = new Timestamp(date.getTime());
 		user.setUsersCreatetime(time);// 用户注册时间
 		user.setUsersIntegral(0.0);// 设置用户默认积分为0
 		user.setUsersType(0);// 设置用户为普通会员
 		user.setUsersPaypwd("111111");
-		
-
 		if (weixinuser != null) {
 			weixinuser.setUserinfo(user);
 		}
-		
 		userinfoDAO.save(user);
 		return user;
 	}
@@ -199,5 +183,4 @@ public class WeixinUserService {
 			return (Userinfo) list.get(0);
 		return null;
 	}
-
 }

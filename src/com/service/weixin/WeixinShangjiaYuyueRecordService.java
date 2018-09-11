@@ -25,7 +25,6 @@ import net.sf.json.JsonConfig;
 /*
  * 查仕龙-商家预约记录
  */
-
 @Service
 public class WeixinShangjiaYuyueRecordService {
 	@Autowired
@@ -40,25 +39,22 @@ public class WeixinShangjiaYuyueRecordService {
 	 * @param page
 	 * @return
 	 */
-public List yuyuerecordListing(String weixinhao, int size, int page) {
-		
+	public List yuyuerecordListing(String weixinhao, int size, int page) {
 		String hql="from Yuyue  where service.business.openid = ? order by created desc";
 		List list=hqlDAO.pageQuery(hql, size, page, weixinhao);
-		
 		return list;
 	}
 	
-/**
- * 总条数
- * @param size
- * @param page
- * @param weixinhao
- * @return
- */
+	/**
+	 * 总条数
+	 * @param size
+	 * @param page
+	 * @param weixinhao
+	 * @return
+	 */
 	public int getSum(int size, int page, String weixinhao){
 		String hqlsum="select count(*) from Yuyue where service.business.openid = ? ";
 		int sum=(int) hqlDAO.unique(hqlsum,weixinhao);
-		
 		return sum;
 	}
 
@@ -92,14 +88,13 @@ public List yuyuerecordListing(String weixinhao, int size, int page) {
 	public String findAll(String openid) {
 		String hql="from Yuyue where service.business.openid = ? order by created desc";
 		List<Yuyue> list = hqlDAO.findByHQL(hql, openid);
-	
-		
 		JsonConfig config=new JsonConfig();
 		net.sf.json.JSONObject object = new net.sf.json.JSONObject();
 		JsonFilter.ignoredSet(config);
 		String json=JSONArray.fromObject(list, config).toString();
 		return json;
 	}
+
 	/**
 	 * 
 	 *根据用户的微信号查询预约记录
@@ -115,7 +110,6 @@ public List yuyuerecordListing(String weixinhao, int size, int page) {
 		String json=JSONArray.fromObject(list, config).toString();
 		return json;
 	}
-
 	
 	/**
 	 * 根据状态查
@@ -128,14 +122,12 @@ public List yuyuerecordListing(String weixinhao, int size, int page) {
 	public List findByStatus(int size, int page, String openid, short status) {
 		String hql="from Yuyue where service.business.openid = ? and status= ? order by created desc";
 		List<Yuyue> list=hqlDAO.pageQuery(hql, size, page, openid, status);
-		
 		return list;
 	}
 	
 	public int getSum2(int size, int page, String weixinhao,short status){
 		String hqlsum="select count(*) from Yuyue where service.business.openid = ? and status= ? ";
 		int sum=(int) hqlDAO.unique(hqlsum,weixinhao,status);
-		
 		return sum;
 	}
 	
@@ -155,31 +147,27 @@ public List yuyuerecordListing(String weixinhao, int size, int page) {
 			yuyueDAO.save(yuyue);
 		}
 		return yuyue;
-		
 	}
-/**
- * 找商家
- * @param openid
- * @return
- */
+	/**
+	 * 找商家
+	 * @param openid
+	 * @return
+	 */
 	public List<Business> findbusiness(String openid) {
 		String hql="from Business where openid=?";
 		List<Business> business=hqlDAO.findByHQL(hql, openid);
 		return business;
 	}
 
-public List<Applybusiness> findapplybusiness(String openid) {
-	String hql="from Applybusiness where openid=?";
-	List<Applybusiness> applybusiness=hqlDAO.findByHQL(hql, openid);
-	return applybusiness;
-}
-
-public List<Business> findbusiness2(String tel) {
-	String hql="from Business where tel=?";
-	List<Business> business=hqlDAO.findByHQL(hql, tel);
-	return business;
+	public List<Applybusiness> findapplybusiness(String openid) {
+		String hql="from Applybusiness where openid=?";
+		List<Applybusiness> applybusiness=hqlDAO.findByHQL(hql, openid);
+		return applybusiness;
+	}
 	
-}
-
-	
+	public List<Business> findbusiness2(String tel) {
+		String hql="from Business where tel=?";
+		List<Business> business=hqlDAO.findByHQL(hql, tel);
+		return business;
+	}
 }
