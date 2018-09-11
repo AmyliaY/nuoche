@@ -33,31 +33,23 @@ public class WeixinJiayouService {
 
 	@Autowired
 	private HqlDAO hqlDAO;
-
 	@Autowired
 	private JiayouEmpDAO jiayouEmpDAO;
-
 	@Autowired
 	private JiayouZhekouDAO jiayouZhekouDAO;
-
 	@Autowired
 	private JiayouJiluDAO jiayouJiluDAO;
-
 	@Autowired
 	private JiayouStationYuerDAO jiayouStationYuerDAO;
-
 	@Autowired
 	private WeixinUserDAO weixinUserDAO;
-
 	@Autowired
 	private JiayouYouhuijuanDAO jiayouYouhuijuanDAO;
-	
 	@Autowired
 	private VipDAO  vipDAO;
 
 	/**
 	 * 根据员工id找员工
-	 * 
 	 * @param id
 	 * @return
 	 */
@@ -67,7 +59,6 @@ public class WeixinJiayouService {
 
 	/**
 	 * 根据加员工编号找加油站
-	 * 
 	 * @param empid
 	 * @return
 	 */
@@ -79,7 +70,6 @@ public class WeixinJiayouService {
 
 	/**
 	 * 根据加油站获取油列表
-	 * 
 	 * @param stationId
 	 *            加油站编号
 	 * @return
@@ -92,7 +82,6 @@ public class WeixinJiayouService {
 
 	/**
 	 * 获取可用余额
-	 * 
 	 * @param stationId
 	 *            加油站
 	 * @param openId
@@ -108,14 +97,11 @@ public class WeixinJiayouService {
 			Float money = jiayouStationYuer.getMoney();
 			return (money == null ? 0.0F : money);
 		}
-
 		return 0.0F;
-
 	}
 
 	/**
 	 * 根据油编号，找油
-	 * 
 	 * @param id
 	 *            编号
 	 * @return
@@ -127,7 +113,6 @@ public class WeixinJiayouService {
 
 	/**
 	 * 保存加油记录
-	 * 
 	 * @param jiayouJilu
 	 */
 	public void addJiayoujilu(JiayouJilu jiayouJilu) {
@@ -202,11 +187,7 @@ public class WeixinJiayouService {
 		// 送余额（区分VIP和普通用户)
 		Vip vip = user.getVip();
 		if (vip != null) {
-			
-			
-
 		} else {
-			
 			JiayouStation station = jiayouJilu.getJiayouZhekou().getJiayouStation();
 			Float c = station.getChai_fanxian();
 			Float q = station.getQiyou_fanxian();
@@ -226,8 +207,6 @@ public class WeixinJiayouService {
 				oldMoney = 0.0F;
 			jiayouStationYuer.setMoney(oldMoney+money);
 			jiayouStationYuerDAO.merge(jiayouStationYuer);
-
-
 		}
 
 		// 修改红包
@@ -340,8 +319,6 @@ public class WeixinJiayouService {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		vip.setVdate(timestamp);
 		vipDAO.save(vip);
-		
 		return vip;
 	}
-
 }

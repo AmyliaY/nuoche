@@ -57,7 +57,6 @@ public class WeiXinMoveCarService {
 			return user;
 		}
 		return null;
-		
 	}
 
 	public String messageIdCX(int i) {
@@ -65,9 +64,6 @@ public class WeiXinMoveCarService {
 		List list = hqldao.query(hql);
 		Templatemessage t = (Templatemessage) list.get(0);
 		String mid = t.getTpweixinId();
-		
-		
-		
 		return mid;
 	}
 
@@ -92,30 +88,12 @@ public class WeiXinMoveCarService {
 		String hql="from User where openid = ?";
 		List list = hqldao.pageQuery(hql,1,1,wxh);
 		User usercar = (User) list.get(0);
-		
-		
-		/*String hql2="from User where openid = "+"'"+user_wx+"'";
-		List list2 = hqldao.query(hql2);
-		if (list2.size()==0){
-			String sql= "insert into User (openid) values (?)";
-			hqldao.executeSql(sql, user_wx);
-		}
-		
-		String hql3="from User where openid = "+"'"+user_wx+"'";
-		list2 = hqldao.query(hql3);
-		User user = (User) list2.get(0);
-		wxuser = user;*/
-		
-		
-	 
 		Date date = new Date();       
 		Timestamp registtime = new Timestamp(date.getTime());
-		
 		Movecar movecar = new Movecar();
 		movecar.setUserByCar(usercar);
 		movecar.setTime(registtime);
 		movecar.setAddr(wz);
-		
 		//申请挪车
 		try {
 			WeixinUser weixinUser = wxDAO.findById(user_wx);
@@ -124,15 +102,8 @@ public class WeiXinMoveCarService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 		movecar.setStatus((short)2);
 		movecarDAO.save(movecar);
-		
-		
-		//String sql= "insert into movecar (time,addr, car,`user`,status) values (?,?,?,?,2)";
-		//hqldao.executeSql(sql, registtime,wz,user_wx,usercar.getId());
-		
 		int mcid = -1;
 		String hqlmc ="from Movecar where time = ?";
 		List list3 = hqldao.pageQuery(hqlmc, 1, 1, registtime);
@@ -141,15 +112,11 @@ public class WeiXinMoveCarService {
 		return mcid;
 	}
 
-
 	public void xiugaiStauts(String mobilephone) {
 		String hql="from User where tel = ?";
 		List list = hqldao.query(hql,mobilephone);
 		User user = (User) list.get(0);
 		Integer uid = user.getId();
-		//System.out.println("uid="+uid);
-		//String sql= "UPDATE  movecar SET status = 0 where car=?";
-		//hqldao.executeSql(sql, uid);
 		String hql2 = "from Movecar where userByCar.id=? order by id desc";
 		List list2  = hqldao.pageQuery(hql2, 1, 1, uid);
 		if (list2.size()>0)
@@ -175,7 +142,6 @@ public class WeiXinMoveCarService {
 		List list = hqldao.pageQuery(hql, 1, 1, openid);
 		if (list.size()>0)
 			return (User) list.get(0);
-		
 		return null;
 	}
 
@@ -186,9 +152,6 @@ public class WeiXinMoveCarService {
 		Integer uid = user.getId();
 		String sql= "UPDATE  movecar SET status = 0 where car=?";
 		hqldao.executeSql(sql, uid);
-		
-	
-	
 	}
 
 	public User findBywxh(String weixinhao) {
@@ -222,8 +185,6 @@ public class WeiXinMoveCarService {
 			wxDAO.save(wxuser);
 			
 		}
-		
-		
 	}
 
 	public void huiCall(String wxh, String fee_time) {
@@ -235,7 +196,6 @@ public class WeiXinMoveCarService {
 			t=t-f;
 			wxuser.setTimeLeft(t);
 			wxDAO.save(wxuser);
-			
 		}
 	}
 
@@ -246,11 +206,6 @@ public class WeiXinMoveCarService {
 	 */
 	public String getAllDingdanhao() {
 		String dingdanhao = null;
-		// Date date=new Date();
-		// SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddhhmmss");
-		// String dataString=sdf.format(date);
-		//		
-		// dingdanhao="shuiguoshangcheng"+dataString;
 		dingdanhao = UUID.randomUUID().toString().replaceAll("-", "");
 		return dingdanhao;
 	}
@@ -323,5 +278,4 @@ public class WeiXinMoveCarService {
 			}
 		}
 	}
-
 }
