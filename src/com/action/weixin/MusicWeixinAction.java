@@ -61,8 +61,6 @@ public class MusicWeixinAction {
 		 JsonFilter.ignoredSet(jsonConfig);
 		 
 		 String json = JSONObject.fromObject(music,jsonConfig).toString();
-//		 System.out.println(json);
-		 
 		 return json;
 		 
 		 
