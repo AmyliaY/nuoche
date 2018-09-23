@@ -62,11 +62,7 @@ public class MusicWeixinAction {
 		 
 		 String json = JSONObject.fromObject(music,jsonConfig).toString();
 		 return json;
-		 
-		 
 	 }
-	 
-	 
 	 
 	 @RequestMapping(params="p=checkMusic")
 	 @ResponseBody
