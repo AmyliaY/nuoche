@@ -76,11 +76,6 @@ public class MusicWeixinAction {
 		 if (StringUtil.isDigit(gid)==false)
 			 gid = "1";
 		 //----------------------------------------------------
-		 
-		 //MLevel  m = musicWeixinService.getCurrentDenji(Integer.parseInt(gid), userinfo.getUsersId());
-		 //float zhekou = music
-		
-		 
 		 if (songs!=null && songs.getName().equalsIgnoreCase(name))
 		 {
 			 request.getSession().removeAttribute("music");
@@ -93,11 +88,6 @@ public class MusicWeixinAction {
 			 float zhekou = musicWeixinService.getCurrentZhekou(Integer.parseInt(gid), userinfo.getUsersId());
 			 return "{msg:'挑战失败',zhekou:"+zhekou+"}";
 		 }
-		 
-		 
-		 
-		 
-		 
 	 }
 	 
 	 
