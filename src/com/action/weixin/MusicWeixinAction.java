@@ -89,16 +89,4 @@ public class MusicWeixinAction {
 			 return "{msg:'挑战失败',zhekou:"+zhekou+"}";
 		 }
 	 }
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
 }
-
-
-
-
