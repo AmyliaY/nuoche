@@ -29,25 +29,19 @@ public class MusicWeixinAction {
 
 	 @Autowired
 	 private WeixinMusicWeixinService  musicWeixinService;
-	 
-	 
-	 
 	 @Autowired
 	 private HttpServletRequest request;
 	
-	 
 	 @RequestMapping(params="p=getNextDenji")
 	 @ResponseBody
 	 public String getNextDenji()
 	 {
 		 Userinfo userinfo = (Userinfo) request.getSession().getAttribute("userinfo");
-		 
 		 //------------------------------------------------------
 		 if (userinfo==null)
 		 {	 
 			 userinfo = musicWeixinService.findUserById(9);
 		     request.getSession().setAttribute("userinfo", userinfo);
-		 
 		 }
 		 //------------------------------------------------------
 		 String gidString = request.getParameter("gid");
