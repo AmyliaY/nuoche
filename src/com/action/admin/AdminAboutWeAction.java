@@ -42,7 +42,6 @@ public class AdminAboutWeAction {
 		return "/admin/aboutwe.jsp";
 	}
 	
-	
 	/**
 	 * 修改
 	 * @param request
