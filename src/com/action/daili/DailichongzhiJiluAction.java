@@ -34,7 +34,6 @@ import com.util.Upload;
  * pc端 代理管理
  * 
  */
-
 @Controller
 @RequestMapping("/daili_chongzhi.do")
 public class DailichongzhiJiluAction {
