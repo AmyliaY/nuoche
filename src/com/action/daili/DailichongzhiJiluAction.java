@@ -44,7 +44,6 @@ public class DailichongzhiJiluAction {
 	@Autowired
 	private DailiChongzhiService dailichongzhiservice;
 	
-	
 	/**
 	 * 某个代理充值成功记录
 	 */
