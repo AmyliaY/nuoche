@@ -51,7 +51,6 @@ public class WeixinTuiguangAction {
 		return "redirect:" + shop_newUrl;
 	}
 	
-	
 	@RequestMapping(params="p=tuiguang2")
 	public String tuiguang2(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		//判断用户是否关注
