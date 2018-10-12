@@ -64,7 +64,6 @@ public class MusicWeixinAction {
 		 return json;
 	 }
 	 
-	 
 	 @RequestMapping(params="p=checkMusic")
 	 @ResponseBody
 	 public String checkMusic()
