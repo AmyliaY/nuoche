@@ -22,7 +22,7 @@ import com.util.StringUtil;
  * admin_admin.do?p=adminlisting
  *
  */
-@Controller 
+@Controller
 @RequestMapping("/admin_admin.do")	
 public class AdminAdminglAction {
 	@Autowired
