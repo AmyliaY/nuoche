@@ -24,6 +24,7 @@ public class WapAction {
 	private Wapservice wapservice;
 	@Autowired
 	private HttpServletRequest request;
+	
 	//  查询服务类别
 	@ResponseBody
 	@RequestMapping(params="p=findAllshopcategory")
@@ -32,6 +33,7 @@ public class WapAction {
 		return json;
 		
 	}
+	
 	//根据信息查询商家
 	@ResponseBody
 	@RequestMapping(params="p=findtjshop")
