@@ -19,6 +19,7 @@ import com.service.wap.Wapservice;
 @Controller
 @RequestMapping("/wapgoods.do")
 public class WapAction {
+	
 	@Autowired
 	private Wapservice wapservice;
 	@Autowired
