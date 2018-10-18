@@ -65,4 +65,5 @@ public class WapAction {
 		return "wap/shop/shopdetail.jsp";
 	}
 	
+	
 }
