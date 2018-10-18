@@ -31,7 +31,6 @@ public class AdminAdminglAction {
 	@Autowired
 	private AdminAdminService adminService;
 	
-	
 	@RequestMapping(params="p=adminlisting")
 	public String daliListing(HttpServletRequest request,HttpServletResponse response)  throws IOException{
 		Admin admin = (Admin) request.getSession().getAttribute("admin");
