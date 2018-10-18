@@ -52,6 +52,7 @@ public class WapAction {
 		String json=wapservice.findtjshop(sid,name,aderssname,shi,qu,page,size);
 		return json;
 	}
+	
 	//跳转店铺详情界面
 	@RequestMapping(params="p=toshopdetails")
 	public String Toshopdetails(){
