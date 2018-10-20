@@ -34,6 +34,8 @@ public class WapAction {
 		
 	}
 	
+	
+	
 	//根据信息查询商家
 	@ResponseBody
 	@RequestMapping(params="p=findtjshop")
